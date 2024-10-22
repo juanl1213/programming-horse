@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger("question_id");
             $table->string("answer_selected");
             $table->string("round_winner");
+            $table->string("is_correct");
 
             $table->foreign("game_id")->references("game_id")->on("games");
             $table->foreign("question_id")->references("question_id")->on("questions");

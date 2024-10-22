@@ -17,7 +17,7 @@ class QuestionsService
         $csv = Reader::createFromPath($csvFilePath);
         $csv->setHeaderOffset(0);
          $questions = $csv->getRecords();
-
+           
          $data = [];
 
          foreach($questions as $question)
@@ -30,6 +30,7 @@ class QuestionsService
                 "incorrect_1" => $question["incorrect_1"],
                 "incorrect_2" => $question["incorrect_2"],
                 "incorrect_3" => $question["incorrect_3"],
+                "validated" => $question["validated"],
             ];
          }
         } catch(\Exception $e)
@@ -48,7 +49,8 @@ class QuestionsService
             DB::table('questions')->insert($questions);
         } catch(\Exception $e)
         {
-            //Add exception to logs
+            Log::error($e);
+            Log::error($e->getMessage());
         }
     }
 

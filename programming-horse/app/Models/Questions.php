@@ -12,7 +12,7 @@ class Questions extends Model
         'question_id',
         'language',
         'topic_id',
-        'question_prompt',
+        'question',
         'correct_answer',
         'incorrect_answer_1',
         'incorrect_answer_2',
