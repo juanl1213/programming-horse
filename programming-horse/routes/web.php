@@ -23,6 +23,9 @@ Route::get('/index', function () {
     return view('welcome');
 });
 
+// routes/web.php
+Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggle'])->name('toggle-dark-mode');
+
 Route::get('/rules', function () {
     return view('rules');
 })->name('rules');

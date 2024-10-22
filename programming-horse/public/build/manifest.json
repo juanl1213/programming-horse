@@ -1,11 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-CnMi-Zc0.css",
+    "file": "assets/app-BG4O11tB.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/dark-mode.css": {
+    "file": "assets/dark-mode-DcZY7Hyn.css",
+    "src": "resources/css/dark-mode.css",
+    "isEntry": true
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DI6-W-r-.js",
+    "file": "assets/app-DYMOBCb-.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

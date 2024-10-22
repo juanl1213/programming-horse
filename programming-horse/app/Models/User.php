@@ -20,6 +20,7 @@ class User extends Authenticatable
         'user_name',
         'email',
         'password',
+        'dark_mode',
         'avatar_url',
         'style_sheet',
         'user_role',
