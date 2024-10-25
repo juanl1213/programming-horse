@@ -1,0 +1,581 @@
+question_id,language,topic_id,question,correct_answer,incorrect_1,incorrect_2,incorrect_3,validated
+1,Python,2,What keyword is used to define a class in Python,class,define,function,object,0
+2,Python,2,What does inheritance allow in Python,Creating a new class from an existing class,Creating multiple classes,Hiding class members,Defining functions,0
+3,Python,2,What is the purpose of the __init__ method,To initialize an object,To define a class,To create a method,To return a value,0
+4,Python,2,Which of the following is not an access modifier in Python,private,public,protected,final,0
+5,Python,2,What is polymorphism in Python,Methods doing different things based on the object,Multiple classes with the same name,Classes that inherit from one another,Creating multiple methods,0
+6,Python,2,Which keyword is used to inherit a class in Python,class Child(Parent),extends Parent,inherits Parent,inherits class,0
+7,Python,2,What is the output of print(type([]) is list),TRUE,FALSE,None,Error,0
+8,Python,2,What does the self parameter refer to in a method,The instance of the class,The parent class,The method itself,The module,0
+9,Python,2,True or False: Python supports multiple inheritance,TRUE,FALSE,Not applicable,Depends on the version,0
+10,Python,2,What does encapsulation mean,Hiding the internal state of an object,Creating multiple classes,Defining a method,Implementing an interface,0
+11,Python,2,Which of the following can be an abstract method,A method with no implementation,A method with implementation,A static method,An instance method,0
+12,Python,2,What does the __str__ method do in Python,Returns a string representation of an object,Defines a method,Creates an object,Returns the class name,0
+13,Python,2,True or False: You can create a method with the same name as the class in Python,TRUE,FALSE,Not applicable,Only in subclasses,0
+14,Python,2,What is the purpose of the super() function,To call methods from the parent class,To define a class,To create an object,To delete a method,0
+15,Python,2,What is an example of a built-in function in Python,len(),length(),size(),count(),0
+16,Python,2,What is a mixin class,A class that provides methods to other classes,A class with no methods,A class that cannot be instantiated,A subclass,0
+17,Python,2,Which method is automatically called when an object is created,__init__,__new__,__str__,__call__,0
+18,Python,2,True or False: You can define a method outside a class in Python,FALSE,TRUE,Only in scripts,Only in modules,0
+19,Python,2,What keyword is used to create a property in Python,@property,property,def,@def,0
+20,Python,2,What is the main purpose of an interface,To define methods that must be implemented,To create instances,To store data,To inherit methods,0
+21,Python,2,What does the term 'composition' mean in OOP,Creating objects from other objects,Creating classes,Using inheritance,Defining methods,0
+22,Python,2,Which of the following is a mutable type,List,String,Tuple,Set,0
+23,Python,2,What happens if a class does not define a constructor,A default constructor is provided,It throws an error,It must be abstract,It cannot have methods,0
+24,Python,2,True or False: Private variables in Python can be accessed outside the class,FALSE,TRUE,Only in subclasses,Only if specified,0
+25,Python,2,"What is the output of the expression isinstance(obj, Class)",True if obj is an instance of Class,False if obj is an instance of Class,None,Error,0
+26,Python,2,What does the term 'duck typing' refer to,Object behavior being determined at runtime,Static type checking,Strictly defining types,Method overloading,0
+27,Python,2,What is a decorator in Python,A function that modifies another function,A type of class,A special variable,A method of a class,0
+28,Python,2,Which of the following is a characteristic of an abstract class,Cannot be instantiated,Can have concrete methods,Must have abstract methods,Can be inherited,0
+29,Python,2,True or False: All classes in Python inherit from a base class,TRUE,FALSE,Only some classes,Only if specified,0
+30,Python,2,What keyword is used to raise an exception,raise,throw,error,exception,0
+31,Python,2,What does the term 'method overriding' mean,Defining a method in a subclass that has the same name as one in the parent class,Defining multiple methods with the same name,Creating a new class from an existing class,Changing the return type of a method,0
+32,Python,2,What is a class method,A method that belongs to the class rather than any object,A method that cannot be called,A static method,An instance method,0
+33,Python,2,True or False: The __del__ method is called when an object is deleted,TRUE,FALSE,Only in special cases,Only in subclasses,0
+34,Python,2,Which of the following can be a callable object,A function,An instance of a class with __call__ defined,A class itself,All of the above,0
+35,Python,2,What is the purpose of the __repr__ method,To provide a formal string representation of an object,To create an instance,To define methods,To return the class type,0
+36,Python,2,What does the term 'final' imply in Python,The method cannot be overridden,The class cannot be inherited,The variable is constant,None of the above,0
+37,Python,2,"True or False: In Python, you can create anonymous functions using lambda",TRUE,FALSE,Only in classes,Only in methods,0
+38,Python,2,What is the result of 'class MyClass: pass',Creates an empty class called MyClass,Throws an error,Creates an instance of MyClass,Defines a method,0
+39,Python,2,What does the term 'getter' refer to in Python,A method that retrieves the value of an attribute,A method that sets the value of an attribute,A property of a class,A type of class,0
+40,Python,2,What is a static method in Python,A method that belongs to the class rather than an instance,A method that cannot be called,A method that accesses instance variables,A method that must be overridden,0
+41,Python,2,True or False: Class variables are shared among all instances of a class,TRUE,FALSE,Only for private variables,Only for static methods,0
+42,Java,2,What is the main principle of Object Oriented Programming,Encapsulation,Compilation,Execution,Interpretation,0
+43,Java,2,Which keyword is used to create a class in Java,class,object,define,create,0
+44,Java,2,What is the method called that has the same name as the class,Constructor,Destructor,Initializer,Method,0
+45,Java,2,Which keyword is used to inherit a class in Java,extends,inherits,super,implements,0
+46,Java,2,What does polymorphism allow in Java,Methods to do different things based on the object,Multiple classes to have the same name,Class methods to be static,Objects to be created without constructors,0
+47,Java,2,Which of the following is not an access modifier,private,protected,public,static,0
+48,Java,2,What is a class in Java,A blueprint for creating objects,An object itself,A variable type,A data structure,0
+49,Java,2,What does 'this' keyword refer to in Java,The current object,The parent class,The superclass,A static variable,0
+50,Java,2,What is the main purpose of encapsulation,To hide the internal state of an object,To allow multiple inheritance,To create interfaces,To define classes,0
+51,Java,2,Which method is automatically called when an object is created,Constructor,Finalizer,Destructor,Initializer,0
+52,Java,2,What is the return type of a constructor,None,void,int,String,0
+53,Java,2,What keyword is used to define an interface in Java,interface,abstract,class,implements,0
+54,Java,2,What is the purpose of the super keyword,To access parent class methods,To define abstract methods,To create new objects,To override methods,0
+55,Java,2,Which of the following supports multiple inheritance,Interfaces,Classes,Enums,Abstract classes,0
+56,Java,2,What is method overloading,Defining multiple methods with the same name,Defining methods with different names,Changing method return types,Using different access modifiers,0
+57,Java,2,What does the 'final' keyword indicate when applied to a class,The class cannot be subclassed,The class cannot be instantiated,The class is abstract,The class has no methods,0
+58,Java,2,Which of the following cannot be a constructor,Static,Default,Parameterized,Private,0
+59,Java,2,What is the output of a method with no return statement,Null,Compilation error,Undefined,Void,0
+60,Java,2,Which statement is true about abstract classes,Cannot be instantiated,Must have abstract methods,Can only have one method,Are the same as interfaces,0
+61,Java,2,What is the default access modifier for class members,Package-private,Public,Private,Protected,0
+62,Java,2,What does the term 'inheritance' mean in OOP,Deriving a new class from an existing class,Creating multiple classes,Combining classes,Deleting classes,0
+63,Java,2,Which type of relationship does composition represent,Has-a,Is-a,Uses-a,Belongs-to,0
+64,Java,2,Which keyword is used to implement an interface,implements,extends,uses,inherits,0
+65,Java,2,What is an example of a built-in interface in Java,Runnable,ArrayList,HashMap,String,0
+66,Java,2,Which of the following is true about static methods,Can be called without creating an instance,Can access instance variables,Can be overridden,Can only be private,0
+67,Java,2,What is the purpose of the clone method in Java,To create a copy of an object,To delete an object,To compare objects,To serialize an object,0
+68,Java,2,What does the toString method do,Returns a string representation of an object,Converts an object to a JSON string,Returns the class name,Returns the hash code,0
+69,Java,2,Which of the following is an example of a checked exception,IOException,NullPointerException,ArrayIndexOutOfBoundsException,ArithmeticException,0
+70,Java,2,What is the output of 'System.out.println(1 + 1 == 2)',TRUE,FALSE,1,0,0
+71,Java,2,What does the term 'encapsulation' refer to,Hiding data within a class,Defining a class,Creating objects,Inheriting classes,0
+72,Java,2,What is the primary benefit of using interfaces,Enforcing a contract for classes,Allowing class inheritance,Providing default methods,Reducing code size,0
+73,Java,2,Which of the following is not a feature of OOP,Abstraction,Encapsulation,Compilation,Inheritance,0
+74,Java,2,What is the main purpose of the 'abstract' keyword,To define a class that cannot be instantiated,To create an interface,To enforce method implementation,To define static methods,0
+75,Java,2,Which of the following can be abstract,Methods and Classes,Only Methods,Only Classes,Only Interfaces,0
+76,Java,2,What is the relationship between a superclass and a subclass,Is-a relationship,Has-a relationship,Uses-a relationship,Implements relationship,0
+77,Java,2,What does the 'instanceof' operator do,Checks if an object is an instance of a class,Creates an instance of a class,Checks method availability,Returns class type,0
+78,Java,2,Which of the following can be a part of a class,Fields,Methods,Constructors,All of the above,0
+79,Java,2,What happens if a class does not have a constructor defined,Default constructor is provided,It cannot be instantiated,It throws an error,It must be abstract,0
+80,Java,2,What does a private constructor restrict,Instantiating the class from outside,Inheriting the class,Accessing class members,Creating static methods,0
+81,Java,2,Which keyword is used to handle exceptions,try,catch,throw,All of the above,0
+82,Java,2,What is true about inner classes,They can access outer class members,They cannot be static,They must be public,They cannot be instantiated,0
+83,Java,2,What is the output of an empty catch block,No error message is displayed,Error message is displayed,Code fails,Code executes without issues,0
+84,Java,2,What is the purpose of the 'default' keyword in interfaces,To define default methods,To define abstract methods,To allow static methods,To implement classes,0
+85,Java,2,Which of the following allows for polymorphism,Method overriding,Method overloading,Static methods,All of the above,0
+86,Java,2,What does the 'new' keyword do,Creates a new object,Accesses existing objects,Clones an object,Deletes an object,0
+87,Java,2,What is true about Java Beans,They must have a default constructor,They can be serialized,They have getter and setter methods,All of the above,0
+88,C++,2,What keyword is used to define a class in C++,class,define,function,object,0
+89,C++,2,What is the purpose of a constructor in C++,To initialize objects,To define methods,To create a class,To delete an object,0
+90,C++,2,Which of the following is not an access specifier in C++,private,public,protected,friend,0
+91,C++,2,What does inheritance allow in C++,Creating a new class from an existing class,Creating multiple classes,Hiding class members,Defining functions,0
+92,C++,2,What is polymorphism in C++,Methods behaving differently based on the object,Multiple classes with the same name,Classes that inherit from one another,Creating multiple methods,0
+93,C++,2,What keyword is used to inherit a class in C++,class Child : public Parent,inherits Parent,extends Parent,inherits class,0
+94,C++,2,Which of the following correctly declares a virtual function,virtual void functionName(),void virtual functionName(),virtual functionName(),functionName() virtual,0
+95,C++,2,What does the keyword 'this' refer to in a class,The current object,The parent class,The method itself,The class type,0
+96,C++,2,True or False: C++ supports multiple inheritance,TRUE,FALSE,Not applicable,Depends on the compiler,0
+97,C++,2,What does encapsulation mean in C++,Hiding the internal state of an object,Creating multiple classes,Defining a method,Implementing an interface,0
+98,C++,2,What is a destructor's purpose in C++,To clean up before an object is destroyed,To create an object,To define a method,To return a value,0
+99,C++,2,True or False: You can create a method with the same name as the class in C++,TRUE,FALSE,Only in subclasses,Only in templates,0
+100,C++,2,What is an abstract class in C++,A class that cannot be instantiated,A class with only private members,A class with no methods,A class that must be inherited,0
+101,C++,2,Which of the following is a characteristic of a pure virtual function,Must be overridden in derived classes,Cannot be overridden,Can have a definition,Must be declared public,0
+102,C++,2,What does the keyword 'friend' do in C++,Allows access to private members from another class,Defines a class,Creates a new object,Overrides a method,0
+103,C++,2,True or False: The copy constructor is called when an object is passed by value,TRUE,FALSE,Only for primitive types,Only for pointers,0
+104,C++,2,What is method overriding in C++,Defining a method in a subclass that has the same name as one in the parent class,Defining multiple methods with the same name,Creating a new class from an existing class,Changing the return type of a method,0
+105,C++,2,What is the purpose of the virtual keyword in C++,To allow polymorphic behavior,To define a class,To create a constructor,To declare a variable,0
+106,C++,2,What does the term 'static binding' mean,The method call is resolved at compile time,The method call is resolved at runtime,No binding occurs,Only for static methods,0
+107,C++,2,True or False: All classes in C++ inherit from a base class,TRUE,FALSE,Only some classes,Only if specified,0
+108,C++,2,What is the output of the following code: class Base {}; class Derived : public Base {};,Derived is a subclass of Base,Base is a subclass of Derived,Both classes are unrelated,An error occurs,0
+109,C++,2,What is a virtual destructor,A destructor that can be overridden,A destructor that cannot be called,A destructor without implementation,None of the above,0
+110,C++,2,Which of the following can be a member of a class,Functions and variables,Only functions,Only variables,None of the above,0
+111,C++,2,What is the default access specifier for members of a class in C++,private,public,protected,friend,0
+112,C++,2,True or False: An inline function can be defined inside a class,TRUE,FALSE,Only for private functions,Only for public functions,0
+113,C++,2,What does the keyword 'const' mean when applied to a member function,The function does not modify the object,The function cannot be called,The function must be overridden,The function is static,0
+114,C++,2,What is a constructor initializer list in C++,A way to initialize member variables before the constructor body executes,A list of all constructors,A way to define destructors,None of the above,0
+115,C++,2,True or False: A class can have multiple constructors,TRUE,FALSE,Only if they are virtual,Only if they are private,0
+116,C++,2,What is the result of 'class A { public: void func(); };',Defines a class A with a public function,Defines a function only,Throws an error,Creates an object,0
+117,C++,2,What does the 'override' keyword signify,That a method is overriding a base class method,That a method cannot be overridden,That a method is final,None of the above,0
+118,C++,2,"True or False: In C++, a class can have multiple base classes",TRUE,FALSE,Only if specified,Only for templates,0
+119,C++,2,What is the purpose of the scope resolution operator (::),To access members of a class or namespace,To define a class,To create an instance,To declare variables,0
+120,C++,2,What is a template in C++,A blueprint for creating classes or functions,A type of class,A method that cannot be defined,None of the above,0
+121,C++,2,True or False: C++ allows function overloading,TRUE,FALSE,Only for constructors,Only for methods,0
+122,C++,2,What is the purpose of the 'new' keyword in C++,To allocate memory on the heap,To declare a variable,To create an object,To define a class,0
+123,C++,2,What is the main advantage of using an abstract class,To enforce method implementation in derived classes,To create instances,To define data members,To allow multiple inheritance,0
+124,C++,2,True or False: Private members of a class cannot be accessed from derived classes,FALSE,TRUE,Only if not inherited,Only in friend classes,0
+125,C++,2,"What is the output of 'class Base { public: virtual void show() { cout << ""Base""; }}; class Derived : public Base { public: void show() { cout << ""Derived""; }};'",Derived,Base,Both,Error,0
+126,C++,2,What does 'public' mean in C++,Members can be accessed from anywhere,Members can only be accessed from within the class,Members can be accessed only by derived classes,None of the above,0
+127,C++,1,What is the size of an int in C++,Typically 4 bytes,Typically 2 bytes,Typically 8 bytes,Depends on the compiler,0
+128,C++,1,Which of the following is a floating-point type,float,int,char,bool,0
+129,C++,1,What is the purpose of the bool data type,To store true or false values,To store character values,To store integer values,To store decimal values,0
+130,C++,1,What keyword is used to define a constant in C++,const,define,constant,fixed,0
+131,C++,1,True or False: A character in C++ is represented by an integer value,TRUE,FALSE,Only in ASCII,Only in Unicode,0
+132,C++,1,What is the default value of a bool variable in C++,FALSE,TRUE,0,1,0
+133,C++,1,Which of the following is a valid way to declare a string in C++,std::string myString,string myString,char myString[],String myString,0
+134,C++,1,What does the sizeof operator do,Returns the size of a data type,Returns the value of a variable,Returns the type of a variable,Returns the address of a variable,0
+135,C++,1,What type is used to store a single character,char,string,int,float,0
+136,C++,1,True or False: The float type has more precision than double in C++,FALSE,TRUE,Only for small numbers,Only for large numbers,0
+137,C++,1,Which of the following types can hold decimal values,float,char,int,bool,0
+138,C++,1,What is the purpose of the double data type,To store larger floating-point values,To store characters,To store boolean values,To store integers,0
+139,C++,1,What is an array in C++,A collection of variables of the same type,A collection of variables of different types,A single variable,None of the above,0
+140,C++,1,True or False: You can change the value of a constant variable after it's defined,FALSE,TRUE,Only if it is static,Only if it is global,0
+141,C++,1,Which of the following is an example of a user-defined data type,struct,int,char,float,0
+142,C++,1,What is the size of a long long int in C++,Typically 8 bytes,Typically 4 bytes,Typically 2 bytes,Depends on the system,0
+143,C++,1,What does the keyword 'typedef' do,Creates an alias for a data type,Defines a new data type,Declares a variable,None of the above,0
+144,C++,1,True or False: A string in C++ is an array of characters,TRUE,FALSE,Only for C-style strings,Only for wide strings,0
+145,C++,1,What is a pointer in C++,A variable that holds the address of another variable,A type of data,A constant variable,None of the above,0
+146,C++,1,Which of the following is not a built-in data type,struct,int,char,float,0
+147,C++,1,What type is used for dynamic memory allocation,void*,int,float,char,0
+148,C++,1,True or False: Enumerations can be used to define a set of integer constants,TRUE,FALSE,Only for characters,Only for floats,0
+149,C++,1,What is the result of adding an int to a float in C++,The result is a float,The result is an int,The result is a double,An error occurs,0
+150,C++,1,Which type is best for storing true/false values,bool,int,char,float,0
+151,C++,1,What happens if you use an uninitialized variable in C++,It contains a garbage value,It throws an error,It is set to zero,It is automatically initialized,0
+152,C++,1,True or False: A union can hold multiple data types at the same time,FALSE,TRUE,Only in C++11,Only in C,0
+153,C++,1,What is the maximum value for an unsigned char in C++,255,128,64,32,0
+154,C++,1,What is a constant pointer in C++,A pointer that cannot change the address it holds,A pointer that cannot point to a different variable,A pointer that cannot be dereferenced,A pointer that is not initialized,0
+155,C++,1,True or False: An int can be assigned a float value without casting,TRUE,FALSE,Only in certain conditions,Only in C++11,0
+156,C++,1,Which of the following can be used to allocate memory for an array dynamically,new,malloc,calloc,All of the above,0
+157,C++,1,What is the value of a char variable that is initialized with 'A',65,97,68,1,0
+158,C++,1,Which data type can store both integers and decimals,double,int,char,bool,0
+159,C++,1,True or False: The default data type for floating-point numbers is float,FALSE,TRUE,Only in C,Only in C++11,0
+160,C++,1,What is the purpose of the const keyword when used with pointers,To prevent changing the value pointed to,To prevent changing the pointer itself,Both of the above,None of the above,0
+161,C++,1,What is a reference variable in C++,An alias for another variable,A pointer to a variable,A type of variable,None of the above,0
+162,C++,1,True or False: You can perform arithmetic operations on char data types,TRUE,FALSE,Only in ASCII,Only in Unicode,0
+163,C++,1,Which of the following is a correct way to declare a constant integer in C++,const int myConst = 10;,int const myConst = 10;,Both of the above,None of the above,0
+164,C++,1,What is the range of a signed int in C++,"-2,147,483,648 to 2,147,483,647","0 to 4,294,967,295","-32,768 to 32,767",None of the above,0
+165,C++,1,What is a wide character type used for,To store Unicode characters,To store regular characters,To store integers,To store floating-point numbers,0
+166,C++,1,True or False: A void pointer can point to any data type,TRUE,FALSE,Only to int,Only to char,0
+167,C++,1,What is the result of dividing two integers in C++,An integer,A float,A double,An error occurs,0
+168,Java,1,What is the size of an int in Java,4 bytes,2 bytes,8 bytes,Depends on the JVM,0
+169,Java,1,Which of the following is a floating-point type,float,int,char,boolean,0
+170,Java,1,What is the purpose of the boolean data type,To store true or false values,To store character values,To store integer values,To store decimal values,0
+171,Java,1,What keyword is used to define a constant in Java,final,constant,define,static,0
+172,Java,1,True or False: A character in Java is represented by a Unicode value,TRUE,FALSE,Only in ASCII,Only in UTF-8,0
+173,Java,1,What is the default value of a boolean variable in Java,FALSE,TRUE,0,1,0
+174,Java,1,Which of the following is a valid way to declare a string in Java,String myString;,string myString;,char myString[];,String[] myString;,0
+175,Java,1,What does the sizeof operator do in Java,Not applicable,Returns the size of a data type,Returns the value of a variable,Returns the address of a variable,0
+176,Java,1,What type is used to store a single character,char,String,int,float,0
+177,Java,1,True or False: The float type has more precision than double in Java,FALSE,TRUE,Only for small numbers,Only for large numbers,0
+178,Java,1,Which of the following types can hold decimal values,double,char,int,boolean,0
+179,Java,1,What is the purpose of the long data type,To store larger integer values,To store characters,To store boolean values,To store decimals,0
+180,Java,1,What is an array in Java,A collection of variables of the same type,A collection of variables of different types,A single variable,None of the above,0
+181,Java,1,True or False: You can change the value of a final variable after it's defined,FALSE,TRUE,Only if it is static,Only if it is global,0
+182,Java,1,Which of the following is an example of a user-defined data type,class,int,char,float,0
+183,Java,1,What is the size of a long in Java,8 bytes,4 bytes,2 bytes,Depends on the JVM,0
+184,Java,1,What does the keyword 'instanceof' do,Checks the type of an object,Creates a new instance of a class,Defines a new type,None of the above,0
+185,Java,1,True or False: A string in Java is an object,TRUE,FALSE,Only for C-style strings,Only for wide strings,0
+186,Java,1,What is the default value of an object reference in Java,null,0,FALSE,undefined,0
+187,Java,1,Which of the following can be used to define a character constant in Java,'A',"A/",A,None of the above,0
+188,Java,1,What is the value of a char variable initialized with 'A',65,97,68,1,0
+189,Java,1,True or False: A byte can hold values from -128 to 127,TRUE,FALSE,Only in signed byte,Only in unsigned byte,0
+190,Java,1,What type is best for storing true/false values,boolean,int,char,float,0
+191,Java,1,What happens if you use an uninitialized variable in Java,It contains a default value,It throws an error,It is set to zero,It is automatically initialized,0
+192,Java,1,True or False: Enums in Java can be used to define a set of constants,TRUE,FALSE,Only in C++,Only in C#,0
+193,Java,1,What is the maximum value for an unsigned byte in Java,255,128,64,32,0
+194,Java,1,What is a reference type in Java,A type that refers to an object,A primitive type,An integer type,A float type,0
+195,Java,1,True or False: You can perform arithmetic operations on char data types in Java,TRUE,FALSE,Only in ASCII,Only in Unicode,0
+196,Java,1,Which of the following is a correct way to declare a constant integer in Java,final int myConst = 10;,int const myConst = 10;,Both of the above,None of the above,0
+197,Java,1,What is the range of a signed int in Java,"-2,147,483,648 to 2,147,483,647","0 to 4,294,967,295","-32,768 to 32,767",None of the above,0
+198,Java,1,What is a StringBuilder used for,To manipulate strings efficiently,To store integers,To define a constant string,To create arrays,0
+199,Java,1,True or False: A void type can return a value in Java,FALSE,TRUE,Only in C++,Only in C#,0
+200,Java,1,What is the result of adding an int to a double in Java,A double,An int,A float,An error occurs,0
+201,Java,1,Which data type can store both integers and decimals,double,int,char,boolean,0
+202,Java,1,What is the result of dividing two integers in Java,An integer,A float,A double,An error occurs,0
+203,Java,1,True or False: A character literal can be assigned to an int variable,TRUE,FALSE,Only in C,Only in C++,0
+204,Java,1,What type is used to represent a decimal number in Java,float,int,char,boolean,0
+205,Java,1,Which of the following is a correct way to declare an array in Java,int[] myArray;,myArray int[];,int myArray[];,None of the above,0
+206,Java,1,True or False: You can create an array of objects in Java,TRUE,FALSE,Only for primitive types,Only for strings,0
+207,Java,1,What is the default data type for floating-point numbers in Java,double,float,int,char,0
+208,Java,1,What is an implicit type conversion,Automatic conversion of one type to another,Manual conversion of types,Conversion of strings to integers,None of the above,0
+209,Java,1,True or False: A list can store different types of objects in Java,FALSE,TRUE,Only if they are subclasses,Only if they are interfaces,0
+210,Python,1,What is the output of type(3.14)?,<class 'float'>,<class 'int'>,<class 'str'>,<class 'complex'>,0
+211,Python,1,Which of the following is not a built-in data type in Python?,None,List,Tuple,Set,0
+212,Python,1,What data type is used to store true or false values?,bool,int,str,float,0
+213,Python,1,What is the output of type([])?,<class 'list'>,<class 'dict'>,<class 'set'>,<class 'tuple'>,0
+214,Python,1,Which function converts a string to an integer?,int(),str(),float(),bool(),0
+215,Python,1,What is the output of 10 // 3?,3,3.33,3,4,0
+216,Python,1,Which of the following is a mutable data type?,List,Tuple,String,Integer,0
+217,Python,1,What is the result of 'Hello' + ' World'?,Hello World,HelloWorld,Hello World!,"Hello, World",0
+218,Python,1,Which of the following is used to create a dictionary?,{},[],(),<>,0
+219,Python,1,What is the output of len('Python')?,6,5,7,8,0
+220,Python,1,What data type would you use for a single character?,str,int,list,tuple,0
+221,Python,1,What is the output of type({'a': 1})?,<class 'dict'>,<class 'list'>,<class 'set'>,<class 'tuple'>,0
+222,Python,1,Which data type is used to store multiple items in a single variable?,List,int,float,bool,0
+223,Python,1,What is the output of str(100) + ' is a number'?,100 is a number,100is a number,100 is a number!,100 is not a number,0
+224,Python,1,Which of the following is an immutable data type?,Tuple,List,Dictionary,Set,0
+225,Python,1,What is the result of type(True)?,<class 'bool'>,<class 'int'>,<class 'str'>,<class 'list'>,0
+226,Python,1,"What is the output of [1, 2] + [3, 4]?","[1, 2, 3, 4]","[4, 3, 2, 1]","[[1, 2], [3, 4]]","[1, 2] + [3, 4]",0
+227,Python,1,Which data type allows duplicate values?,List,Set,Tuple,Dictionary,0
+228,Python,1,"What is the output of {1, 2, 2}?","{1, 2}","{1, 2, 2}",{2},Error,0
+229,Python,1,What is the result of 'abc' * 3?,abcabcabc,abcabc,abcabcabc!,Error,0
+230,Python,1,What is the output of 5 == 5.0?,TRUE,FALSE,Error,None,0
+231,Python,1,Which of the following data types can be used as a key in a dictionary?,String,List,Set,Dictionary,0
+232,Python,1,What is the output of '2' + '2'?,22,4,Error,'4',0
+233,Python,1,Which of the following is a way to create a set?,"set([1, 2, 3])","[1, 2, 3]","(1, 2, 3)","{1, 2, 3}",0
+234,Python,1,What is the result of 1.0 + 1?,2,2,Error,None,0
+235,Python,1,Which function would you use to convert a float to a string?,str(),float(),int(),bool(),0
+236,Python,1,"What is the output of isinstance(3.0, float)?",TRUE,FALSE,Error,None,0
+237,Python,1,"What is the output of [1, 2, 3] * 0?",[],[0],"[1, 2, 3]",Error,0
+238,Python,1,Which data type is used for text in Python?,str,int,float,bool,0
+239,Python,1,"What is the output of dict(a=1, b=2)?","{'a': 1, 'b': 2}",Error,"{'a', 1, 'b', 2}","('a': 1, 'b': 2)",0
+240,Python,1,Which of the following can hold an ordered collection of items?,List,Set,Dictionary,All of the above,0
+241,Python,1,"What is the output of type((1, 2))?",<class 'tuple'>,<class 'list'>,<class 'set'>,<class 'dict'>,0
+242,Python,1,Which keyword is used to declare a boolean variable?,bool,int,str,float,0
+243,Python,1,What is the output of 0.1 + 0.2 == 0.3?,FALSE,TRUE,Error,None,0
+244,Python,1,"What is the output of round(2.675, 2)?",2.67,2.68,2.7,2.6,0
+245,Python,1,What is the output of 10 % 3?,1,3,2,0,0
+246,Python,1,Which of the following is a valid way to create a tuple?,"(1, 2, 3)","{1, 2, 3}","[1, 2, 3]","<1, 2, 3>",0
+247,Python,1,"What is the output of {1: 'a', 2: 'b'}?","{1: 'a', 2: 'b'}",Error,"{1, 'a', 2, 'b'}","{(1, 'a'), (2, 'b')}",0
+248,Python,1,What data type is used for an unordered collection of unique items?,Set,List,Tuple,Dictionary,0
+249,Python,1,"What is the output of str([1, 2])?","[1, 2]",Error,"1, 2","'1, 2'",0
+250,Python,1,Which of the following is a valid string method?,lower(),upper(),split(),All of the above,0
+251,Python,1,What is the output of len([])?,0,1,Error,None,0
+252,Python,1,Which operator is used to check for equality?,==,=,!=,<>,0
+253,Python,1,What is the output of type(None)?,<class 'NoneType'>,<class 'str'>,<class 'int'>,<class 'float'>,0
+254,Python,1,"What is the output of [1, 2, 3][1]?",2,1,3,Error,0
+255,Python,1,"What is the output of (1, 2) + (3, 4)?","(1, 2, 3, 4)","(4, 3, 2, 1)",Error,"(1, 2, (3, 4))",0
+256,Python,1,"What is the result of {1, 2} | {2, 3}?","{1, 2, 3}","{1, 2}","{2, 3}","{1, 2, 2, 3}",0
+257,Python,3,Which data structure uses FIFO (First In First Out) principle?,Queue,Stack,List,Set,0
+258,Python,3,Which data structure is mutable and ordered?,List,Tuple,String,Set,0
+259,Python,3,What method adds an element to the end of a list?,append(),add(),insert(),extend(),0
+260,Python,3,"What is the output of len({'a': 1, 'b': 2})?",2,1,3,Error,0
+261,Python,3,Which of the following is a valid way to create a set?,"{1, 2, 3}","[1, 2, 3]","(1, 2, 3)",{1; 2; 3},0
+262,Python,3,Which data structure can store key-value pairs?,Dictionary,List,Tuple,Set,0
+263,Python,3,"What is the output of [1, 2, 3][0]?",1,2,3,Error,0
+264,Python,3,Which method removes an element from a list by value?,remove(),pop(),discard(),delete(),0
+265,Python,3,What is the time complexity of appending to a list in Python?,O(1),O(n),O(log n),O(n^2),0
+266,Python,3,What data structure is used for implementing stacks?,List,Dictionary,Set,Tuple,0
+267,Python,3,Which of the following methods can be used to sort a list?,sort(),order(),arrange(),shuffle(),0
+268,Python,3,"What is the output of {1, 2} & {2, 3}?",{2},"{1, 2, 3}",{1},{3},0
+269,Python,3,What data structure uses LIFO (Last In First Out) principle?,Stack,Queue,List,Set,0
+270,Python,3,"What is the output of (1, 2) + (3, 4)?","(1, 2, 3, 4)","(4, 3, 2, 1)",Error,"(1, 2, (3, 4))",0
+271,Python,3,Which method would you use to retrieve and remove the last element from a list?,pop(),remove(),delete(),discard(),0
+272,Python,3,"What is the output of [1, 2, 3] * 2?","[1, 2, 3, 1, 2, 3]","[1, 2, 3]","[2, 3]",Error,0
+273,Python,3,Which data structure allows duplicate values?,List,Set,Dictionary,Tuple,0
+274,Python,3,"What is the result of {1, 2} | {2, 3}?","{1, 2, 3}","{1, 2}","{2, 3}","{1, 3}",0
+275,Python,3,"What is the output of d = {1: 'a', 2: 'b'}; d[1]?",'a','b',1,Error,0
+276,Python,3,Which method is used to clear all items from a dictionary?,clear(),delete(),remove(),pop(),0
+277,Python,3,"What is the output of [1, 2, 3].index(2)?",1,2,0,Error,0
+278,Python,3,Which data structure cannot have mutable elements?,Tuple,List,Dictionary,Set,0
+279,Python,3,"What is the output of ['a', 'b', 'c'][1:3]?","['b', 'c']","['a', 'b']",['c'],Error,0
+280,Python,3,What is the method used to add multiple elements to a list?,extend(),append(),insert(),add(),0
+281,Python,3,Which of the following is an example of a hash table?,Dictionary,List,Set,Tuple,0
+282,Python,3,"What is the output of sorted([3, 1, 2])?","[1, 2, 3]","[3, 1, 2]",Error,"[2, 3, 1]",0
+283,Python,3,"What is the output of {1, 2, 3}.add(2)?","{1, 2, 3}","{1, 2}","{2, 3}",Error,0
+284,Python,3,What method would you use to get the number of items in a dictionary?,len(),count(),size(),length(),0
+285,Python,3,Which method would you use to check if an item exists in a list?,in,exists,contains,has,0
+286,Python,3,"What is the output of (1, 2, 3).count(2)?",1,2,Error,0,0
+287,Python,3,Which of the following is not a valid way to create a list?,list(range(5)),"[1, 2, 3]","(1, 2, 3)",list(),0
+288,Python,3,"What is the output of d = {1: 'a', 2: 'b'}; d.get(3)?",None,'b','a',Error,0
+289,Python,3,Which data structure is best for unique items?,Set,List,Dictionary,Tuple,0
+290,Python,3,"What is the output of 'Python' in ['Python', 'Java']?",TRUE,FALSE,Error,None,0
+291,Python,3,What is the time complexity of searching in a list?,O(n),O(1),O(log n),O(n^2),0
+292,Python,3,What is the method used to remove an item from a set?,discard(),remove(),pop(),delete(),0
+293,Python,3,Which of the following is an ordered collection of items?,List,Set,Dictionary,None of the above,0
+294,Python,3,"What is the output of [1, 2, 3].reverse()?",None,"[3, 2, 1]","[1, 2, 3]",Error,0
+295,Python,3,What does the pop method return if no index is provided?,Last item,First item,Error,None,0
+296,Python,3,"What is the output of {1: 'a', 2: 'b'}[2]?",'b','a',Error,2,0
+297,Python,3,"What is the output of set([1, 1, 2, 3])?","{1, 2, 3}","{1, 1, 2, 3}",Error,None,0
+298,Python,3,"What is the output of [1, 2, 3].count(3)?",1,0,Error,3,0
+299,Python,3,What is the result of deque() in the collections module?,Double-ended queue,Stack,List,Set,0
+300,Python,3,Which of the following can be used to implement a graph?,Dictionary,List,Set,All of the above,0
+301,Python,3,"What is the output of 'a' in ['a', 'b', 'c']?",TRUE,FALSE,Error,None,0
+302,C++,3,Which data structure uses LIFO (Last In First Out)?,Stack,Queue,List,Array,0
+303,C++,3,Which data structure uses FIFO (First In First Out)?,Queue,Stack,List,Array,0
+304,C++,3,What method is used to add an element to the end of a vector?,push_back(),append(),add(),insert(),0
+305,C++,3,What is the output of a.size() if a is a vector with 5 elements?,5,4,0,Error,0
+306,C++,3,Which of the following is a valid way to declare a map?,"std::map<int, std::string> m;",map<int> m;,"map<int, string> m;","std::map m<int, string>;",0
+307,C++,3,Which data structure is best for key-value pairs?,Map,Vector,Set,List,0
+308,C++,3,What is the time complexity of accessing an element in an array?,O(1),O(n),O(log n),O(n^2),0
+309,C++,3,What does the pop_back() method do in a vector?,Removes the last element,Adds an element,Removes the first element,Clears the vector,0
+310,C++,3,What is the output of std::set<int> s; s.insert(1); s.insert(1); s.size()?,1,2,0,Error,0
+311,C++,3,Which data structure allows duplicate values?,List,Set,Map,Stack,0
+312,C++,3,What is the time complexity of searching in an unordered_map?,O(1) on average,O(n),O(log n),O(n^2),0
+313,C++,3,What is the default value of an uninitialized pointer?,nullptr,0,-1,Error,0
+314,C++,3,Which of the following is a way to create a linked list?,Node* head = nullptr;,Node head;,LinkedList list;,std::list list;,0
+315,C++,3,"What is the output of vector<int> v = {1, 2, 3}; v[1]?",2,1,3,Error,0
+316,C++,3,Which STL container does not allow duplicates?,Set,List,Vector,Array,0
+317,C++,3,What is the output of std::vector<int> v; v.push_back(5); v[0]?,5,0,Error,5,0
+318,C++,3,What is the purpose of the front() method in a queue?,Retrieve the first element,Remove the first element,Add an element,Check if empty,0
+319,C++,3,Which of the following is not a linear data structure?,Tree,Array,Linked List,Stack,0
+320,C++,3,"What is the output of std::map<int, string> m; m[1] = 'a'; m[2] = 'b'; m.size()?",2,1,0,Error,0
+321,C++,3,What is the result of using a deque?,Double-ended queue,Stack,Array,Set,0
+322,C++,3,Which of the following data structures allows for efficient insertion and deletion at both ends?,Deque,Vector,Array,List,0
+323,C++,3,"What is the output of std::vector<int> v = {1, 2, 3}; v.at(2)?",3,2,1,Error,0
+324,C++,3,What is the time complexity of inserting an element in a linked list?,O(1) at head,O(n),O(log n),O(n^2),0
+325,C++,3,Which of the following is a method of std::unordered_map?,find(),search(),get(),index(),0
+326,C++,3,"What is the output of std::vector<int> v = {1, 2, 3}; v.size()?",3,2,0,Error,0
+327,C++,3,Which data structure is implemented as a hierarchical structure?,Tree,Array,Set,List,0
+328,C++,3,What does the clear() method do in a vector?,Removes all elements,Removes the last element,Clears the first element,Nothing,0
+329,C++,3,Which of the following is a valid way to declare a stack?,std::stack<int> s;,stack<int> s;,std::stack s<int>;,stack s;,0
+330,C++,3,What is the output of std::list<int> l; l.push_back(1); l.front()?,1,0,Error,1,0
+331,C++,3,Which STL container allows for random access?,Vector,List,Set,Queue,0
+332,C++,3,What is the output of std::set<int> s; s.insert(1); s.insert(2); s.insert(1); s.size()?,2,1,3,Error,0
+333,C++,3,Which method removes the first element of a queue?,pop(),dequeue(),remove(),shift(),0
+334,C++,3,"What is the result of std::array<int, 3> arr; arr[3]?",Error,0,3,1,0
+335,C++,3,What is the time complexity of deleting the last element in a vector?,O(1),O(n),O(log n),O(n^2),0
+336,C++,3,What data structure uses pointers to link nodes?,Linked List,Array,Map,Set,0
+337,C++,3,Which data structure is suitable for implementing a priority queue?,Heap,Stack,List,Array,0
+338,C++,3,"What is the output of std::vector<int> v = {1, 2, 3}; v.erase(v.begin()); v.size()?",2,3,1,Error,0
+339,C++,3,Which of the following is an associative container?,Map,Array,Vector,List,0
+340,C++,3,What is the output of std::stack<int> s; s.push(1); s.top()?,1,0,Error,1,0
+341,C++,3,Which data structure is not dynamic?,Array,Vector,List,Map,0
+342,C++,3,What is the time complexity of accessing an element in a linked list?,O(n),O(1),O(log n),O(n^2),0
+343,C++,3,What method is used to remove an element from a map?,erase(),remove(),delete(),pop(),0
+344,C++,3,Which of the following can be used to create a binary tree?,Node* root = nullptr;,Node root;,Tree<int> t;,std::tree<int> t;,0
+345,C++,3,What is the output of std::queue<int> q; q.push(1); q.front()?,1,0,Error,1,0
+346,C++,3,Which of the following data structures does not allow for duplicate keys?,Map,Set,List,Array,0
+347,C++,3,What is the output of std::vector<int> v; v.push_back(1); v.push_back(2); v[1]?,2,1,0,Error,0
+348,C++,3,What is the time complexity of inserting at the beginning of a linked list?,O(1),O(n),O(log n),O(n^2),0
+349,Java,3,Which data structure uses LIFO (Last In First Out)?,Stack,Queue,ArrayList,LinkedList,0
+350,Java,3,Which data structure uses FIFO (First In First Out)?,Queue,Stack,ArrayList,LinkedList,0
+351,Java,3,What method adds an element to the end of an ArrayList?,add(),append(),insert(),push(),0
+352,Java,3,What is the output of an empty ArrayList's size()?,0,1,Error,-1,0
+353,Java,3,Which of the following is a valid way to declare a HashMap?,"HashMap<Integer, String> map;","HashMap map<Integer, String>;","map<Integer, String> HashMap;",HashMap<Integer> map;,0
+354,Java,3,Which data structure is best for key-value pairs?,HashMap,ArrayList,LinkedList,Stack,0
+355,Java,3,What is the time complexity of accessing an element in an array?,O(1),O(n),O(log n),O(n^2),0
+356,Java,3,What does the pop() method do in a Stack?,Removes the top element,Adds an element,Removes the bottom element,Clears the stack,0
+357,Java,3,What is the output of new HashSet<Integer>().size()?,0,1,Error,-1,0
+358,Java,3,Which data structure allows duplicate values?,ArrayList,HashSet,HashMap,TreeSet,0
+359,Java,3,What is the time complexity of searching in a HashMap?,O(1) on average,O(n),O(log n),O(n^2),0
+360,Java,3,What is the default value of an uninitialized object reference?,null,0,-1,Error,0
+361,Java,3,Which of the following is a way to create a linked list?,LinkedList<Integer> list = new LinkedList<>();,LinkedList list;,LinkedList<Integer> list;,List list = new LinkedList<>();,0
+362,Java,3,What is the output of ArrayList<Integer> list = new ArrayList<>(); list.add(1); list.get(0)?,1,0,Error,1,0
+363,Java,3,Which collection does not allow duplicates?,Set,List,Array,Map,0
+364,Java,3,What is the output of new ArrayList<String>().isEmpty()?,TRUE,FALSE,Error,0,0
+365,Java,3,What is the purpose of the peek() method in a Stack?,Retrieve the top element,Remove the top element,Add an element,Check if empty,0
+366,Java,3,Which of the following is not a linear data structure?,Tree,Array,LinkedList,Stack,0
+367,Java,3,"What is the output of HashMap<Integer, String> map = new HashMap<>(); map.put(1, 'a'); map.size()?",1,0,Error,2,0
+368,Java,3,What does the clear() method do in a List?,Removes all elements,Removes the last element,Clears the first element,Nothing,0
+369,Java,3,Which of the following is a valid way to declare a Stack?,Stack<Integer> stack = new Stack<>();,Stack stack<Integer>;,Stack<Integer> stack;,stack = new Stack<>();,0
+370,Java,3,What is the output of new LinkedList<Integer>().add(1)?,TRUE,1,Error,0,0
+371,Java,3,Which of the following data structures allows for efficient insertion and deletion at both ends?,Deque,ArrayList,HashSet,HashMap,0
+372,Java,3,What is the output of ArrayList<Integer> list = new ArrayList<>(); list.add(2); list.remove(0)?,Error,0,1,2,0
+373,Java,3,Which method removes the first element of a Queue?,poll(),dequeue(),remove(),shift(),0
+374,Java,3,What is the time complexity of inserting an element in a linked list?,O(1) at head,O(n),O(log n),O(n^2),0
+375,Java,3,Which of the following is a method of HashMap?,get(),retrieve(),find(),index(),0
+376,Java,3,What is the output of ArrayList<String> list = new ArrayList<>(); list.add('a'); list.size()?,1,0,Error,2,0
+377,Java,3,Which data structure is implemented as a hierarchical structure?,Tree,Array,Set,List,0
+378,Java,3,What does the toArray() method do in a List?,Converts the list to an array,Clears the list,Adds an element,Removes duplicates,0
+379,Java,3,Which of the following is a valid way to declare a PriorityQueue?,PriorityQueue<Integer> pq = new PriorityQueue<>();,PriorityQueue pq<Integer>;,PriorityQueue<Integer> pq;,pq = new PriorityQueue<>();,0
+380,Java,3,What is the output of LinkedList<String> l = new LinkedList<>(); l.add('a'); l.get(0)?,'a',Error,0,1,0
+381,Java,3,Which collection allows for random access?,ArrayList,LinkedList,HashSet,TreeSet,0
+382,Java,3,What is the output of HashSet<String> set = new HashSet<>(); set.add('a'); set.add('a'); set.size()?,1,2,Error,0,0
+383,Java,3,Which method retrieves and removes the first element from a queue?,poll(),dequeue(),remove(),shift(),0
+384,Java,3,What is the result of String[] arr = new String[3]; arr[3]?,ArrayIndexOutOfBoundsException,null,0,Error,0
+385,Java,3,What is the time complexity of accessing an element in a linked list?,O(n),O(1),O(log n),O(n^2),0
+386,Java,3,What method is used to remove an element from a HashMap?,remove(),delete(),clear(),pop(),0
+387,Java,3,Which of the following can be used to create a binary tree?,TreeNode root = null;,Node root;,BinaryTree t;,ArrayList<Node> t;,0
+388,Java,3,What is the output of Queue<Integer> q = new LinkedList<>(); q.add(1); q.peek()?,1,0,Error,1,0
+389,Java,3,Which of the following data structures does not allow for duplicate keys?,Map,List,Array,Set,0
+390,Java,3,What is the output of ArrayList<Integer> list = new ArrayList<>(); list.add(1); list.add(2); list.get(1)?,2,1,0,Error,0
+391,Java,3,What is the time complexity of inserting at the beginning of a linked list?,O(1),O(n),O(log n),O(n^2),0
+392,C++,4,What is the default value of an uninitialized int variable?,Undefined,0,-1,Error,0
+393,C++,4,Which keyword is used to declare a constant variable in C++?,const,final,static,immutable,0
+394,C++,4,What is the output of int x = 5; cout << x;?,5,0,Error,5,0
+395,C++,4,Which of the following is a valid variable name in C++?,var_name,1variable,variable-name,variable name,0
+396,C++,4,What data type is used to store true or false values in C++?,bool,int,char,string,0
+397,C++,4,Which of the following is not a primitive data type in C++?,String,int,char,float,0
+398,C++,4,What is the output of string str = 'Hello'; cout << str;?,Hello,'Hello',Error,Hello!,0
+399,C++,4,Which of the following correctly declares a vector?,std::vector<int> myVec;,std::vector myVec;,myVec = vector<int>();,vector myVec = std::vector<int>();,0
+400,C++,4,What is the output of int x = 10; int y = 2; cout << x / y;?,5,5,Error,2,0
+401,C++,4,Which of the following is a mutable data type?,std::vector<int>,std::string,std::array,Both A and B,0
+402,C++,4,What is the output of float f = 5.5; cout << f;?,5.5,5,Error,5,0
+403,C++,4,Which keyword is used to define a function in C++?,void,function,def,func,0
+404,C++,4,What is the output of bool b = true; cout << b;?,1,TRUE,0,Error,0
+405,C++,4,Which of the following is a valid way to declare a map?,"std::map<int, string> myMap;",std::map myMap;,"myMap = map<int, string>();","map myMap = std::map<int, string>();",0
+406,C++,4,What is the output of myMap[1] = 'one'; cout << myMap[1];?,one,1,Error,'one',0
+407,C++,4,Which of the following is an invalid variable name?,myVar,my-var,my_var,myVar1,0
+408,C++,4,What is the output of int x = 10; cout << (x == 10);?,1,0,Error,TRUE,0
+409,C++,4,What is the size of an empty vector in C++?,0,1,Error,None,0
+410,C++,4,What does the keyword 'static' indicate in variable declaration?,Static scope,Local scope,Global scope,Thread safety,0
+411,C++,4,Which of the following can hold multiple data types?,None,std::variant,std::vector,std::list,0
+412,C++,4,"What is the output of myList = {1, 2, 3}; cout << myList[1];?",2,1,Error,3,0
+413,C++,4,Which of the following correctly declares an array?,int myArray[5];,int myArray();,myArray = int[5];,array<int> myArray[5];,0
+414,C++,4,What is the output of int x = 10; cout << (x += 5);?,15,10,Error,5,0
+415,C++,4,What is the output of char c = 'A'; cout << c;?,A,65,Error,'A',0
+416,C++,4,Which keyword is used to create a class in C++?,class,object,struct,define,0
+417,C++,4,What is the output of int* ptr; cout << ptr;?,Undefined,0,Error,null,0
+418,C++,4,What is the output of std::string str = 'C++'; cout << str;?,C++,'C++',Error,C,0
+419,C++,4,Which of the following correctly initializes a set?,std::set<int> mySet;,std::set mySet;,mySet = set<int>();,set mySet = std::set<int>();,0
+420,C++,4,"What is the output of std::vector<int> v = {1, 2, 3}; cout << v.size();?",3,Error,0,1,0
+421,C++,4,Which of the following is a valid way to declare a pointer?,int* ptr;,int ptr*;,ptr = int*;,int ptr;,0
+422,C++,4,What is the output of int x = 10; cout << ++x;?,11,10,Error,12,0
+423,C++,4,What is the size of a long variable in C++?,At least 4 bytes,4 bytes,8 bytes,Depends on implementation,0
+424,C++,4,What is the output of std::cout << (10 > 5);?,1,0,Error,TRUE,0
+425,C++,4,Which of the following is the correct syntax for a lambda function?,[]() { return 1; },(int x) => { return x; },lambda x: x,(x) => return x;,0
+426,C++,4,What is the output of int a = 10; cout << a--;?,10,9,Error,11,0
+427,C++,4,What is the output of float x = 5.5; cout << static_cast<int>(x);?,5,5.5,Error,6,0
+428,C++,4,"What is the result of the following declaration: int a, b, c;?",Three variables declared,Only a declared,Only a and b declared,None declared,0
+429,C++,4,Which keyword is used to define an abstract class in C++?,There is no specific keyword,abstract,interface,class,0
+430,C++,4,What is the output of std::cout << 'A' + 1;?,66,Error,A1,B,0
+431,C++,4,Which of the following is a valid declaration of a string?,std::string myStr = 'Hello';,"std::string myStr = \Hello\"";""",Both A and B,None of the above,0
+432,C++,4,What is the output of int a = 5; int b = 2; cout << a / b;?,2,2.5,Error,1,0
+433,C++,4,What is the output of bool x = false; cout << !x;?,1,0,TRUE,FALSE,0
+434,C++,4,Which of the following can be used to create a multi-dimensional array?,int myArray[3][3];,int myArray[];,myArray = new int[3][3];,Both A and C,0
+435,C++,4,What is the output of std::cout << sizeof(int);?,4 (or depends on system),Error,8,2,0
+436,C++,4,What is the output of int x = 5; x *= 2; cout << x;?,10,5,Error,2,0
+437,C++,4,Which keyword is used to define a constant in C++?,const,final,static,define,0
+438,C++,4,What is the output of float f = 5.5; cout << f;?,5.5,5,Error,5,0
+439,C++,4,What is the size of a char variable in C++?,1 byte,2 bytes,4 bytes,8 bytes,0
+440,C++,4,Which of the following is a valid way to declare a string?,"std::string myStr = \Hello\"";""",std::string myStr = 'Hello';,std::string myStr = Hello;,std::string myStr;,0
+441,C++,4,What is the output of std::cout << (5 == 5);?,1,0,Error,TRUE,0
+442,C++,4,Which of the following is the correct syntax for declaring a reference?,int& ref = x;,int& ref(x);,int ref& = x;,int ref = &x;,0
+443,C++,4,What is the output of int a = 5; int b = 10; cout << (a + b);?,15,5,10,Error,0
+444,C++,4,What is the size of a long long variable in C++?,8 bytes,4 bytes,2 bytes,Depends on implementation,0
+445,C++,4,Which keyword is used for dynamic memory allocation?,new,malloc,alloc,create,0
+446,C++,4,What is the default value of a float variable in C++?,Undefined,0,1,Error,0
+447,C++,4,Which of the following is a valid way to declare a pointer to an integer?,int* ptr;,int ptr*;,int* ptr();,int ptr;,0
+448,C++,4,What is the output of std::cout << (4.0 / 2);?,2,2,Error,4,0
+449,C++,4,What is the size of a wchar_t variable in C++?,2 bytes,1 byte,4 bytes,Depends on implementation,0
+450,C++,4,Which of the following correctly initializes a string?,"std::string myStr = \Hello\"";""",std::string myStr = 'Hello';,std::string myStr = Hello;,std::string myStr;,0
+451,C++,4,What is the output of int a = 5; int b = 3; cout << a % b;?,2,1,Error,5,0
+452,C++,4,Which keyword is used for inheritance in C++?,public,protected,private,inherits,0
+453,C++,4,What is the output of char c = 'B'; cout << c;?,B,Error,66,'B',0
+454,C++,4,"What is the output of int arr[3] = {1, 2, 3}; cout << arr[2];?",3,Error,2,1,0
+455,C++,4,Which of the following is a valid declaration of a structure?,struct MyStruct {};,struct MyStruct;,MyStruct struct;,struct MyStruct {};,0
+456,Java,4,What is the default value of an int variable?,0,1,-1,null,0
+457,Java,4,Which keyword is used to declare a constant variable in Java?,final,const,static,immutable,0
+458,Java,4,What is the size of a boolean variable in Java?,1 bit,1 byte,2 bytes,4 bytes,0
+459,Java,4,Which of the following is a valid variable name in Java?,var_name,1variable,variable-name,variable name,0
+460,Java,4,What type of variable is declared within a method?,Local variable,Instance variable,Class variable,Static variable,0
+461,Java,4,Which of the following is a valid way to declare a double variable?,double myVar;,double myVar = 0;,myVar double;,0 double myVar;,0
+462,Java,4,What is the default value of a boolean variable?,FALSE,TRUE,0,1,0
+463,Java,4,Which of the following is not a primitive data type in Java?,String,int,char,boolean,0
+464,Java,4,What is the output of int x = 5; System.out.println(x);?,5,Error,0,5,0
+465,Java,4,Which of the following correctly declares a float variable?,float myVar = 5.0f;,float myVar = 5.0;,float myVar = 5;,float myVar = 5.0F;,0
+466,Java,4,What keyword is used to create a class in Java?,class,object,struct,variable,0
+467,Java,4,What is the size of a char variable in Java?,2 bytes,1 byte,4 bytes,8 bytes,0
+468,Java,4,Which keyword is used to declare a static variable?,static,final,const,class,0
+469,Java,4,What is the output of String str = 'Hello'; System.out.println(str);?,Hello,Error,null,0,0
+470,Java,4,Which data type can store a single character?,char,String,int,byte,0
+471,Java,4,What is the default value of an object reference?,null,0,FALSE,1,0
+472,Java,4,Which of the following is a valid declaration of a String array?,String[] myArray;,String myArray[];,Both A and B,None of the above,0
+473,Java,4,What does the keyword 'volatile' indicate in variable declaration?,Thread safety,Constant value,Static scope,Final value,0
+474,Java,4,What is the output of int a = 10; int b = 20; System.out.println(a + b);?,30,10,20,Error,0
+475,Java,4,Which of the following is an invalid variable declaration?,int 1var;,int var1;,float var_1;,boolean varName;,0
+476,Java,4,What type of variable is shared among all instances of a class?,Static variable,Local variable,Instance variable,Final variable,0
+477,Java,4,What is the output of System.out.println(5 + 3 + '8');?,58,11,Error,83,0
+478,Java,4,Which keyword is used to declare a method that does not return a value?,void,return,null,static,0
+479,Java,4,Which data type can hold the largest integer value?,long,int,short,byte,0
+480,Java,4,What is the output of double d = 5.5; System.out.println(d);?,5.5,5,Error,5,0
+481,Java,4,What type of variable is declared with the 'final' keyword?,Constant variable,Static variable,Local variable,Instance variable,0
+482,Java,4,What is the output of char c = 'A'; System.out.println(c);?,A,65,Error,'A',0
+483,Java,4,Which of the following correctly declares a multidimensional array?,int[][] myArray;,int myArray[][];,Both A and B,None of the above,0
+484,Java,4,What is the scope of a local variable?,Method level,Class level,Package level,Global level,0
+485,Java,4,What is the output of System.out.println(3 * 4 + '2');?,124,14,Error,32,0
+486,Java,4,Which of the following data types is used to represent decimal numbers?,float and double,int,char,boolean,0
+487,Java,4,What is the output of int x = 5; System.out.println(++x);?,6,5,Error,7,0
+488,Java,4,Which of the following is the correct syntax for declaring a variable?,int varName;,int varName = 0;,Both A and B,None of the above,0
+489,Java,4,What is the size of a long variable in Java?,8 bytes,4 bytes,2 bytes,1 byte,0
+490,Java,4,Which keyword is used to define an interface in Java?,interface,class,abstract,enum,0
+491,Java,4,What is the output of float f = 3.14f; System.out.println(f);?,3.14,Error,3.14f,3,0
+492,Java,4,Which of the following is a valid declaration of a byte variable?,byte b = 10;,byte b = 128;,byte b = 200;,byte b = -130;,0
+493,Java,4,What is the output of System.out.println(10 == 10);?,TRUE,FALSE,0,1,0
+494,Java,4,Which of the following is not a valid identifier in Java?,var_name,VarName,2ndVar,$var,0
+495,Java,4,What is the output of int x = 10; x += 5; System.out.println(x);?,15,10,5,Error,0
+496,Java,4,Which of the following correctly initializes a String?,String str = 'Hello';,"String str = \Hello\"";""",Both A and B,None of the above,0
+497,Java,4,What is the default value of a double variable?,0,0,null,Error,0
+498,Java,4,Which data type is used to represent true/false values?,boolean,int,String,char,0
+499,Java,4,What is the output of System.out.println('Hello' + ' World');?,Hello World,HelloWorld,Error,Hello+World,0
+500,Java,4,"What is the result of the following declaration: int a, b, c;?",Three variables declared,Only a declared,Only a and b declared,None declared,0
+501,Java,4,Which keyword is used to create an abstract class in Java?,abstract,interface,final,static,0
+502,Java,4,What is the output of System.out.println(5 / 2);?,2,2.5,Error,2,0
+503,Java,4,What is the default value of a double variable?,0,0,null,1,0
+504,Java,4,Which of the following is a valid way to declare a String?,"String str = \Hello\"";""",String str = 'Hello';,String str = Hello;,"String str = new String(\Hello\"");""",0
+505,Java,4,What is the output of int x = 5; System.out.println(x++);?,5,6,Error,4,0
+506,Java,4,What keyword is used to declare an abstract method?,abstract,interface,final,void,0
+507,Java,4,Which of the following is not a valid array declaration?,int[] myArray;,int myArray[];,int myArray[5];,int myArray()[];,0
+508,Java,4,What is the output of System.out.println(10 / 3);?,3,3,Error,3.333,0
+509,Java,4,What is the size of a short variable in Java?,2 bytes,4 bytes,1 byte,8 bytes,0
+510,Java,4,Which of the following correctly declares a float variable?,float myVar = 5.0f;,float myVar = 5;,float myVar = 5.0;,float myVar = 5.0F;,0
+511,Java,4,What is the output of boolean b = false; System.out.println(!b);?,TRUE,FALSE,0,1,0
+512,Java,4,"What is the output of int[] arr = {1, 2, 3}; System.out.println(arr[1]);?",2,1,Error,3,0
+513,Java,4,What is the default value of a boolean variable in Java?,FALSE,TRUE,null,0,0
+514,Java,4,Which of the following is a valid way to declare a character?,char c = 'A';,"char c = \A\"";""",char c = A;,char c = `A`;,0
+515,Java,4,"What is the output of System.out.println(5 + 3 + \ apples\"");?""",8 apples,5 apples,Error,8,0
+516,Java,4,Which keyword is used to define an interface in Java?,interface,abstract,class,implements,0
+517,Java,4,What is the output of int a = 5; int b = 10; System.out.println(a + b);?,15,5,10,Error,0
+518,Java,4,What is the size of a byte variable in Java?,1 byte,2 bytes,4 bytes,8 bytes,0
+519,Java,4,Which of the following is a valid way to declare a multidimensional array?,int[][] myArray;,int myArray[][];,Both A and B,int myArray[3][4];,0
+520,Java,4,What is the output of float f = 5.5f; System.out.println(f);?,5.5,5,Error,5,0
+521,Java,4,What is the output of System.out.println(true && false);?,FALSE,TRUE,0,1,0
+522,Java,4,What is the output of int[] arr = new int[5]; System.out.println(arr.length);?,5,Error,0,1,0
+523,Python,4,What is the default value of an uninitialized variable in Python?,None,0,FALSE,Error,0
+524,Python,4,Which keyword is used to declare a constant variable in Python?,There is no constant keyword,const,final,static,0
+525,Python,4,What is the output of x = 5; print(x)?,5,0,Error,5,0
+526,Python,4,Which of the following is a valid variable name in Python?,var_name,1variable,variable-name,variable name,0
+527,Python,4,What data type is used to store true or false values?,bool,int,str,list,0
+528,Python,4,Which of the following is not a primitive data type in Python?,String,int,float,bool,0
+529,Python,4,What is the output of x = 'Hello'; print(x)?,Hello,'Hello',Error,Hello!,0
+530,Python,4,Which data type can store multiple items in a single variable?,list,int,bool,None,0
+531,Python,4,"What is the output of x = [1, 2, 3]; print(len(x))?",3,2,Error,1,0
+532,Python,4,Which of the following correctly declares a list?,my_list = [],my_list = (),my_list = {},my_list = ,0
+533,Python,4,What is the output of x = 10; y = 2; print(x / y)?,5,5,Error,2,0
+534,Python,4,"What is the output of x = (1, 2, 3); print(type(x))?",<class 'tuple'>,<class 'list'>,<class 'set'>,<class 'dict'>,0
+535,Python,4,Which keyword is used to define a function in Python?,def,function,fun,define,0
+536,Python,4,What is the output of x = True; print(int(x))?,1,0,TRUE,Error,0
+537,Python,4,What is the output of my_dict = {'a': 1}; print(my_dict['a'])?,1,'a',Error,0,0
+538,Python,4,Which of the following is an invalid variable name?,myVar,my-var,my_var,myVar1,0
+539,Python,4,What is the output of x = 5; y = '5'; print(x == y)?,FALSE,TRUE,Error,0,0
+540,Python,4,What type of variable is declared inside a function?,Local variable,Global variable,Instance variable,Class variable,0
+541,Python,4,What is the size of an empty list in Python?,0,1,Error,None,0
+542,Python,4,What does the keyword 'global' indicate in variable declaration?,Global scope,Local scope,Static scope,Final value,0
+543,Python,4,Which of the following can hold multiple data types?,list,int,str,bool,0
+544,Python,4,"What is the output of my_list = [1, 2, 3]; print(my_list[1])?",2,1,Error,3,0
+545,Python,4,Which of the following correctly declares a tuple?,"my_tuple = (1, 2, 3)","my_tuple = [1, 2, 3]","my_tuple = {1, 2, 3}","my_tuple = 1, 2, 3",0
+546,Python,4,What is the output of x = 10; print(x ** 2)?,100,20,10,Error,0
+547,Python,4,What is the output of x = 'Hello'; print(x[1])?,e,Error,Hello,1,0
+548,Python,4,"What is the output of my_list = [1, 2, 3]; print(my_list[-1])?",3,Error,1,2,0
+549,Python,4,Which of the following is a valid way to initialize a set?,"my_set = {1, 2, 3}","my_set = [1, 2, 3]","my_set = (1, 2, 3)","my_set = 1, 2, 3",0
+550,Python,4,What is the output of my_dict = {'a': 1}; print(my_dict.get('b'))?,None,Error,0,1,0
+551,Python,4,Which of the following data types is immutable?,tuple,list,dict,set,0
+552,Python,4,"What is the output of x = [1, 2]; y = x; y.append(3); print(x)?","[1, 2, 3]","[1, 2]",Error,[3],0
+553,Python,4,Which of the following is the correct syntax for a lambda function?,lambda x: x + 1,lambda(x: x + 1),(lambda x: x + 1),function lambda(x: x + 1),0
+554,Python,4,"What is the output of x = [1, 2, 3]; x[0] = 10; print(x)?","[10, 2, 3]","[1, 2, 3]",Error,"[0, 2, 3]",0
+555,Python,4,What is the output of x = 'Python'; print(x[0:2])?,Py,Python,Error,P,0
+556,Python,4,Which of the following is a valid way to declare a variable with multiple assignments?,"x, y = 1, 2","x = 1, y = 2","x: 1, y: 2",x = 1; y = 2,0
+557,Python,4,"What is the output of my_list = [1, 2, 3]; print(my_list + [4])?","[1, 2, 3, 4]","[1, 2, 3]",Error,4,0
+558,Python,4,Which of the following is a valid dictionary comprehension?,"{k: v for k, v in zip(keys, values)}","{k, v for k, v in zip(keys, values)}","{k: v in zip(keys, values)}","[k: v for k, v in zip(keys, values)]",0
+559,Python,4,What is the output of x = None; print(type(x))?,<class 'NoneType'>,<class 'null'>,<class 'object'>,Error,0
+560,Python,4,Which of the following is a valid way to declare a variable with type hinting?,x: int = 5,x = int: 5,int x = 5,5 = int x,0
+561,Python,4,What is the output of x = 10; x += 1; print(x)?,11,10,Error,1,0
+562,Python,4,Which of the following is a valid way to declare a dictionary?,my_dict = {'key': 'value'},my_dict = [],my_dict = (),my_dict = ,0
+563,Python,4,"What is the result of x = [1, 2, 3]; x.append(4); print(x)?","[1, 2, 3, 4]","[1, 2, 3]",Error,4,0
+564,Python,4,What is the output of str = 'Python'; print(str[0])?,P,Error,'Python',0,0
+565,Python,4,Which keyword is used to create a class in Python?,class,object,struct,define,0
+566,Python,4,"What is the output of x = {1, 2, 3}; print(len(x))?",3,2,Error,1,0
+567,Python,4,Which of the following is a valid tuple?,"(1, 2, 3)","[1, 2, 3]","{1, 2, 3}","1, 2, 3",0
+568,Python,4,What is the output of x = None; print(x is None)?,TRUE,FALSE,Error,None,0
+569,Python,4,Which of the following is used for type hinting in Python?,x: int,x = int,int x,x as int,0
+570,Python,4,"What is the output of x = [1, 2]; y = x; y[0] = 10; print(x)?","[10, 2]","[1, 2]",Error,"[0, 2]",0
+571,Python,4,What is the output of x = '5'; print(int(x) + 1)?,6,5,Error,51,0
+572,Python,4,Which of the following is a valid way to declare a set?,"my_set = {1, 2, 3}",my_set = [],my_set = (),"my_set = set[1, 2, 3]",0
+573,Python,4,"What is the output of x = [1, 2, 3]; x.insert(1, 5); print(x)?","[1, 5, 2, 3]","[1, 2, 5, 3]",Error,"[5, 1, 2, 3]",0
+574,Python,4,What is the output of x = 'abc'; print(x[1:3])?,bc,ab,Error,a,0
+575,Python,4,Which keyword is used to create an instance of a class in Python?,class name(),new,object,create,0
+576,Python,4,What will be the output of print(type([]) is list)?,TRUE,FALSE,Error,None,0
+577,Python,4,Which of the following correctly initializes a dictionary with a key-value pair?,my_dict = {'key': 'value'},my_dict = {'key': 'value',my_dict = ('key': 'value'),"my_dict = {'key', 'value'}",0
+578,Python,4,What is the output of x = 5; y = 2; print(x % y)?,1,2,Error,5,0
+579,Python,4,Which data type is used to represent a sequence of characters?,str,list,dict,tuple,0
+580,Python,4,What is the output of x = 2.5; print(int(x))?,2,2.5,Error,3,0

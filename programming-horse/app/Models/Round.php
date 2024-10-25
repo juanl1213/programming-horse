@@ -15,6 +15,7 @@ class Round extends Model
         'question_id',
         'answer_selected',
         'round_winner',
+        'is_correct',
     ];
 
 }
