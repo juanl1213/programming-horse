@@ -91,22 +91,12 @@
 
                 // Play multiple rounds until a Player wins the game
                 playGame() {
-                    let winner = -1;
+                    let winner = -1;                    // No players have won yet
+                    
+                    this.resetPoints();                 // Reset players' points
 
-                    // Reset players' points
-                    this.resetPoints();
-
-                    // TEST
-                    this.playRound();
-                    winner = this.checkWinCondition(); // Check if any Players won
-
-                    //TODO: fix gameplay loop freezing page. Route to new view per round?
-                    /*
-                    while (winner === -1) {
-                        this.playRound();   // Play a single round
-                        winner = this.checkWinCondition(); // Check if any Players won
-                    }
-                    */
+                    this.playRound();                   // Play a single round
+                    winner = this.checkWinCondition();  // Check if any Players won
                 }
 
                 // Play a single round
@@ -199,7 +189,7 @@
                         let userAnswerLabel = document.querySelector(`label[for="${userAnswerElement.id}"]`);
                         userAnswerText = userAnswerLabel ? userAnswerLabel.innerText : "";
                     }
-                    let correctAnswer = 1;  // replace with correct answer from database
+                    let correctAnswer = "C++";  // replace with correct answer from database
                     return [comAnswer, userAnswerText, correctAnswer];
                 }
 
