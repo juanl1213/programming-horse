@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Questions extends Model
+class Question extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -19,5 +19,10 @@ class Questions extends Model
         'incorrect_answer_3',
         'validated',
     ];
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class, 'question_id');
+    }
 
 }

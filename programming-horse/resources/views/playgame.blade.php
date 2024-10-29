@@ -10,14 +10,14 @@
 
     <div class="dark:bg-gray-800 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white" style="margin-top: 50px; font-family:'Urbanist';padding-bottom: 20px; border-radius: 25px; padding-top: 10px;">
         <!-- Round Counter -->
-        <h1 id="round" style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">ROUND</h1>
+        <h1 id="round" style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">ROUND 1</h1>
         
         <!-- Current Topic -->
         <p style="font-size: 20px" id="topic"></p>
         <!-- Current Question -->
         <p style="font-size: 20px" id="question"></p>
         <!-- TEST: Current Question's Answer -->
-        <p style="font-size: 20px" id="correctAnswer"></p>
+        <p style="font-size: 20px" id="correctAnswer" style="display:none;"></p>
 
         <!-- TODO: Set default value for loading page -->
         <!-- User Answer Selection -->
@@ -56,27 +56,46 @@
         <script>
             class Game {
                 
-                // Game class constructor
                 constructor() {
-                    // Attributes  
-
-                    // current round
-                    this.currentRound = 1;
-
-                    // player names
+                    this.currentRound = 2;
                     this.playerNames = ["COM", "USER"];
-
-                    // templates for spelling HORSE
-                    this.HORSE = ["H","O","R","S","E"];
-
-                    // Reset player points and responses
+                    this.HORSE = ["H", "O", "R", "S", "E"];
                     this.resetPoints();
-
-                    // players' responses for the entire game: int [[COM_response, USER_response]]
                     this.gameResponses = [];
-
-                    this.userAnswer = 0
+                    this.userAnswer = 0;
+                    this.loadQuestion();
+                    this.questionData = [];
                 }
+
+        async loadQuestion() {
+            try {
+                const gameId = 1; // Replace with actual game ID
+                const topicId = 2; // Replace with actual topic ID
+                const language = 'Java'; // Replace with desired language
+
+                const response = await fetch(`/playgame/load-new-question/${gameId}/${topicId}/${language}`);
+                this.questionData = await response.json();
+
+                console.log('Fetched question data:', this.questionData); // Log the data to check response
+
+                if (this.questionData.answers && this.questionData.answers.length === 4) {
+                    // Populate HTML elements
+                    document.getElementById("topic").innerHTML = `Topic ID: ${this.questionData.topic_id}`;
+                    document.getElementById("question").innerHTML = this.questionData.question;
+                    document.getElementById("correctAnswer").innerHTML = `TEST Correct Answer:  ${this.questionData.correct_answer}`;
+                    document.getElementById("answer_0_label").innerHTML = this.questionData.answers[0];
+                    document.getElementById("answer_1_label").innerHTML = this.questionData.answers[1];
+                    document.getElementById("answer_2_label").innerHTML = this.questionData.answers[2];
+                    document.getElementById("answer_3_label").innerHTML = this.questionData.answers[3];
+                } else {
+                    console.error("Error: Question data missing answers array or insufficient answers");
+                }
+            } catch (error) {
+                console.error("Error loading question:", error);
+            }
+        }
+
+
 
                 // Reset round, points counter, and player letters
                 resetPoints() {
@@ -109,29 +128,20 @@
                     */
                 }
 
-                // Play a single round
-                playRound() {
-                    // Update round counter
+
+
+                async playRound() {
                     document.getElementById("round").innerHTML = "ROUND " + game.getRoundNum();
+                    await this.loadQuestion();  // Load a new question each round
 
-                    // Load a question
-                    this.loadQuestion();
-
-                    // Get player responses
                     let round = this.getRoundResponses();
-
-                    // Determine the round winner
-                    this.determineRound(round);
-
-                    // Append player responses to the game tracker
-                    this.gameResponses.push(round);
-
-                    // Display player progress
-                    this.updateHTML();
-
-                    // Update round counter
                     this.currentRound++;
+                    this.determineRound(round);
+                    this.gameResponses.push(round);
+                    this.updateHTML();
+                    
                 }
+
 
                 getRoundNum() {
                     return this.currentRound;
@@ -190,36 +200,36 @@
 
                 // Return the players' responses for the current round
                 getRoundResponses() {
-                    let comAnswer = Math.ceil(Math.random() * 3);
+                    let comAnswer = Math.ceil(Math.random() * 3);  // Integer value for COM's answer
                     let userAnswerElement = document.querySelector('input[name="selection"]:checked');
-    
-                    // Get the answer's label text
+                    
+                    // Get the integer value from the input tag's value attribute
+                    let userAnswerValue = userAnswerElement ? parseInt(userAnswerElement.value, 10) : null;
+                    
+                    // Get the label text for display purposes
                     let userAnswerText = "";
                     if (userAnswerElement) {
                         let userAnswerLabel = document.querySelector(`label[for="${userAnswerElement.id}"]`);
                         userAnswerText = userAnswerLabel ? userAnswerLabel.innerText : "";
                     }
-                    let correctAnswer = 1;  // replace with correct answer from database
-                    return [comAnswer, userAnswerText, correctAnswer];
+
+                    let comAnswerText = document.querySelector(`label[for="answer_${comAnswer}"]`).innerText || "";
+
+
+                    let correctAnswer = document.querySelector(`label[for="answer_${this.questionData.correctAnswer}"]`).innerText || "";  // replace with correct answer from database
+
+                    // Store both integer value and text in gameResponses
+                    return [{ value: comAnswer, text: comAnswerText}, { value: userAnswerValue, text: userAnswerText }, correctAnswer];
                 }
 
-                // Retrieve a question from the database and update HTML form
-                loadQuestion() {
-                    //TODO: replace placeholder values with question data from database
-                    document.getElementById("topic").innerHTML = "[insert TOPIC here]" + ":";
-                    document.getElementById("question").innerHTML = "[insert question text here]";
-                    document.getElementById("correctAnswer").innerHTML = "TEST: [insert correct answer text here]";
-                    document.getElementById("answer_0_label").innerHTML = "C++";
-                    document.getElementById("answer_1_label").innerHTML = "Java";
-                    document.getElementById("answer_2_label").innerHTML = "Python";
-                    document.getElementById("answer_3_label").innerHTML = "JavaScript";
-                }
 
+    
                 // Update HTML elements
                 updateHTML() {  
                     console.log(this.gameResponses)
-                    document.getElementById("com_selection").innerHTML = "COM selected: " + this.gameResponses[this.currentRound][0];
-                    document.getElementById("user_selection").innerHTML = "USER selected: " + this.gameResponses[this.currentRound][1];
+                    const latestRound = this.gameResponses[this.gameResponses.length - 1]; // Access the most recent round
+                    document.getElementById("com_selection").innerHTML = "COM selected: " + latestRound[0].text;
+                    document.getElementById("user_selection").innerHTML = "USER selected: " + latestRound[1].text;
 
                     document.getElementById("COM").innerHTML = game.getPlayerName(0) + ": " 
                                                                 + game.getPlayerPoints(0) + " " 
@@ -231,8 +241,8 @@
 
                 // Compare player answers and update points
                 determineRound(round) {
-                    const comAnswer = round[0];
-                    const userAnswer = round[1];
+                    const comAnswer = round[0].value;
+                    const userAnswer = round[1].value;
                     const correctAnswer = round[2];
 
                     // Determine round winner
@@ -273,7 +283,7 @@
             game.playGame();  */
             let userAnswer = 0
             game = new Game();
-            game.loadQuestion()
+
 
             document.getElementById('gameForm').addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent the form from submitting normally
