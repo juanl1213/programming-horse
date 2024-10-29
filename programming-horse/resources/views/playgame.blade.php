@@ -21,7 +21,7 @@
 
         <!-- TODO: Set default value for loading page -->
         <!-- User Answer Selection -->
-        <form id="gameForm" action="/playgame" method="GET">
+        <form action="/playgame" method="GET">
             <input type="radio" id="answer_0" name="selection" value=0>
             <label for="answer_0" id="answer_0_label"></label><br>
 
@@ -55,13 +55,12 @@
         <!--Game Script-->
         <script>
             class Game {
-                
                 // Game class constructor
                 constructor() {
                     // Attributes  
 
                     // current round
-                    this.currentRound = 1;
+                    this.currentRound = 0;
 
                     // player names
                     this.playerNames = ["COM", "USER"];
@@ -74,8 +73,6 @@
 
                     // players' responses for the entire game: int [[COM_response, USER_response]]
                     this.gameResponses = [];
-
-                    this.userAnswer = 0
                 }
 
                 // Reset round, points counter, and player letters
@@ -191,16 +188,9 @@
                 // Return the players' responses for the current round
                 getRoundResponses() {
                     let comAnswer = Math.ceil(Math.random() * 3);
-                    let userAnswerElement = document.querySelector('input[name="selection"]:checked');
-    
-                    // Get the answer's label text
-                    let userAnswerText = "";
-                    if (userAnswerElement) {
-                        let userAnswerLabel = document.querySelector(`label[for="${userAnswerElement.id}"]`);
-                        userAnswerText = userAnswerLabel ? userAnswerLabel.innerText : "";
-                    }
+                    let userAnswer = <?php echo $_GET["selection"]?>;
                     let correctAnswer = 1;  // replace with correct answer from database
-                    return [comAnswer, userAnswerText, correctAnswer];
+                    return [comAnswer, userAnswer, correctAnswer];
                 }
 
                 // Retrieve a question from the database and update HTML form
@@ -217,7 +207,6 @@
 
                 // Update HTML elements
                 updateHTML() {  
-                    console.log(this.gameResponses)
                     document.getElementById("com_selection").innerHTML = "COM selected: " + this.gameResponses[this.currentRound][0];
                     document.getElementById("user_selection").innerHTML = "USER selected: " + this.gameResponses[this.currentRound][1];
 
@@ -268,27 +257,9 @@
                 }
             }
 
-    /*         // Initialize new game
+            // Initialize new game
             game = new Game();
-            game.playGame();  */
-            let userAnswer = 0
-            game = new Game();
-            game.loadQuestion()
-
-            document.getElementById('gameForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting normally
-
-                // Find the selected radio button
-                userAnswer = document.querySelector('input[name="selection"]:checked');
-                if (userAnswer) {
-                    // Update userAnswer in the Game instance
-                    game.userAnswer = parseInt(userAnswer.value);
-                    // Now call any function that uses the user answer, e.g., playRound
-                    game.playRound();
-                } else {
-                    alert('Please select an answer before submitting.');
-                }
-            });
+            game.playGame();
             
         </script>
 
