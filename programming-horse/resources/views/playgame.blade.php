@@ -34,7 +34,7 @@
             <input type="radio" id="answer_3" name="selection" value=3>
             <label for="answer_3" id="answer_3_label"></label><br><br>
 
-            <input type="submit" value="Submit">
+            <input id="submitBtn" type="submit" value="Submit">
         </form>
 
         <br></br>
@@ -51,254 +51,217 @@
 
         <!-- Winner -->
         <p style="font-size: 20px" id="winner">[no winner yet]</p>
+        <button id="nextQuestionBtn" style="display: none;">Move on to next question</button>
+
 
         <!--Game Script-->
         <script>
             class Game {
-                
-                constructor() {
-                    this.currentRound = 2;
-                    this.playerNames = ["COM", "USER"];
-                    this.HORSE = ["H", "O", "R", "S", "E"];
-                    this.resetPoints();
-                    this.gameResponses = [];
-                    this.userAnswer = 0;
-                    this.loadQuestion();
-                    this.questionData = [];
-                }
+    constructor() {
+        this.currentRound = 1;
+        this.playerNames = ["COM", "USER"];
+        this.HORSE = ["H", "O", "R", "S", "E"];
+        this.resetPoints();
+        this.gameResponses = [];
+        this.userAnswer = null;
+        this.questionData = null;
+        this.isRoundActive = true;
+    }
 
-        async loadQuestion() {
-            try {
-                const gameId = 1; // Replace with actual game ID
-                const topicId = 2; // Replace with actual topic ID
-                const language = 'Java'; // Replace with desired language
+    resetPoints() {
+        this.playerPoints = [0, 0];
+        this.playerLetters = [["_","_","_","_","_"], ["_","_","_","_","_"]];
+    }
 
-                const response = await fetch(`/playgame/load-new-question/${gameId}/${topicId}/${language}`);
-                this.questionData = await response.json();
+    async loadQuestion() {
+        try {
+            const gameId = 1;
+            const topicId = 2;
+            const language = 'Java';
 
-                console.log('Fetched question data:', this.questionData); // Log the data to check response
+            const response = await fetch(`/playgame/load-new-question/${gameId}/${topicId}/${language}`);
+            this.questionData = await response.json();
 
-                if (this.questionData.answers && this.questionData.answers.length === 4) {
-                    // Populate HTML elements
-                    document.getElementById("topic").innerHTML = `Topic ID: ${this.questionData.topic_id}`;
-                    document.getElementById("question").innerHTML = this.questionData.question;
-                    document.getElementById("correctAnswer").innerHTML = `TEST Correct Answer:  ${this.questionData.correct_answer}`;
-                    document.getElementById("answer_0_label").innerHTML = this.questionData.answers[0];
-                    document.getElementById("answer_1_label").innerHTML = this.questionData.answers[1];
-                    document.getElementById("answer_2_label").innerHTML = this.questionData.answers[2];
-                    document.getElementById("answer_3_label").innerHTML = this.questionData.answers[3];
-                } else {
-                    console.error("Error: Question data missing answers array or insufficient answers");
-                }
-            } catch (error) {
-                console.error("Error loading question:", error);
+            if (this.questionData.answers && this.questionData.answers.length === 4) {
+                this.updateQuestionDisplay();
+                this.isRoundActive = true;
+                this.enableFormControls();
+            } else {
+                console.error("Error: Question data missing answers array or insufficient answers");
+            }
+        } catch (error) {
+            console.error("Error loading question:", error);
+        }
+    }
+
+    updateQuestionDisplay() {
+        document.getElementById("round").innerHTML = "ROUND " + this.currentRound;
+        document.getElementById("topic").innerHTML = `Topic ID: ${this.questionData.topic_id}`;
+        document.getElementById("question").innerHTML = this.questionData.question;
+        document.getElementById("correctAnswer").innerHTML = `TEST Correct Answer: ${this.questionData.correct_answer}`;
+        
+        // Update answer labels
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`answer_${i}_label`).innerHTML = this.questionData.answers[i];
+        }
+    }
+
+    enableFormControls() {
+        document.getElementById("submitBtn").disabled = false;
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.disabled = false);
+    }
+
+    disableFormControls() {
+        document.getElementById("submitBtn").disabled = true;
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.disabled = true);
+    }
+
+    async playRound() {
+        if (!this.isRoundActive) return;
+        
+        let round = this.getRoundResponses();
+        this.determineRound(round);
+        this.gameResponses.push(round);
+        this.updateHTML();
+        
+        this.isRoundActive = false;
+        this.disableFormControls();
+        
+        // Show next question button only after round is complete
+        document.getElementById("nextQuestionBtn").style.display = "block";
+        
+        // Check for winner
+        if (this.checkWinCondition() !== -1) {
+            this.handleGameEnd();
+        }
+    }
+
+    handleGameEnd() {
+        const winner = this.checkWinCondition();
+        document.getElementById("winner").innerHTML = this.getPlayerName(winner) + " spelled HORSE!";
+        document.getElementById("nextQuestionBtn").style.display = "none";
+        // You might want to add a "Play Again" button here
+    }
+
+    getRoundResponses() {
+        const comAnswer = Math.floor(Math.random() * 4);  // 0-3 instead of 1-3
+        const userAnswerElement = document.querySelector('input[name="selection"]:checked');
+        
+        const userAnswerValue = userAnswerElement ? parseInt(userAnswerElement.value, 10) : null;
+        
+        const userAnswerText = userAnswerElement ? 
+            document.querySelector(`label[for="${userAnswerElement.id}"]`).innerText : "";
+        const comAnswerText = document.querySelector(`label[for="answer_${comAnswer}"]`).innerText;
+
+        const correctAnswerLabel = Array.from(document.querySelectorAll("label"))
+            .find(label => label.innerText.trim() === this.questionData.correct_answer.trim());
+        const correctAnswer = correctAnswerLabel ? 
+            parseInt(correctAnswerLabel.getAttribute("for").split("_")[1]) : null;
+
+        return [
+            { value: comAnswer, text: comAnswerText}, 
+            { value: userAnswerValue, text: userAnswerText }, 
+            correctAnswer
+        ];
+    }
+
+    updateHTML() {
+        const latestRound = this.gameResponses[this.gameResponses.length - 1];
+        document.getElementById("com_selection").innerHTML = "COM selected: " + latestRound[0].text;
+        document.getElementById("user_selection").innerHTML = "USER selected: " + latestRound[1].text;
+
+        document.getElementById("COM").innerHTML = `${this.getPlayerName(0)}: ${this.getPlayerPoints(0)} ${this.getPlayerLetters(0)}`;
+        document.getElementById("USER").innerHTML = `${this.getPlayerName(1)}: ${this.getPlayerPoints(1)} ${this.getPlayerLetters(1)}`;
+    }
+
+    determineRound(round) {
+        const comAnswer = round[0].value;
+        const userAnswer = round[1].value;
+        const correctAnswer = round[2];
+
+        if (comAnswer !== userAnswer) {
+            if (comAnswer === correctAnswer) {
+                this.updatePoints(0);
+            } else if (userAnswer === correctAnswer) {
+                this.updatePoints(1);
             }
         }
+    }
 
+    updatePoints(player) {
+        const points = this.playerPoints[player];
+        if (points > -1 && points < 5) {
+            this.playerPoints[player]++;
+            this.playerLetters[player][points] = this.HORSE[points];
+        }
+    }
 
+    loadNextQuestion() {
+        this.currentRound++;
+        this.resetRound();
+        this.loadQuestion();
+    }
 
-                // Reset round, points counter, and player letters
-                resetPoints() {
-                    // Reset playerPoints to zeros
-                    // players' points: int [COM_points, USER_points]
-                    this.playerPoints = [0, 0];
-                    
-                    // Reset playerLetters to underscores
-                    // players' letters: char [[COM_letters], [USER_letters]]
-                    this.playerLetters = [["_","_","_","_","_",], ["_","_","_","_","_",]];
-                }
+    resetRound() {
+        // Reset the form using the form's reset() method
+        document.getElementById('gameForm').reset();
+        
+        // Explicitly uncheck all radio buttons
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.checked = false;
+        });
 
-                // Play multiple rounds until a Player wins the game
-                playGame() {
-                    let winner = -1;
+        // Clear the selections display
+        document.getElementById("com_selection").innerHTML = "";
+        document.getElementById("user_selection").innerHTML = "";
+        
+        // Hide the next question button
+        document.getElementById("nextQuestionBtn").style.display = "none";
+        
+        // Reset round state
+        this.isRoundActive = true;
+        this.userAnswer = null;
+    }
 
-                    // Reset players' points
-                    this.resetPoints();
+    // Getter methods remain the same
+    getRoundNum() { return this.currentRound; }
+    getPlayerName(player) { return this.playerNames[player]; }
+    getPlayerPoints(player) { return this.playerPoints[player]; }
+    getPlayerLetters(player) {
+        return this.playerLetters[player].join("");
+    }
+    checkWinCondition() {
+        for (let i = 0; i < this.playerPoints.length; i++) {
+            if (this.getPlayerPoints(i) >= 5) return i;
+        }
+        return -1;
+    }
+}
 
-                    // TEST
-                    this.playRound();
-                    winner = this.checkWinCondition(); // Check if any Players won
+// Initialize game and set up event listeners
+let game;
+document.addEventListener('DOMContentLoaded', () => {
+    game = new Game();
+    game.loadQuestion();
 
-                    //TODO: fix gameplay loop freezing page. Route to new view per round?
-                    /*
-                    while (winner === -1) {
-                        this.playRound();   // Play a single round
-                        winner = this.checkWinCondition(); // Check if any Players won
-                    }
-                    */
-                }
+    document.getElementById('gameForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const selectedAnswer = document.querySelector('input[name="selection"]:checked');
+        if (selectedAnswer) {
+            game.userAnswer = parseInt(selectedAnswer.value);
+            await game.playRound();
+        } else {
+            alert('Please select an answer before submitting.');
+        }
+    });
 
-
-
-                async playRound() {
-                    document.getElementById("round").innerHTML = "ROUND " + game.getRoundNum();
-                    await this.loadQuestion();  // Load a new question each round
-
-                    let round = this.getRoundResponses();
-                    this.currentRound++;
-                    this.determineRound(round);
-                    this.gameResponses.push(round);
-                    this.updateHTML();
-                    
-                }
-
-
-                getRoundNum() {
-                    return this.currentRound;
-                }
-
-                getPlayerName(player) {
-                    return this.playerNames[player];
-                }
-
-                getPlayerPoints(player) {
-                    return this.playerPoints[player];
-                }
-
-                getPlayerLetters(player) {
-                    let letters = ""
-                    this.playerLetters[player].forEach(letter => {
-                        letters += letter;
-                    });
-                    return letters;
-                }
-
-                // Update points for the given player
-                updatePoints(player) {
-                    // Get player's current points
-                    let points = this.playerPoints[player];
-
-                    // If points is in the valid range
-                    if (points > -1 && points < 5) {
-                        // Give player 1 point and a letter
-                        this.playerPoints[player]++;
-                        this.playerLetters[player][points-1] = this.HORSE[points-1];
-                    } 
-                }
-
-                // Set points for the given player
-                setPoints(player, points) {
-                    // If points is in the valid range
-                    if (points > -1 && points < 6) {
-                        // assign player points
-                        this.playerPoints[player] = points;
-                    }
-                    // Else if points too low, assign player 0 points
-                    else if (points < 0) {
-                        this.playerPoints[player] = 0;
-                    }
-                    // Else if points too high, assign player 0 points
-                    else if (points > 5) {
-                        this.playerPoints[player] = 5;
-                    }
-
-                    // Loop through and update player letters based on points
-                    for (let i = 0; i < points && i < 5; i++) {
-                        this.playerLetters[player][i] = this.HORSE[i];
-                    }
-                }
-
-                // Return the players' responses for the current round
-                getRoundResponses() {
-                    let comAnswer = Math.ceil(Math.random() * 3);  // Integer value for COM's answer
-                    let userAnswerElement = document.querySelector('input[name="selection"]:checked');
-                    
-                    // Get the integer value from the input tag's value attribute
-                    let userAnswerValue = userAnswerElement ? parseInt(userAnswerElement.value, 10) : null;
-                    
-                    // Get the label text for display purposes
-                    let userAnswerText = "";
-                    if (userAnswerElement) {
-                        let userAnswerLabel = document.querySelector(`label[for="${userAnswerElement.id}"]`);
-                        userAnswerText = userAnswerLabel ? userAnswerLabel.innerText : "";
-                    }
-
-                    let comAnswerText = document.querySelector(`label[for="answer_${comAnswer}"]`).innerText || "";
-
-
-                    let correctAnswer = document.querySelector(`label[for="answer_${this.questionData.correctAnswer}"]`).innerText || "";  // replace with correct answer from database
-
-                    // Store both integer value and text in gameResponses
-                    return [{ value: comAnswer, text: comAnswerText}, { value: userAnswerValue, text: userAnswerText }, correctAnswer];
-                }
-
-
-    
-                // Update HTML elements
-                updateHTML() {  
-                    console.log(this.gameResponses)
-                    const latestRound = this.gameResponses[this.gameResponses.length - 1]; // Access the most recent round
-                    document.getElementById("com_selection").innerHTML = "COM selected: " + latestRound[0].text;
-                    document.getElementById("user_selection").innerHTML = "USER selected: " + latestRound[1].text;
-
-                    document.getElementById("COM").innerHTML = game.getPlayerName(0) + ": " 
-                                                                + game.getPlayerPoints(0) + " " 
-                                                                + game.getPlayerLetters(0);
-                    document.getElementById("USER").innerHTML = game.getPlayerName(1) + ": " 
-                                                                + game.getPlayerPoints(1) + " " 
-                                                                + game.getPlayerLetters(1);
-                }
-
-                // Compare player answers and update points
-                determineRound(round) {
-                    const comAnswer = round[0].value;
-                    const userAnswer = round[1].value;
-                    const correctAnswer = round[2];
-
-                    // Determine round winner
-                    // If there was no tie
-                    if (comAnswer !== userAnswer) {
-                        // If the computer answered correctly
-                        if (comAnswer === correctAnswer) {
-                            // Update computer's points
-                            this.updatePoints(0);
-                        // If the user answered correctly
-                        } else if (userAnswer === correctAnswer) {
-                            // Update user's points
-                            this.updatePoints(1);
-                        }
-                    }
-                }
-
-                // Check if a player has won (has 5 points)
-                checkWinCondition() {
-                    // For each player
-                    for (let i = 0; i < this.playerPoints.length; i++) {
-                        // Check if player has at least 5 points
-                        if (this.getPlayerPoints(i) >= 5) {
-                            document.getElementById("winner").innerHTML = this.getPlayerName(i) +  " spelled HORSE!";
-
-                            // Return index of player
-                            return i;
-                        }
-                    }
-
-                    // Else, return -1 (no winner yet)
-                    return -1;
-                }
-            }
-
-    /*         // Initialize new game
-            game = new Game();
-            game.playGame();  */
-            let userAnswer = 0
-            game = new Game();
-
-
-            document.getElementById('gameForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting normally
-
-                // Find the selected radio button
-                userAnswer = document.querySelector('input[name="selection"]:checked');
-                if (userAnswer) {
-                    // Update userAnswer in the Game instance
-                    game.userAnswer = parseInt(userAnswer.value);
-                    // Now call any function that uses the user answer, e.g., playRound
-                    game.playRound();
-                } else {
-                    alert('Please select an answer before submitting.');
-                }
-            });
+    document.getElementById("nextQuestionBtn").addEventListener("click", () => {
+        game.loadNextQuestion();
+    });
+});
             
         </script>
 
