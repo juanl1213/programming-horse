@@ -62,4 +62,46 @@ class GameController extends Controller
         $game->save();
         return $game;
     }
+
+    public function finishGame(Request $request)
+    {
+        // Assume $request contains the user's game data including incorrect answers
+        $userName = $request->input('user_name');
+        $incorrectAnswers = $request->input('incorrect_answers'); // Array of incorrect answers
+        
+        // Generate the study guide text
+        $studyGuideText = $this->generateStudyGuideText($incorrectAnswers);
+
+        // Send the request to the API to create a study guide
+        $response = Http::post('https://your-api-endpoint.com/create-study-guide', [
+            'user_name' => $userName,
+            'study_guide' => $studyGuideText,
+        ]);
+
+        if ($response->successful()) {
+            return response()->json(['message' => 'Study guide created successfully!']);
+        } else {
+            return response()->json(['error' => 'Failed to create study guide.'], 500);
+        }
+    }
+
+    private function generateStudyGuideText($incorrectAnswers)
+    {
+        $text = "This user got these incorrect answers:\n\n";
+        
+        foreach ($incorrectAnswers as $answer) {
+            $text .= "Question: {$answer['question']}\n";
+            $text .= "Your Answer: {$answer['selected_answer']}\n";
+            $text .= "Correct Answer: {$answer['correct_answer']}\n\n";
+        }
+
+        $text .= "Recommendations for improvement:\n";
+        $text .= "1. Review the correct answers and explanations.\n";
+        $text .= "2. Practice similar questions on this topic.\n";
+        $text .= "3. Consider studying the following resources:\n";
+        $text .= "- Online tutorials\n";
+        $text .= "- Discussion forums for peer support\n";
+
+        return $text;
+    }
 }
