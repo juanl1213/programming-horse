@@ -11,9 +11,12 @@ class OpenAIController extends Controller
 
     public function __construct()
     {
+        $organizationName = env('ORGANIZATION_NAME');
+        $apiKey = env('API_KEY');
+
         $this->openai = new Client([
-            'organization' => '', 
-            'api_key' => '',
+            'organization' => $organizationName, 
+            'api_key' => $apiKey,
         ]);
     }
 

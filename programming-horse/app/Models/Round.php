@@ -18,4 +18,13 @@ class Round extends Model
         'is_correct',
     ];
 
+    public function game()
+    {
+        return $this->belongsTo(Game::class, 'game_id');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'question_id', 'question_id');
+    }
 }

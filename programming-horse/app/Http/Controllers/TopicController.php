@@ -55,7 +55,7 @@ class TopicController extends Controller
        ]);
 
        // Retrieve questions based on the topic and programming language
-       return Questions::where('topic_id', $request->topic_id)
+       return Question::where('topic_id', $request->topic_id)
            ->whereHas('topic', function ($query) use ($request) {
                $query->where('programming_language', $request->language);
            })
