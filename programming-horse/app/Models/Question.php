@@ -24,4 +24,5 @@ class Question extends Model
     {
         return $this->hasMany(Round::class, 'question_id');
     }
+
 }

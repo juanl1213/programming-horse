@@ -4,104 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Services\GameService;
+
 class GameController extends Controller
 {
-    // Get a specific game by ID
-    public function show($id)
+    protected $gameService;
+
+    public function __construct(GameService $gameService)
     {
-        return Game::findOrFail($id);
+        $this->gameService = $gameService;
     }
 
-    // Create a new game
-    public function store(Request $request)
+    public function loadNewQuestion($gameId, $topicId, $language)
     {
-        $request->validate([
-            'user_name' => 'required|string|max:255',
-            'language' => 'required|string|max:255',
-            'topic' => 'required|string|max:255',
-            'game_state' => 'required|in:in_progress,completed',
-            'game_status' => 'required|string|max:255', // e.g., "HOR"
-        ]);
-
-        $game = Game::create($request->all()); // Create and return the new game
-        return response()->json($game, 201); // Return the created game with a 201 status
-    }
-
-    // Update an existing game (to continue)
-    public function update(Request $request, $id)
-    {
-        $game = Game::findOrFail($id);
-        
-        $request->validate([
-            'game_state' => 'sometimes|required|in:in_progress,completed',
-            'game_status' => 'sometimes|required|string|max:255',
-            'game_winner' => 'nullable|string|in:user,computer', // Specify who won the game
-        ]);
-
-        // Update only if the game state is 'completed' to set the winner
-        if ($request->has('game_state') && $request->game_state === 'completed') {
-            $request->validate([
-                'game_winner' => 'required|string|in:user,computer', // Winner must be specified
-            ]);
-        }
-
-        $game->update($request->only('game_state', 'game_status', 'game_winner'));
-        return $game;
-    }
-
-    // Restart a game
-    public function restart($id)
-    {
-        $game = Game::findOrFail($id);
-
-        // Reset game fields to start a new game
-        $game->game_state = 'in_progress';
-        $game->game_status = ''; // Reset to initial status
-        $game->game_winner = null; // No winner yet
-
-        $game->save();
-        return $game;
-    }
-
-    public function finishGame(Request $request)
-    {
-        // Assume $request contains the user's game data including incorrect answers
-        $userName = $request->input('user_name');
-        $incorrectAnswers = $request->input('incorrect_answers'); // Array of incorrect answers
-        
-        // Generate the study guide text
-        $studyGuideText = $this->generateStudyGuideText($incorrectAnswers);
-
-        // Send the request to the API to create a study guide
-        $response = Http::post('https://your-api-endpoint.com/create-study-guide', [
-            'user_name' => $userName,
-            'study_guide' => $studyGuideText,
-        ]);
-
-        if ($response->successful()) {
-            return response()->json(['message' => 'Study guide created successfully!']);
+        $question = $this->gameService->loadQuestion($gameId, $topicId, $language);
+        if ($question) {
+            \Log::info('Question found:', $question); // Log question data for debugging
+            return response()->json($question);
         } else {
-            return response()->json(['error' => 'Failed to create study guide.'], 500);
+            \Log::info('No question returned from loadQuestion.');
+            return response()->json([], 404);
         }
     }
 
-    private function generateStudyGuideText($incorrectAnswers)
+    public function saveRound(Request $request)
     {
-        $text = "This user got these incorrect answers:\n\n";
+        $this->gameService->insertRound(
+            $request->gameId,
+            $request->roundNum,
+            $request->questionId,
+            $request->answerSelected,
+            $request->roundWinner,
+            $request->isCorrect
+        );
         
-        foreach ($incorrectAnswers as $answer) {
-            $text .= "Question: {$answer['question']}\n";
-            $text .= "Your Answer: {$answer['selected_answer']}\n";
-            $text .= "Correct Answer: {$answer['correct_answer']}\n\n";
-        }
-
-        $text .= "Recommendations for improvement:\n";
-        $text .= "1. Review the correct answers and explanations.\n";
-        $text .= "2. Practice similar questions on this topic.\n";
-        $text .= "3. Consider studying the following resources:\n";
-        $text .= "- Online tutorials\n";
-        $text .= "- Discussion forums for peer support\n";
-
-        return $text;
+        return response()->json(['status' => 'Round saved successfully']);
     }
+
+    public function getIncorrectAnswers($gameId, $userName)
+    {
+        $incorrectAnswers = $this->gameService->getIncorrectAnswers($gameId, $userName);
+        return response()->json($incorrectAnswers);
+    }
+
 }
