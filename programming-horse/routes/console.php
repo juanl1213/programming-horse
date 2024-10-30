@@ -2,6 +2,7 @@
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Services\QuestionsService;
+use App\Services\GameService;
 use App\Services\SimulateGameService;
 use App\Models\Round;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,57 @@ Artisan::command('check', function(){
     dd($rounds);
     // test code to check these conditions
     
+});
+
+Artisan::command('get-question', function(){
+
+    $gameService = new GameService;
+
+    try
+    { 
+        $question = $gameService->loadQuestion(1, 2, 'Java' );
+    dd($question);
+    // test code to check these conditions
+    } catch (\Exception $e)
+    {
+        Log::error("Error importing questions from: " . $e->getMessage());
+        $this->error("Failed to import questions from. Check the logs for more details.");
+    }
+    $this->info("It Worked" . "!");
+});
+
+Artisan::command('get-studyGuide', function(){
+
+    $gameService = new GameService;
+
+    try
+    { 
+        $guide = $gameService->getIncorrectAnswers(1, 'alipi' );
+    dd($guide);
+    // test code to check these conditions
+    } catch (\Exception $e)
+    {
+        Log::error("Error importing questions from: " . $e->getMessage());
+        $this->error("Failed to import questions from. Check the logs for more details.");
+    }
+    $this->info("It Worked" . "!");
+});
+
+
+Artisan::command('insert-round', function(){
+
+    $gameService = new GameService;
+
+    try
+    { 
+        $gameService->insertRound(1, 37, 42,'Encapsulation', 'alipi', 'correct');
+    // test code to check these conditions
+    } catch (\Exception $e)
+    {
+        Log::error("Error importing questions from: " . $e->getMessage());
+        $this->error("Failed to import questions from. Check the logs for more details.");
+    }
+    $this->info("It Worked" . "!");
 });
 
 Artisan::command('simulate-game {gamesFilePath} {roundsFilePath}', function(string $gamesFilePath, string $roundsFilePath){
@@ -65,4 +117,3 @@ Artisan::command('hydrate-questions {csvFilePath}', function(string $csvFilePath
     }
     $this->info("Successfully Imported $csvFilePath" . "!");
 });
-

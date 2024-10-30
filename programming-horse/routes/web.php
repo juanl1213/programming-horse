@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
+use App\Services\GameService;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\RoundController;
 use App\Http\Controllers\TopicController;
@@ -22,6 +23,8 @@ Route::get('/playgame', function () {
 Route::get('/index', function () {
     return view('welcome');
 });
+// In web.php
+Route::get('/playgame/load-new-question/{gameId}/{topicId}/{language}', [GameService::class, 'loadQuestion']);
 
 // routes/web.php
 Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggle'])->name('toggle-dark-mode');

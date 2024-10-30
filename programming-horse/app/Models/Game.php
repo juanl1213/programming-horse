@@ -17,4 +17,9 @@ class Game extends Model
         'game_status',
         'game_winner',
     ];
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class, 'game_id');
+    }
 }

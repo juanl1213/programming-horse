@@ -4,62 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Services\GameService;
+
 class GameController extends Controller
 {
-    // Get a specific game by ID
-    public function show($id)
+    protected $gameService;
+
+    public function __construct(GameService $gameService)
     {
-        return Game::findOrFail($id);
+        $this->gameService = $gameService;
     }
 
-    // Create a new game
-    public function store(Request $request)
+    public function loadNewQuestion($gameId, $topicId, $language)
     {
-        $request->validate([
-            'user_name' => 'required|string|max:255',
-            'language' => 'required|string|max:255',
-            'topic' => 'required|string|max:255',
-            'game_state' => 'required|in:in_progress,completed',
-            'game_status' => 'required|string|max:255', // e.g., "HOR"
-        ]);
-
-        $game = Game::create($request->all()); // Create and return the new game
-        return response()->json($game, 201); // Return the created game with a 201 status
-    }
-
-    // Update an existing game (to continue)
-    public function update(Request $request, $id)
-    {
-        $game = Game::findOrFail($id);
-        
-        $request->validate([
-            'game_state' => 'sometimes|required|in:in_progress,completed',
-            'game_status' => 'sometimes|required|string|max:255',
-            'game_winner' => 'nullable|string|in:user,computer', // Specify who won the game
-        ]);
-
-        // Update only if the game state is 'completed' to set the winner
-        if ($request->has('game_state') && $request->game_state === 'completed') {
-            $request->validate([
-                'game_winner' => 'required|string|in:user,computer', // Winner must be specified
-            ]);
+        $question = $this->gameService->loadQuestion($gameId, $topicId, $language);
+        if ($question) {
+            \Log::info('Question found:', $question); // Log question data for debugging
+            return response()->json($question);
+        } else {
+            \Log::info('No question returned from loadQuestion.');
+            return response()->json([], 404);
         }
-
-        $game->update($request->only('game_state', 'game_status', 'game_winner'));
-        return $game;
     }
 
-    // Restart a game
-    public function restart($id)
+    public function saveRound(Request $request)
     {
-        $game = Game::findOrFail($id);
-
-        // Reset game fields to start a new game
-        $game->game_state = 'in_progress';
-        $game->game_status = ''; // Reset to initial status
-        $game->game_winner = null; // No winner yet
-
-        $game->save();
-        return $game;
+        $this->gameService->insertRound(
+            $request->gameId,
+            $request->roundNum,
+            $request->questionId,
+            $request->answerSelected,
+            $request->roundWinner,
+            $request->isCorrect
+        );
+        
+        return response()->json(['status' => 'Round saved successfully']);
     }
+
+    public function getIncorrectAnswers($gameId, $userName)
+    {
+        $incorrectAnswers = $this->gameService->getIncorrectAnswers($gameId, $userName);
+        return response()->json($incorrectAnswers);
+    }
+
 }
