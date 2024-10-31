@@ -11,7 +11,7 @@
 
                 <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('playgame') }}'">Play a Game</x-primary-button>
                 <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View Rules</x-primary-button>
-                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View List of Topics</x-primary-button>
+                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View Study Guides</x-primary-button>
             </div>
         </div>
     </div>
