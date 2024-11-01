@@ -12,13 +12,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/topics', function () {
-    return view('topics');
-})->name('topics');
+Route::get('/selection', function () {
+    return view('selection');
+})->name('selection');
 
-Route::get('/playgame', function () {
-    return view('playgame');
-})->name('playgame');
+Route::post('/playgame', [GameController::class, 'startGame'])->name('playgame');
 
 Route::get('/index', function () {
     return view('welcome');
