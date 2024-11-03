@@ -18,13 +18,17 @@ return new class extends Migration
             $table->string("user_name");
             $table->string("language"); 
             $table->foreignId("topic_id")->constrained()->onDelete('cascade'); // Foreign key referencing topics table
-            $table->text("incorrect_answers"); 
-            $table->text("recommendations"); // Recommendations for the user based on incorrect answers
+            $table->string("recommendations_written_1");
+            $table->string("recommendations_written_2");
+            $table->string("recommendations_written_3");
+            $table->string("recommendations_video_1");
+            $table->string("recommendations_video_2");
+            $table->string("recommendations_video_3");
             $table->string("created_by")->default('system'); // created the study guide by system
 
             $table->foreign("user_name")->references("user_name")->on("users");
             $table->foreign("game_id")->references("game_id")->on("games");
-            
+
             // Optional: Index for better performance
             $table->index('user_name');
         });
