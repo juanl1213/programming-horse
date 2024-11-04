@@ -31,6 +31,10 @@ Route::get('/rules', function () {
     return view('rules');
 })->name('rules');
 
+Route::get('/admin', function () {
+    return view('admindatabase');
+})->name('admin');
+
 Route::get('/welcome', function () {
     return view('welcome');
 });

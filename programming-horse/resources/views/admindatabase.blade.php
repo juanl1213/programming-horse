@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" style=" text-align: center">
-            {{ __('Main Menu') }}
+            {{ __('Database Management') }}
         </h2>
     </x-slot>
 
@@ -12,10 +12,7 @@
                 <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('selection') }}'">Play a Game</x-primary-button>
                 <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View Rules</x-primary-button>
                 <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View List of Topics</x-primary-button>
-                <!-- Admin-Only Option -->
-                @if (Auth::check() && Auth::user()->user_role === 'Admin')
-                    <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('admin') }}'">View Database</x-primary-button>
-                @endif
+
             </div>
         </div>
     </div>
