@@ -1,6 +1,12 @@
-body{
-    font-family: 'Urbanist', sans-serif;
+@import 'dark-mode.css';
+
+/* resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Example dark mode styles */
+.dark body {
+    color: black;
 }
-
-
 

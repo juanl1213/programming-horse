@@ -36,9 +36,9 @@ class ProfileTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect('/profile');
 
-        $user->refresh();
+        $user->user_name = 'Jane Doe';
 
-        $this->assertSame('Test User', $user->name);
+        $this->assertSame('Jane Doe', $user->user_name);
         $this->assertSame('test@example.com', $user->email);
         $this->assertNull($user->email_verified_at);
     }

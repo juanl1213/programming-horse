@@ -32,6 +32,8 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        $request->user()->dark_mode = $request->boolean('dark_mode');
+
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

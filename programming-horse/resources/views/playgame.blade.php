@@ -1,164 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<x-app-layout>
 
-        <title>{{ config('app.name', 'Programming HORSE') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-    <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-        <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-
-                <div class="flex">
-                    <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
-                            <!-- Add your logo here -->
-                            <img src="{{ asset('images/horse_logo.png') }}" style="height: 60px; width: 75px; border-radius: 10px" alt="Logo">
-                        
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Main Menu') }}
-                        </x-nav-link>
-                    </div>
-                </div>
-                
-                
-
-
-                <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
-
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
-
-                        <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-
-
-                <!-- Hamburger -->
-                <div class="-me-2 flex items-center sm:hidden">
-                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Main Menu') }}
-                </x-responsive-nav-link>
-            </div>
-
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
-
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
-                    </x-responsive-nav-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </nav>
     <header class="bg-white dark:bg-gray-800 shadow">            
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-align: center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" style="text-align: center">
                 {{ __('Play Game') }}
             </h2>
         </div>
     </header>
-    <!-- <div style="background-color: #333; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; width: 600px; margin: 0 auto; margin-top: 100px;">    
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">All Topics</p>
+
+    <div class="dark:bg-gray-800 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white" style="margin-top: 50px; font-family:'Urbanist';padding-bottom: 20px; border-radius: 25px; padding-top: 10px;">
+        <!-- Round Counter -->
+        <h1 id="round" style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">ROUND 1</h1>
+        
+        <!-- Current Topic -->
+        <p style="font-size: 20px" id="topic"></p>
+        <!-- Current Question -->
+        <p style="font-size: 20px" id="question"></p>
+        <!-- TEST: Current Question's Answer -->
+        <p style="font-size: 20px" id="correctAnswer" style="display:none;"></p>
+
+        <!-- TODO: Set default value for loading page -->
+        <!-- User Answer Selection -->
+        <form id="gameForm" action="/playgame" method="GET">
+            <input type="radio" id="answer_0" name="selection" value=0>
+            <label for="answer_0" id="answer_0_label"></label><br>
+
+            <input type="radio" id="answer_1" name="selection" value=1>
+            <label for="answer_1" id="answer_1_label"></label><br>
+
+            <input type="radio" id="answer_2" name="selection" value=2>
+            <label for="answer_2" id="answer_2_label"></label><br>
+
+            <input type="radio" id="answer_3" name="selection" value=3>
+            <label for="answer_3" id="answer_3_label"></label><br><br>
+
+            <input id="submitBtn" type="submit" value="Submit">
+        </form>
+
+        <br></br>
+        <!-- COM Selection -->
+        <p style="font-size: 20px" id="com_selection"></p>
+        <!-- USER Selection -->
+        <p style="font-size: 20px" id="user_selection"></p>
+
+        <br></br>
+        <!-- Current COM Points -->
+        <p style="font-size: 20px" id="COM"></p>
+        <!-- Current USER Points -->
+        <p style="font-size: 20px" id="USER"></p>
+
+        <!-- Winner -->
+        <p style="font-size: 20px" id="winner">[no winner yet]</p>
+        <button id="nextQuestionBtn" style="display: none;">Move on to next question</button>
+
+
+        <!--Game Script-->
+        <script>
+            class Game {
+    constructor() {
+        this.currentRound = 1;
+        this.playerNames = ["COM", "USER"];
+        this.HORSE = ["H", "O", "R", "S", "E"];
+        this.resetPoints();
+        this.gameResponses = [];
+        this.userAnswer = null;
+        this.questionData = null;
+        this.isRoundActive = true;
+    }
+
+    resetPoints() {
+        this.playerPoints = [0, 0];
+        this.playerLetters = [["_","_","_","_","_"], ["_","_","_","_","_"]];
+    }
+
+    async loadQuestion() {
+        try {
+            const gameId = 1;
+            const topicId = 2;
+            const language = 'Java';
+
+            const response = await fetch(`/playgame/load-new-question/${gameId}/${topicId}/${language}`);
+            this.questionData = await response.json();
+
+            if (this.questionData.answers && this.questionData.answers.length === 4) {
+                this.updateQuestionDisplay();
+                this.isRoundActive = true;
+                this.enableFormControls();
+            } else {
+                console.error("Error: Question data missing answers array or insufficient answers");
+            }
+        } catch (error) {
+            console.error("Error loading question:", error);
+        }
+    }
+
+    updateQuestionDisplay() {
+        document.getElementById("round").innerHTML = "ROUND " + this.currentRound;
+        document.getElementById("topic").innerHTML = `Topic ID: ${this.questionData.topic_id}`;
+        document.getElementById("question").innerHTML = this.questionData.question;
+        document.getElementById("correctAnswer").innerHTML = `TEST Correct Answer: ${this.questionData.correct_answer}`;
+        
+        // Update answer labels
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`answer_${i}_label`).innerHTML = this.questionData.answers[i];
+        }
+    }
+
+    enableFormControls() {
+        document.getElementById("submitBtn").disabled = false;
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.disabled = false);
+    }
+
+    disableFormControls() {
+        document.getElementById("submitBtn").disabled = true;
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.disabled = true);
+    }
+
+    async playRound() {
+        if (!this.isRoundActive) return;
+        
+        let round = this.getRoundResponses();
+        this.determineRound(round);
+        this.gameResponses.push(round);
+        this.updateHTML();
+        
+        this.isRoundActive = false;
+        this.disableFormControls();
+        
+        // Show next question button only after round is complete
+        document.getElementById("nextQuestionBtn").style.display = "block";
+        
+        // Check for winner
+        if (this.checkWinCondition() !== -1) {
+            this.handleGameEnd();
+        }
+    }
+
+    handleGameEnd() {
+        const winner = this.checkWinCondition();
+        document.getElementById("winner").innerHTML = this.getPlayerName(winner) + " spelled HORSE!";
+        document.getElementById("nextQuestionBtn").style.display = "none";
+        // You might want to add a "Play Again" button here
+    }
+
+    getRoundResponses() {
+        const comAnswer = Math.floor(Math.random() * 4);  // 0-3 instead of 1-3
+        const userAnswerElement = document.querySelector('input[name="selection"]:checked');
+        
+        const userAnswerValue = userAnswerElement ? parseInt(userAnswerElement.value, 10) : null;
+        
+        const userAnswerText = userAnswerElement ? 
+            document.querySelector(`label[for="${userAnswerElement.id}"]`).innerText : "";
+        const comAnswerText = document.querySelector(`label[for="answer_${comAnswer}"]`).innerText;
+
+        const correctAnswerLabel = Array.from(document.querySelectorAll("label"))
+            .find(label => label.innerText.trim() === this.questionData.correct_answer.trim());
+        const correctAnswer = correctAnswerLabel ? 
+            parseInt(correctAnswerLabel.getAttribute("for").split("_")[1]) : null;
+
+        return [
+            { value: comAnswer, text: comAnswerText}, 
+            { value: userAnswerValue, text: userAnswerText }, 
+            correctAnswer
+        ];
+    }
+
+    updateHTML() {
+        const latestRound = this.gameResponses[this.gameResponses.length - 1];
+        document.getElementById("com_selection").innerHTML = "COM selected: " + latestRound[0].text;
+        document.getElementById("user_selection").innerHTML = "USER selected: " + latestRound[1].text;
+
+        document.getElementById("COM").innerHTML = `${this.getPlayerName(0)}: ${this.getPlayerPoints(0)} ${this.getPlayerLetters(0)}`;
+        document.getElementById("USER").innerHTML = `${this.getPlayerName(1)}: ${this.getPlayerPoints(1)} ${this.getPlayerLetters(1)}`;
+    }
+
+    determineRound(round) {
+        const comAnswer = round[0].value;
+        const userAnswer = round[1].value;
+        const correctAnswer = round[2];
+
+        if (comAnswer !== userAnswer) {
+            if (comAnswer === correctAnswer) {
+                this.updatePoints(0);
+            } else if (userAnswer === correctAnswer) {
+                this.updatePoints(1);
+            }
+        }
+    }
+
+    updatePoints(player) {
+        const points = this.playerPoints[player];
+        if (points > -1 && points < 5) {
+            this.playerPoints[player]++;
+            this.playerLetters[player][points] = this.HORSE[points];
+        }
+    }
+
+    loadNextQuestion() {
+        this.currentRound++;
+        this.resetRound();
+        this.loadQuestion();
+    }
+
+    resetRound() {
+        // Reset the form using the form's reset() method
+        document.getElementById('gameForm').reset();
+        
+        // Explicitly uncheck all radio buttons
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.checked = false;
+        });
+
+        // Clear the selections display
+        document.getElementById("com_selection").innerHTML = "";
+        document.getElementById("user_selection").innerHTML = "";
+        
+        // Hide the next question button
+        document.getElementById("nextQuestionBtn").style.display = "none";
+        
+        // Reset round state
+        this.isRoundActive = true;
+        this.userAnswer = null;
+    }
+
+    // Getter methods remain the same
+    getRoundNum() { return this.currentRound; }
+    getPlayerName(player) { return this.playerNames[player]; }
+    getPlayerPoints(player) { return this.playerPoints[player]; }
+    getPlayerLetters(player) {
+        return this.playerLetters[player].join("");
+    }
+    checkWinCondition() {
+        for (let i = 0; i < this.playerPoints.length; i++) {
+            if (this.getPlayerPoints(i) >= 5) return i;
+        }
+        return -1;
+    }
+}
+
+// Initialize game and set up event listeners
+let game;
+document.addEventListener('DOMContentLoaded', () => {
+    game = new Game();
+    game.loadQuestion();
+
+    document.getElementById('gameForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const selectedAnswer = document.querySelector('input[name="selection"]:checked');
+        if (selectedAnswer) {
+            game.userAnswer = parseInt(selectedAnswer.value);
+            await game.playRound();
+        } else {
+            alert('Please select an answer before submitting.');
+        }
+    });
+
+    document.getElementById("nextQuestionBtn").addEventListener("click", () => {
+        game.loadNextQuestion();
+    });
+});
+            
+        </script>
+
     </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Data Types</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Arrays</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Functions</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Objects</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Strings</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Syntax</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Loops</p>
-    </div>
-    <div class="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="margin-top: 50px; font-family:'Urbanist'; padding-bottom: 20px; width: 165px; text-align: center;">
-        <p style="font-size: 20px; padding-top: 13px;">Operators</p>
-    </div> -->
 </div>
 
 </div>
-</body>
-</html>
+</x-app-layout>

@@ -6,6 +6,8 @@ use App\Models\Round;
 use Illuminate\Support\Facades\DB;
 
 class GameService {
+   
+
 function loadQuestion($gameId, $topicId, $language) {
     // Fetch the first question that is relevant to the selected topic and language
     $question = Question::where('topic_id', $topicId)
@@ -20,7 +22,11 @@ function loadQuestion($gameId, $topicId, $language) {
 
     // Initialize the result array
     $result = [];
-
+    
+    if (!$question) {
+        \Log::info('No question found with the provided criteria.');
+        return [];
+    }
     // Check if a question was found
     if ($question) {
         // Create an array of answers
@@ -39,7 +45,8 @@ function loadQuestion($gameId, $topicId, $language) {
             'question_id' => $question->question_id,
             'topic_id' => $question->topic_id,
             'question' => $question->question,
-            'answers' => array_values($answers), // Reset keys
+            'answers' => array_values($answers),
+            'correct_answer' => $question->correct_answer, // Reset keys
         ];
     }
         return $result;
