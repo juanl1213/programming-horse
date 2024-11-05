@@ -45,18 +45,18 @@ class OpenAIController extends Controller
     public function createStudyGuide(Request $request)
     {
         $gameId = $request->input('game_id');
-        $userId = $request->input('user_id');
+        $userName = $request->input('user_name');
         $incorrectAnswers = $request->input('incorrect_answers');
         $totalQuestions = $request->input('total_questions');
 
         // Find the user
-        $user = User::find($userId);
+        $user = User::find($userName);
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
         // Generate the study guide content
-        $studyGuideContent = $this->generateStudyGuide($gameId, $user->name, $user->language, $request->input('topic_id'), $incorrectAnswers, $totalQuestions);
+        $studyGuideContent = $this->generateStudyGuide($gameId, $user->user_name, $user->language, $request->input('topic_id'), $incorrectAnswers, $totalQuestions);
 
         // Parse the CSV data
         $lines = explode("\n", trim($studyGuideContent));

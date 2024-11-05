@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('study_guides', function (Blueprint $table) {
-            $table->studyGuide_id(); 
+            $table->id(); 
             $table->timestamps(); 
             $table->foreignId("game_id")->unique();
             $table->string("user_name");
             $table->string("language"); 
-            $table->foreignId("topic_id")->constrained()->onDelete('cascade'); // Foreign key referencing topics table
+            $table->unsignedBigInteger("topic_id")->onDelete('cascade'); // Foreign key referencing topics table
             $table->string("recommendations_written_1");
             $table->string("recommendations_written_2");
             $table->string("recommendations_written_3");
@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->foreign("user_name")->references("user_name")->on("users");
             $table->foreign("game_id")->references("game_id")->on("games");
+            $table->foreign("topic_id")->references("topic_id")->on("topics");
 
             // Optional: Index for better performance
             $table->index('user_name');
