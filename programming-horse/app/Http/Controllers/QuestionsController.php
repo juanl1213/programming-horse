@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Question;
+use Illuminate\Support\Facades\Auth;;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +11,16 @@ class QuestionsController extends Controller
     // Get all questions with their answers
     public function index()
     {
-        return Question::with(['topic', 'answers'])->get();
+          // Check if the authenticated user is an admin
+          if (Auth::user()->user_role !== 'Admin') {
+            return redirect()->route('dashboard')->with('error', 'Unauthorized access.');
+        }
+
+        // Fetch all questions from the database
+        $questions = Question::all();
+
+        // Pass the questions data to the view
+        return view('admin.questionstable', compact('questions'));
     }
 
     // Get a specific question with its answers

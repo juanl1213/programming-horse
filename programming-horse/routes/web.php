@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
 use App\Services\GameService;
-use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\RoundController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,8 +32,14 @@ Route::get('/rules', function () {
 })->name('rules');
 
 Route::get('/admin', function () {
-    return view('admindatabase');
+    return view('admin.admindatabase');
 })->name('admin');
+
+Route::get('/userstable', [ProfileController::class, 'index'])->name('userstable');
+Route::put('/users/{id}', [ProfileController::class, 'adminupdate'])->name('users.update');
+
+Route::get('/questionstable', [QuestionsController::class, 'index'])->name('questionstable');
+Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
 Route::get('/welcome', function () {
     return view('welcome');

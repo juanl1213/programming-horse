@@ -9,9 +9,8 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-400 overflow-hidden shadow-sm sm:rounded-lg div-ele">
 
-                <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('selection') }}'">Play a Game</x-primary-button>
-                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View Rules</x-primary-button>
-                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('rules') }}'">View List of Topics</x-primary-button>
+                <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('userstable') }}'">Users Table</x-primary-button>
+                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('questionstable') }}'">Questions Table</x-primary-button>
 
             </div>
         </div>
