@@ -38,7 +38,12 @@ Route::get('/admin', function () {
 Route::get('/userstable', [ProfileController::class, 'index'])->name('userstable');
 Route::put('/users/{id}', [ProfileController::class, 'adminupdate'])->name('users.update');
 
-Route::get('/questionstable', [QuestionsController::class, 'index'])->name('questionstable');
+Route::get('/question', [QuestionsController::class, 'index'])->name('question'); // Show the filtering form
+Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
+Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
+// Route to update a question (PUT only)
+Route::put('/questions/{question_id}', [QuestionsController::class, 'update'])->name('questions.update');
+
 Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
 Route::get('/welcome', function () {

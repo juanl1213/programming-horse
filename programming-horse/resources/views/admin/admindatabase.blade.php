@@ -10,7 +10,7 @@
         <div class="bg-white dark:bg-gray-400 overflow-hidden shadow-sm sm:rounded-lg div-ele">
 
                 <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('userstable') }}'">Users Table</x-primary-button>
-                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('questionstable') }}'">Questions Table</x-primary-button>
+                <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('question') }}'">Questions Table</x-primary-button>
 
             </div>
         </div>
