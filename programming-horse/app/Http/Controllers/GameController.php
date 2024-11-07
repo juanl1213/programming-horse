@@ -60,5 +60,4 @@ class GameController extends Controller
         $incorrectAnswers = $this->gameService->getIncorrectAnswers($gameId, $userName);
         return response()->json($incorrectAnswers);
     }
-
 }

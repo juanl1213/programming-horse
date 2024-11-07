@@ -14,6 +14,7 @@ class RoundController extends Controller
             'question_id' => 'required|exists:questions,id', // Assuming questions table has an 'id' column
             'answer_selected' => 'required|string', // The answer selected by the user
             'round_num' => 'required|integer', // Ensure round_num is included
+            'is_correct' => 'required|string',
         ]);
 
         // Create and return the new round

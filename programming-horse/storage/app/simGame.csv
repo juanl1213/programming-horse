@@ -1,0 +1,4 @@
+game_id,timestamps,user_name,language,topic_id,game_state,game_status,game_winner
+1,2023-10-19 00:00:00,alipi,Python,2,completed,won,alipi
+2,2023-10-19 00:00:00,alipi,Python,2,completed,lost,computer
+3,2023-10-19 00:00:00,alipi,Python,2,completed,lost,computer
