@@ -42,7 +42,7 @@ Route::get('/question', [QuestionsController::class, 'index'])->name('question')
 Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
 Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
 // Route to update a question (PUT only)
-Route::put('/questions/{question_id}', [QuestionsController::class, 'update'])->name('questions.update');
+Route::put('/questions/{question}', [QuestionsController::class, 'update'])->name('questions.update');
 
 Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
@@ -95,7 +95,7 @@ Route::prefix('rounds')->group(function () {
     Route::put('/{id}', [RoundController::class, 'update']);
 });
 
-Route::prefix('questions')->group(function () {
+/* Route::prefix('questions')->group(function () {
     // Get all questions with their answers
     Route::get('/', [QuestionsController::class, 'index']);
 
@@ -113,7 +113,7 @@ Route::prefix('questions')->group(function () {
 
     // Get questions by topic and language
     Route::post('/filter', [QuestionsController::class, 'getQuestionsByTopicAndLanguage']);
-});
+}); */
 
 Route::prefix('games')->group(function () {
     // Get a specific game by ID

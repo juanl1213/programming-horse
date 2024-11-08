@@ -66,20 +66,25 @@ class QuestionsController extends Controller
 
         // Find and update the question
     $question = Question::where('question_id', $question_id)->firstOrFail();
-    $question->update($request->only([
-        'language', 'question', 'correct_answer', 'incorrect_1', 
-        'incorrect_2', 'incorrect_3', 'validated'
-    ]));
+     // Update the question fields
+     $question->update([
+        'language' => $request->language,
+            'question' => $request->question,
+            'correct_answer' => $request->correct_answer,
+            'incorrect_1' => $request->incorrect_1,
+            'incorrect_2' => $request->incorrect_2,
+            'incorrect_3' => $request->incorrect_3,
+        'validated' => $request->validated
+    ]);
 
-     // Clear any previous error flash data
-     session()->forget('errors');
+    dd($question);
+
 
         // Redirect to the filter route with POST method
-    return redirect()->route('questions.filter')
-    ->withInput([
-        'topic_id' => $request->input('topic_id'),
-        'language' => $request->input('language')
-    ])->with('success', 'Question updated successfully.');
+        return view('admin.redirect', [
+            'topic_id' => $request->input('topic_id'),
+            'language' => $request->input('language'),
+        ]);
     }
 
     // Delete a question and its answers
