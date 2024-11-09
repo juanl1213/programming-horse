@@ -3,22 +3,20 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
 use App\Services\GameService;
-use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\RoundController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/topics', function () {
-    return view('topics');
-})->name('topics');
+Route::get('/selection', function () {
+    return view('selection');
+})->name('selection');
 
-Route::get('/playgame', function () {
-    return view('playgame');
-})->name('playgame');
+Route::post('/playgame', [GameController::class, 'startGame'])->name('playgame');
 
 Route::get('/index', function () {
     return view('welcome');
@@ -32,6 +30,26 @@ Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggle'])->name('t
 Route::get('/rules', function () {
     return view('rules');
 })->name('rules');
+
+Route::get('/admin', function () {
+    return view('admin.admindatabase');
+})->name('admin');
+
+Route::get('/userstable', [ProfileController::class, 'index'])->name('userstable');
+Route::put('/users/{id}', [ProfileController::class, 'adminupdate'])->name('users.update');
+
+Route::get('/question', [QuestionsController::class, 'index'])->name('question'); // Show the filtering form
+Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
+Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
+// Route to update a question (PUT only)
+Route::delete('/questions/{question}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
+
+Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
+Route::post('/questions', [QuestionsController::class, 'store'])->name('questions.store');
+
+Route::put('/questions/update', [QuestionsController::class, 'update'])->name('questions.update');
+
+Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -82,7 +100,7 @@ Route::prefix('rounds')->group(function () {
     Route::put('/{id}', [RoundController::class, 'update']);
 });
 
-Route::prefix('questions')->group(function () {
+/* Route::prefix('questions')->group(function () {
     // Get all questions with their answers
     Route::get('/', [QuestionsController::class, 'index']);
 
@@ -100,7 +118,7 @@ Route::prefix('questions')->group(function () {
 
     // Get questions by topic and language
     Route::post('/filter', [QuestionsController::class, 'getQuestionsByTopicAndLanguage']);
-});
+}); */
 
 Route::prefix('games')->group(function () {
     // Get a specific game by ID

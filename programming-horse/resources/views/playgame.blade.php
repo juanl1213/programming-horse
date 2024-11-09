@@ -66,6 +66,10 @@
         this.userAnswer = null;
         this.questionData = null;
         this.isRoundActive = true;
+        this.topicId = @json(session('topic_id'));
+        this.language = @json(session('programming_language'));
+        console.log(this.topicId);
+        console.log(this.language);
     }
 
     resetPoints() {
@@ -76,11 +80,9 @@
     async loadQuestion() {
         try {
             const gameId = 1;
-            const topicId = 2;
-            const language = 'Java';
+            
 
-            const response = await fetch(`/playgame/load-new-question/${gameId}/${topicId}/${language}`);
-            this.questionData = await response.json();
+            const response = await fetch(`/playgame/load-new-question/${gameId}/${this.topicId}/${this.language}`);            this.questionData = await response.json();
 
             if (this.questionData.answers && this.questionData.answers.length === 4) {
                 this.updateQuestionDisplay();

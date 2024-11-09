@@ -26,6 +26,20 @@ class GameController extends Controller
             return response()->json([], 404);
         }
     }
+    public function startGame(Request $request)
+    {
+        // Validate the input
+        $validated = $request->validate([
+            'programming_language' => 'required|in:Python,C++,Java',
+            'topic_id' => 'required|integer|between:1,4',
+        ]);
+
+        // Store the selections in the session
+        session(['programming_language' => $validated['programming_language']]);
+        session(['topic_id' => $validated['topic_id']]);
+
+        return view('playgame');
+    }
 
     public function saveRound(Request $request)
     {
