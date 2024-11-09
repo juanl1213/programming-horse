@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'question_id'; // Define custom primary key
+    public $incrementing = true;           // Set to true if question_id is auto-incrementing
+    protected $keyType = 'int';      
     protected $fillable = [
-        'question_id',
         'language',
         'topic_id',
         'question',
         'correct_answer',
-        'incorrect_answer_1',
-        'incorrect_answer_2',
-        'incorrect_answer_3',
+        'incorrect_1',
+        'incorrect_2',
+        'incorrect_3',
         'validated',
     ];
 
