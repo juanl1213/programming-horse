@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\Round;
 use OpenAI\Contracts\TransporterContract;
+use App\Models\Game;
 
 class OpenAIController extends Controller
 {
@@ -45,30 +46,30 @@ class OpenAIController extends Controller
 
     public function createStudyGuide(Request $request)
     {
+        
         $gameId = $request->input('game_id');
         $userName = $request->input('user_name');
-        $incorrectAnswers = $request->input('incorrect_answers');
-        $totalQuestions = $request->input('total_questions');
-
+        $totalQuestions = Round::where('round_winner', $userName)
+            ->where('game_id', 1)->count();
         // Find the user
-        $user = User::find($userName);
+        $user = User::where('user_name', $userName);
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
         // Generate the study guide content
         $incorrectAnswers = array_values(Round::where('game_id',1)->pluck('question_id')->toArray());
-        $q = Question::whereIn('question_id',$incorrectAnswers)->select('topic_id','question','incorrect_1','incorrect_2','incorrect_3'); 
-        $studyGuideContent = $this->generateStudyGuide($gameId, $userName, 'Java', 2, $q, $totalQuestions);
+        $questionList = Question::whereIn('question_id',$incorrectAnswers)->select('topic_id','question','incorrect_1','incorrect_2','incorrect_3')->get()->toArray();
+        $language = Game::where('game_id', $gameId)->pluck('language')->first();
+        $topic_id = Game::where('game_id', $gameId)->pluck('topic_id')->first();
+        $studyGuideContent = $this->generateStudyGuide($gameId, $userName, $language, $topic_id, $questionList, $totalQuestions);
 
         // Parse the CSV data
         $lines = explode("\n", trim($studyGuideContent));
         $header = str_getcsv(array_shift($lines)); // Get the header row
         $data = str_getcsv($lines[0]); // Assuming there's only one row of data
-
         // Combine header and data into an associative array
         $csvArray = array_combine($header, $data);
-        
         // Validate the required fields
         $requiredFields = ['game_id', 'user_name', 'language', 'topic_id', 'recommendations_written_1', 'recommendations_written_2', 'recommendations_written_3', 'recommendations_video_1', 'recommendations_video_2', 'recommendations_video_3'];
         
@@ -91,7 +92,6 @@ class OpenAIController extends Controller
         $studyGuide->recommendations_video_2 = $csvArray['recommendations_video_2'];
         $studyGuide->recommendations_video_3 = $csvArray['recommendations_video_3'];
         $studyGuide->created_by = 'system';
-        
         $studyGuide->save();
 
         return response()->json(['message' => 'Study guide created successfully', 'study_guide' => $studyGuide]);
@@ -145,15 +145,12 @@ class OpenAIController extends Controller
                 ['role'=>'user','content'=>$prompt]
             ]
             ]);
-
         // Check for a successful response
         if ($response) {
             // Return the CSV data
             $csvData = $response['choices'][0]['message']['content'];
-            dd($csvData);
-            return response($csvData)
-                ->header('Content-Type', 'text/csv')
-                ->header('Content-Disposition', 'attachment; filename="study_guide.csv"');
+
+            return $csvData;
         } else {
             // Handle error response
             throw new \Exception('Error generating study guide: ' . $response->body());
