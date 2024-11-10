@@ -42,7 +42,7 @@ Route::get('/question', [QuestionsController::class, 'index'])->name('question')
 Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
 Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
 // Route to update a question (PUT only)
-Route::delete('/questions/{question}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
+Route::delete('/questions/{question_id}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
 
 Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
 Route::post('/questions', [QuestionsController::class, 'store'])->name('questions.store');

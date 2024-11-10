@@ -19,10 +19,10 @@
                             <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
                             <input type="text" id="language" name="language" 
                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                   required>
-                            @error('language')
+>
+                         <!--    @error('language')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
+                            @enderror -->
                         </div>
 
                         <!-- Topic ID Field -->
@@ -30,10 +30,10 @@
                             <label for="topic_id" class="block text-sm font-medium text-gray-700">Topic ID</label>
                             <input type="number" id="topic_id" name="topic_id"
                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                   required>
-                            @error('topic_id')
+                                   >
+                           <!--  @error('topic_id')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
+                            @enderror -->
                         </div>
 
                         <!-- Question Text Field -->

@@ -127,18 +127,17 @@ class QuestionsController extends Controller
     }
 
     // Delete a question and its answers
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         if (Auth::user()->user_role !== 'Admin') {
             return redirect()->route('dashboard')->with('error', 'Unauthorized access.');
         }
 
         // Find the question by ID and delete it
-    $question = Question::where('question_id', 50000)->firstOrFail();
+    $question = Question::where('question_id', $request->question_id)->firstOrFail();
     $question->delete();
 
-    // Redirect to the questions filter page with a success message
-    return redirect()->route('questions.filter')->with('success', 'Question deleted successfully.');
+    return redirect()->route('question')->with('success', 'Question deleted successfully.');
     }
     
     
