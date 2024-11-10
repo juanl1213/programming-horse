@@ -8,6 +8,9 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/study-guide',[OpenAIController::class, 'createStudyGuide']);
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');

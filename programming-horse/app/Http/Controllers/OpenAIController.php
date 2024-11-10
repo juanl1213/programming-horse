@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use OpenAI;
 use OpenAI\Client;
 use App\Models\StudyGuide;
 use App\Models\User;
+use App\Models\Question;
+use App\Models\Round;
+use OpenAI\Contracts\TransporterContract;
 
 class OpenAIController extends Controller
 {
-    protected $openai;
 
-    public function __construct()
-    {
-        $organizationName = env('ORGANIZATION_NAME');
-        $apiKey = env('API_KEY');
+    protected string $apiKey;
+    protected OpenAI\Client $openaiclient;
 
-        $this->openai = new Client([
-            'organization' => $organizationName, 
-            'api_key' => $apiKey,
-        ]);
+    public function __construct(
+    ){
+        $this->apiKey = env('API_KEY');
+        $this->openaiclient = OpenAI::client($this->apiKey);
     }
 
     public function generateChatCompletion(Request $request)
@@ -56,7 +57,9 @@ class OpenAIController extends Controller
         }
 
         // Generate the study guide content
-        $studyGuideContent = $this->generateStudyGuide($gameId, $user->user_name, $user->language, $request->input('topic_id'), $incorrectAnswers, $totalQuestions);
+        $incorrectAnswers = array_values(Round::where('game_id',1)->pluck('question_id')->toArray());
+        $q = Question::whereIn('question_id',$incorrectAnswers)->select('topic_id','question','incorrect_1','incorrect_2','incorrect_3'); 
+        $studyGuideContent = $this->generateStudyGuide($gameId, $userName, 'Java', 2, $q, $totalQuestions);
 
         // Parse the CSV data
         $lines = explode("\n", trim($studyGuideContent));
@@ -110,13 +113,14 @@ class OpenAIController extends Controller
         $prompt .= "    \"topic_id\" => $topicId\n";
         $prompt .= "    \"question_set\" => [\n";
 
-        foreach ($incorrectAnswers as $question => $options) {
-            $prompt .= "        \"$question\" => [\n";
-            $prompt .= "            \"question\" => \"$question\",\n";
-            $prompt .= "            \"incorrect_answer_set\" => [" . implode(", ", $options) . "]\n";
+        foreach ($incorrectAnswers as $options) {
+            $q = $options['question'];
+            $a = [$options['incorrect_1'], $options['incorrect_2'], $options['incorrect_3']];
+            $prompt .= "        \"$q\" => [\n";
+            $prompt .= "            \"question\" => \"$q\",\n";
+            $prompt .= "            \"incorrect_answer_set\" => [" . implode(", ", $a) . "]\n";
             $prompt .= "        ],\n";
         }
-
         $prompt .= "    ]\n\n";
         $prompt .= "With the information above, please generate a set of recommendations, 3 text-based recommendations along with 3 video-based recommendations in CSV format.\n";
         $prompt .= "The CSV format should go as follows:\n\n";
@@ -135,26 +139,18 @@ class OpenAIController extends Controller
         $prompt .= "ONLY GENERATE CSV FILE NOTHING ELSE.";
 
         // Make the API request to OpenAI
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('API_KEY'), 
-            'Content-Type' => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo', 
-            'messages' => [
-                [
-                    'role' => 'user',
-                    'content' => $prompt,
-                ],
-            ],
-            'max_tokens' => 1500, // Adjust token limit based on expected output
-            'temperature' => 0.7,  // Adjust temperature for variability
-        ]);
+        $response = $this->openaiclient->chat()->create([
+            'model'=> 'gpt-3.5-turbo',
+            'messages'=>[
+                ['role'=>'user','content'=>$prompt]
+            ]
+            ]);
 
         // Check for a successful response
-        if ($response->successful()) {
-            $csvData = $response->json()['choices'][0]['message']['content'];
-        
+        if ($response) {
             // Return the CSV data
+            $csvData = $response['choices'][0]['message']['content'];
+            dd($csvData);
             return response($csvData)
                 ->header('Content-Type', 'text/csv')
                 ->header('Content-Disposition', 'attachment; filename="study_guide.csv"');
