@@ -5,6 +5,7 @@ use App\Models\Question;
 use Illuminate\Support\Facades\Auth;;
 
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class QuestionsController extends Controller
 {

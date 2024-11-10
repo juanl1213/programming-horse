@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use OpenAI;
 use OpenAI\Client;
 use App\Models\StudyGuide;
 use App\Models\User;
+use App\Models\Question;
+use App\Models\Round;
+use OpenAI\Contracts\TransporterContract;
+use App\Models\Game;
 
 class OpenAIController extends Controller
 {
-    protected $openai;
 
-    public function __construct()
-    {
-        $organizationName = env('ORGANIZATION_NAME');
-        $apiKey = env('API_KEY');
+    protected string $apiKey;
+    protected OpenAI\Client $openaiclient;
 
-        $this->openai = new Client([
-            'organization' => $organizationName, 
-            'api_key' => $apiKey,
-        ]);
+    public function __construct(
+    ){
+        $this->apiKey = env('API_KEY');
+        $this->openaiclient = OpenAI::client($this->apiKey);
     }
 
     public function generateChatCompletion(Request $request)
@@ -44,28 +46,30 @@ class OpenAIController extends Controller
 
     public function createStudyGuide(Request $request)
     {
+        
         $gameId = $request->input('game_id');
         $userName = $request->input('user_name');
-        $incorrectAnswers = $request->input('incorrect_answers');
-        $totalQuestions = $request->input('total_questions');
-
+        $totalQuestions = Round::where('round_winner', $userName)
+            ->where('game_id', 1)->count();
         // Find the user
-        $user = User::find($userName);
+        $user = User::where('user_name', $userName);
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
         // Generate the study guide content
-        $studyGuideContent = $this->generateStudyGuide($gameId, $user->user_name, $user->language, $request->input('topic_id'), $incorrectAnswers, $totalQuestions);
+        $incorrectAnswers = array_values(Round::where('game_id',1)->pluck('question_id')->toArray());
+        $questionList = Question::whereIn('question_id',$incorrectAnswers)->select('topic_id','question','incorrect_1','incorrect_2','incorrect_3')->get()->toArray();
+        $language = Game::where('game_id', $gameId)->pluck('language')->first();
+        $topic_id = Game::where('game_id', $gameId)->pluck('topic_id')->first();
+        $studyGuideContent = $this->generateStudyGuide($gameId, $userName, $language, $topic_id, $questionList, $totalQuestions);
 
         // Parse the CSV data
         $lines = explode("\n", trim($studyGuideContent));
         $header = str_getcsv(array_shift($lines)); // Get the header row
         $data = str_getcsv($lines[0]); // Assuming there's only one row of data
-
         // Combine header and data into an associative array
         $csvArray = array_combine($header, $data);
-        
         // Validate the required fields
         $requiredFields = ['game_id', 'user_name', 'language', 'topic_id', 'recommendations_written_1', 'recommendations_written_2', 'recommendations_written_3', 'recommendations_video_1', 'recommendations_video_2', 'recommendations_video_3'];
         
@@ -88,7 +92,6 @@ class OpenAIController extends Controller
         $studyGuide->recommendations_video_2 = $csvArray['recommendations_video_2'];
         $studyGuide->recommendations_video_3 = $csvArray['recommendations_video_3'];
         $studyGuide->created_by = 'system';
-        
         $studyGuide->save();
 
         return response()->json(['message' => 'Study guide created successfully', 'study_guide' => $studyGuide]);
@@ -110,13 +113,14 @@ class OpenAIController extends Controller
         $prompt .= "    \"topic_id\" => $topicId\n";
         $prompt .= "    \"question_set\" => [\n";
 
-        foreach ($incorrectAnswers as $question => $options) {
-            $prompt .= "        \"$question\" => [\n";
-            $prompt .= "            \"question\" => \"$question\",\n";
-            $prompt .= "            \"incorrect_answer_set\" => [" . implode(", ", $options) . "]\n";
+        foreach ($incorrectAnswers as $options) {
+            $q = $options['question'];
+            $a = [$options['incorrect_1'], $options['incorrect_2'], $options['incorrect_3']];
+            $prompt .= "        \"$q\" => [\n";
+            $prompt .= "            \"question\" => \"$q\",\n";
+            $prompt .= "            \"incorrect_answer_set\" => [" . implode(", ", $a) . "]\n";
             $prompt .= "        ],\n";
         }
-
         $prompt .= "    ]\n\n";
         $prompt .= "With the information above, please generate a set of recommendations, 3 text-based recommendations along with 3 video-based recommendations in CSV format.\n";
         $prompt .= "The CSV format should go as follows:\n\n";
@@ -135,29 +139,18 @@ class OpenAIController extends Controller
         $prompt .= "ONLY GENERATE CSV FILE NOTHING ELSE.";
 
         // Make the API request to OpenAI
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('API_KEY'), 
-            'Content-Type' => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo', 
-            'messages' => [
-                [
-                    'role' => 'user',
-                    'content' => $prompt,
-                ],
-            ],
-            'max_tokens' => 1500, // Adjust token limit based on expected output
-            'temperature' => 0.7,  // Adjust temperature for variability
-        ]);
-
+        $response = $this->openaiclient->chat()->create([
+            'model'=> 'gpt-3.5-turbo',
+            'messages'=>[
+                ['role'=>'user','content'=>$prompt]
+            ]
+            ]);
         // Check for a successful response
-        if ($response->successful()) {
-            $csvData = $response->json()['choices'][0]['message']['content'];
-        
+        if ($response) {
             // Return the CSV data
-            return response($csvData)
-                ->header('Content-Type', 'text/csv')
-                ->header('Content-Disposition', 'attachment; filename="study_guide.csv"');
+            $csvData = $response['choices'][0]['message']['content'];
+
+            return $csvData;
         } else {
             // Handle error response
             throw new \Exception('Error generating study guide: ' . $response->body());

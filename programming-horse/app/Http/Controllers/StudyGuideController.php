@@ -15,7 +15,7 @@ class StudyGuideController extends Controller
         $game = $studyGuide->game; // Get associated game
         $user = $studyGuide->user; // Get associated user
         $topic = $studyGuide->topic; // Get associated topic
-        $language = $studyGude->language; // Get associated language
+        $language = $studyGuide->language; // Get associated language
 
         return response()->json([
             'study_guide' => $studyGuide,
