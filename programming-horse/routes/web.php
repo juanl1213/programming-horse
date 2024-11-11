@@ -54,6 +54,10 @@ Route::put('/questions/update', [QuestionsController::class, 'update'])->name('q
 
 Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
+Route::get('/studyguides', function () {
+    return view('studyguides');
+})->name('studyguides');
+
 Route::get('/welcome', function () {
     return view('welcome');
 });

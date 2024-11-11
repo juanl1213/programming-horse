@@ -51,12 +51,12 @@
                     </form>
                 </div>
 
-                 <!--    <div class="mb-4">
+            <div class="mb-4">
                         <a href="{{ route('questions.create') }}" 
                         class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                             Add Question
                         </a>
-                    </div>  -->
+                    </div>  
                     @if(isset($questions) && $questions->isNotEmpty())
                     <!-- Display Questions Data in a Table -->
                     <table class="min-w-full table-auto text">
