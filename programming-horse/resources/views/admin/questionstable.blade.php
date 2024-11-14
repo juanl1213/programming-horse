@@ -18,11 +18,11 @@
                             
                             <!-- Topic ID Filter -->
                             <div>
-                                <label for="topic_id" class="block text-sm font-medium text-gray-700">Topic ID</label>
+                                <label for="topic_id" class="block text-sm font-medium dark:text-white text-gray-700">Topic ID</label>
                                 <select id="topic_id" name="topic_id" 
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                         required>
-                                    <option value="1">Data Types</option>
+                                    <option class="dark:text-gray-800" value="1">Data Types</option>
                                     <option value="2">Object Oriented Programming</option>
                                     <option value="3">Data Structures</option>
                                     <option value="4">Variable Types & Declarations</option>
@@ -31,7 +31,7 @@
 
                             <!-- Language Filter -->
                             <div>
-                                <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
+                                <label for="language" class="dark:text-white block text-sm font-medium text-gray-700">Language</label>
                                 <select id="language" name="language" 
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                         required>

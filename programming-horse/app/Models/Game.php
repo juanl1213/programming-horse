@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'game_id'; // Define custom primary key
+    public $incrementing = true;           // Set to true if question_id is auto-incrementing
+    protected $keyType = 'int';   
     protected $fillable = [
-        'game_id',
-        'user_name',
+        'user_id',
         'language',
         'topic_id',
         'game_state',

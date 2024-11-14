@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Thiagoprz\CompositeKey\HasCompositeKey;
 
 class Round extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCompositeKey;
+
+    protected $primaryKey = ['game_id', 'round_id'];
+    
+    public $incrementing = false;  // Required for composite keys
+    protected $keyType = 'int';    // Define key type if necessary
+
 
     protected $fillable = [
-        'round_num',
+        'round_id',
         'game_id',
         'question_id',
         'answer_selected',

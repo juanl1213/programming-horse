@@ -12,18 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('games', function (Blueprint $table) {
-            $table->id();
+            $table->id('game_id')->unique();
             $table->timestamps();
-            $table->unsignedBigInteger("game_id")->unique();
-            $table->string("user_name");
+/*             $table->unsignedBigInteger("game_id")->unique(); */
+            $table->foreignId('user_id')->constrained('users');
             $table->string("language");
             $table->foreignId("topic_id");
-            $table->string("game_state");
-            $table->string("game_status");
-            $table->string("game_winner");
+            $table->string("game_state")->default('active');
+            $table->string("game_status")->default('active');
+            $table->string("game_winner")->default('none');
 
-            $table->foreign("user_name")->references("user_name")->on("users");
-            //$table->foreign("topic_id")->reference("topic_id")->on("topics");
+            //$table->foreign("user_name")->references("user_name")->on("users");
+            //$table->foreign("topic_id")->references("topic_id")->on("topics");
         });
     }
 

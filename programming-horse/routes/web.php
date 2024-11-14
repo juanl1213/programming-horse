@@ -19,13 +19,12 @@ Route::get('/selection', function () {
     return view('selection');
 })->name('selection');
 
-Route::post('/playgame', [GameController::class, 'startGame'])->name('playgame');
+//Route::post('/playgame', [GameController::class, 'startGame'])->name('playgame');
 
 Route::get('/index', function () {
     return view('welcome');
 });
 // In web.php
-Route::get('/playgame/load-new-question/{gameId}/{topicId}/{language}', [GameService::class, 'loadQuestion']);
 
 // routes/web.php
 Route::post('/toggle-dark-mode', [DarkModeController::class, 'toggle'])->name('toggle-dark-mode');
@@ -38,20 +37,29 @@ Route::get('/admin', function () {
     return view('admin.admindatabase');
 })->name('admin');
 
+// web.php
+
+Route::match(['get', 'post'], '/games/store', [GameController::class, 'startGame'])->name('games.start');
+
+Route::get('/playgame', function () {
+    return view('playgame');
+})->name('playgame');
+
+Route::post('/rounds/store', [RoundController::class, 'store'])->name('rounds.store');
+Route::post('/rounds/update', [GameController::class, 'submitAnswer'])->name('rounds.update'); // Submit answer
+Route::get('/playgame/load-new-question/{gameId}/{topicId}/{language}', [GameController::class, 'loadNewQuestion'])->name('load-question'); // Load next question
+
+//admin routes
 Route::get('/userstable', [ProfileController::class, 'index'])->name('userstable');
 Route::put('/users/{id}', [ProfileController::class, 'adminupdate'])->name('users.update');
-
 Route::get('/question', [QuestionsController::class, 'index'])->name('question'); // Show the filtering form
 Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
 Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
 // Route to update a question (PUT only)
 Route::delete('/questions/{question_id}', [QuestionsController::class, 'destroy'])->name('questions.destroy');
-
 Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
 Route::post('/questions', [QuestionsController::class, 'store'])->name('questions.store');
-
 Route::put('/questions/update', [QuestionsController::class, 'update'])->name('questions.update');
-
 Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
 Route::get('/studyguides', function () {
@@ -98,7 +106,7 @@ Route::prefix('topics')->group(function () {
 
 Route::prefix('rounds')->group(function () {
     // Create a new round
-    Route::post('/submit-answer', [RoundController::class, 'store']);
+    Route::post('/update', [RoundController::class, 'store'])->name('rounds.update');
 
     // Get all rounds for a specific game
     Route::get('/game/{gameId}', [RoundController::class, 'getRoundsByGame']);
@@ -129,7 +137,7 @@ Route::prefix('rounds')->group(function () {
 
 Route::prefix('games')->group(function () {
     // Get a specific game by ID
-    Route::get('/{id}', [GameController::class, 'show']);
+    /* Route::get('/{id}', [GameController::class, 'show']); */
 
     // Create a new game
     Route::post('/', [GameController::class, 'store']);
