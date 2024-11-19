@@ -39,19 +39,28 @@ class RoundController extends Controller
     // Step 3: Generate COM answer and determine correctness of user answer
     $comAnswer = $answers[array_rand($answers)];
     $isCorrect = $validatedData['selection'] === $question->correct_answer;
-    $roundWinner = $isCorrect ? 'USER' : ($comAnswer === $question->correct_answer ? 'COM' : 'none');
-
-    $userPoints = session('user_points', 0);
-    $comPoints = session('com_points', 0);
-
-    if ($roundWinner === 'USER') {
-        $userPoints++;
-    } elseif ($roundWinner === 'COM') {
-        $comPoints++;
+    
+    if ($validatedData['selection'] === $comAnswer) {
+        $roundWinner = 'none'; // User and COM selected the same answer
+    } elseif ($isCorrect) {
+        $roundWinner = 'USER'; // User's answer is correct
+    } elseif ($comAnswer === $question->correct_answer) {
+        $roundWinner = 'COM'; // COM's answer is correct
+    } else {
+        $roundWinner = 'none'; // Neither selected the correct answer
     }
 
-    session(['user_points' => $userPoints, 'com_points' => $comPoints]);
+/*     $userPoints = session('user_points', 0);
+    $comPoints = session('com_points', 0); */
 
+    if ($roundWinner === 'USER') {
+        session(['user_points' => session('user_points', 0) + 1]);
+    } elseif ($roundWinner === 'COM') {
+        session(['com_points' => session('com_points', 0) + 1]);    
+    }
+
+/*     session(['user_points' => $userPoints, 'com_points' => $comPoints]);
+ */
     session(['question' => $question]);
     // Step 4: Store the round in the database
     $round = Round::create([
@@ -69,11 +78,11 @@ class RoundController extends Controller
     }
 
     $winner = null;
-    if ($userPoints >= 5) {
+   if (session('user_points') >= 5) {
         $winner = 'USER';
-    } elseif ($comPoints >= 5) {
+    } elseif (session('com_points') >= 5) {
         $winner = 'COM';
-    }
+    } 
 
     // Update session with the new question data
     session(['question_id' => $question->question_id]);
@@ -94,8 +103,8 @@ class RoundController extends Controller
         'user_selection' => $validatedData['selection'],
         'com_selection' => $comAnswer,
         'round_winner' => $roundWinner,
-        'user_points' => $userPoints,
-        'com_points' => $comPoints,
+     /*    'user_points' => $userPoints,
+        'com_points' => $comPoints, */
         'winner' => $winner,
     ]);
     }
@@ -104,7 +113,6 @@ class RoundController extends Controller
     {
         // Increment the round number in session
         session(['round_num' => session('round_num', 1) + 1]);
-        session(['user_points' => session('user_points')]);
    
 
         // Load the next question based on session data
@@ -121,6 +129,8 @@ class RoundController extends Controller
         session(['prompt' => $nextQuestion->question]);
         session(['question' => $nextQuestion]);
         session(['question_id' => $nextQuestion->question_id]);
+        session(['correct_answer' => $nextQuestion->correct_answer]);
+
         
         
         // Redirect back to the game view with the next question

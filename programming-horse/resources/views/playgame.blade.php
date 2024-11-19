@@ -22,6 +22,9 @@
     <p id="topic">Topic ID: {{ session('topic_id') ?? 'Topic Loading...' }}</p>
     <p id="question">Question: {{ session('prompt') ?? 'Question Loading...' }}</p>
 
+    <p id="correct_answer">Correct Answer: {{ session('correct_answer') ?? 'Correct Answer Loading...' }}</p>
+
+
     @if (session('question'))
         @foreach([
             session('question')->correct_answer,

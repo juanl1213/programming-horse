@@ -74,7 +74,8 @@ class GameController extends Controller
 
         session(['question' => $question]);
         session(['prompt' => $question->question]);
-
+        session(['correct_answer' => $question->correct_answer]);
+        
      /*    session(['question' => $question]);
   
         session(['question_id' => $question->question_id]); */
