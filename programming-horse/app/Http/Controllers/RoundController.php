@@ -88,6 +88,7 @@ class RoundController extends Controller
    if (session('user_points') >= 5) {
         $winner = 'USER';
         $totalRounds = Round::where('game_id', $gameId)->count();
+      
         $userScorePercentage = session('correct_answers') / $totalRounds * 100;
     } elseif (session('com_points') >= 5) {
         $winner = 'COM';
