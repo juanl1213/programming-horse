@@ -44,8 +44,8 @@
     </form>
 
         @if (session('user_selection'))
+            <p id="com_selection">COM selected: {{ session('com_selection') }}</p>    
             <p id="user_selection">USER selected: {{ session('user_selection') }}</p>
-            <p id="com_selection">COM selected: {{ session('com_selection') }}</p>
             <p id="round_winner">Round Winner: {{ session('round_winner') }}</p>
         @endif
 
