@@ -51,6 +51,7 @@ class GameController extends Controller
         ]);
 
         session([
+            'correct_answers' => 0,
             'user_points' => 0,
             'com_points' => 0,
             'game_id' => $game->game_id,
