@@ -68,6 +68,10 @@ Route::get('/studyguides', function () {
     return view('studyguides');
 })->name('studyguides');
 
+Route::get('/new_studyguide', function () {
+    return view('new_studyguide');
+})->name('new_studyguide');
+
 Route::get('/welcome', function () {
     return view('welcome');
 });

@@ -57,8 +57,13 @@
         @if (session('round_winner') !== null)
     @if (session('user_points', 0) >= 5)
         <p>[Winner: USER]</p>
+        <p class="mt-4">Your final score: <strong>{{ session('user_score_percentage') }}%</strong></p>
+        <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('new_studyguide') }}'">Generate Study Guide</x-primary-button>
     @elseif (session('com_points', 0) >= 5)
+    <p class="mt-4">Your final score: <strong>{{ session('user_score_percentage') }}%</strong></p>
         <p>[Winner: COM]</p>
+        <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('new_studyguide') }}'">Generate Study Guide</x-primary-button>
+
     @else
         <form action="{{ route('rounds.next') }}" method="POST">
             @csrf

@@ -39,7 +39,13 @@ class RoundController extends Controller
     // Step 3: Generate COM answer and determine correctness of user answer
     $comAnswer = $answers[array_rand($answers)];
     $isCorrect = $validatedData['selection'] === $question->correct_answer;
-    
+
+
+
+    if($isCorrect) {
+        session(['correct_answers' => session('correct_answers', 0) + 1]);
+    }
+
     if ($validatedData['selection'] === $comAnswer) {
         $roundWinner = 'none'; // User and COM selected the same answer
     } elseif ($isCorrect) {
@@ -78,10 +84,15 @@ class RoundController extends Controller
     }
 
     $winner = null;
+    $userScorePercentage = 0;
    if (session('user_points') >= 5) {
         $winner = 'USER';
+        $totalRounds = Round::where('game_id', $gameId)->count();
+        $userScorePercentage = session('correct_answers') / $totalRounds * 100;
     } elseif (session('com_points') >= 5) {
         $winner = 'COM';
+        $totalRounds = Round::where('game_id', $gameId)->count();
+        $userScorePercentage = session('correct_answers')  / $totalRounds * 100;
     } 
 
     // Update session with the new question data
@@ -96,9 +107,10 @@ class RoundController extends Controller
         'round_num' => $nextRoundNum
     ]); */
     
-    
+    session(['user_score_percentage' => $userScorePercentage]);
     // Step 6: Redirect to playgame without complex with() chaining
     return redirect()->route('playgame')->with([
+        
         'question' => $question,
         'user_selection' => $validatedData['selection'],
         'com_selection' => $comAnswer,
