@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Round;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use Illuminate\Support\Facades\Log;
 
 class RoundController extends Controller
 { 
@@ -12,12 +13,12 @@ class RoundController extends Controller
     public function store(Request $request)
     {
         // Step 1: Validate incoming data, ensuring `game_id` is present in session
-    $validatedData = $request->validate([
-        'game_id' => 'required|exists:games,game_id',
-        'round_num' => 'required|integer',
-        'question_id' => 'required|exists:questions,question_id',
-        'selection' => 'required|string',
-    ]);
+        $validatedData = $request->validate([
+            'game_id' => 'required|exists:games,game_id',
+            'round_num' => 'required|integer',
+            'question_id' => 'required|exists:questions,question_id',
+            'selection' => 'required|string',
+        ]);
 
     // Retrieve the game ID from the session, checking for its existence
     $gameId = session('game_id');
@@ -40,6 +41,18 @@ class RoundController extends Controller
     $isCorrect = $validatedData['selection'] === $question->correct_answer;
     $roundWinner = $isCorrect ? 'USER' : ($comAnswer === $question->correct_answer ? 'COM' : 'none');
 
+    $userPoints = session('user_points', 0);
+    $comPoints = session('com_points', 0);
+
+    if ($roundWinner === 'USER') {
+        $userPoints++;
+    } elseif ($roundWinner === 'COM') {
+        $comPoints++;
+    }
+
+    session(['user_points' => $userPoints, 'com_points' => $comPoints]);
+
+    session(['question' => $question]);
     // Step 4: Store the round in the database
     $round = Round::create([
         'game_id' => $validatedData['game_id'],
@@ -55,42 +68,25 @@ class RoundController extends Controller
         return back()->withErrors('Failed to store the round.');
     }
 
- /*    // Step 5: Store the results in session individually
-    session([
-        'user_selection' => $validatedData['selection'],
-        'com_selection' => $comAnswer,
-        'round_winner' => $roundWinner,
-        'is_correct' => $isCorrect ? 'yes' : 'no',
-    ]); */
-
-    $nextRoundNum = session('round_num', 1) + 1;
-    session(['round_num' => $nextRoundNum]);
-
-    // Fetch the next question based on topic and language
-    $question = Question::where('topic_id', session('topic_id'))
-                ->where('language', session('programming_language'))
-                ->whereNotIn('question_id', function ($query) use ($gameId) {
-                    $query->select('question_id')
-                          ->from('rounds')
-                          ->where('game_id', $gameId);
-                })
-                ->inRandomOrder()
-                ->first();
-
-    // If there’s no question left, handle end of game
-    if (!$question) {
-        return redirect()->route('game.end')->with('message', 'No more questions for this game.');
+    $winner = null;
+    if ($userPoints >= 5) {
+        $winner = 'USER';
+    } elseif ($comPoints >= 5) {
+        $winner = 'COM';
     }
 
     // Update session with the new question data
     session(['question_id' => $question->question_id]);
 
     // Redirect to playgame view with the updated question and round data
-    return view('playgame', [
+ /*    return view('playgame', [
+        'user_selection' => $validatedData['selection'],
+        'com_selection' => $comAnswer,
         'gameId' => $gameId,
         'question' => $question,
         'round_num' => $nextRoundNum
-    ]);
+    ]); */
+    
     
     // Step 6: Redirect to playgame without complex with() chaining
     return redirect()->route('playgame')->with([
@@ -98,8 +94,41 @@ class RoundController extends Controller
         'user_selection' => $validatedData['selection'],
         'com_selection' => $comAnswer,
         'round_winner' => $roundWinner,
+        'user_points' => $userPoints,
+        'com_points' => $comPoints,
+        'winner' => $winner,
     ]);
     }
+
+    public function nextRound(Request $request)
+    {
+        // Increment the round number in session
+        session(['round_num' => session('round_num', 1) + 1]);
+        session(['user_points' => session('user_points')]);
+   
+
+        // Load the next question based on session data
+        $nextQuestion = Question::where('topic_id', session('topic_id'))
+            ->where('language', session('programming_language'))
+            ->whereNotIn('question_id', function ($query) {
+                $query->select('question_id')
+                    ->from('rounds')
+                    ->where('game_id', session('game_id'));
+            })
+            ->inRandomOrder()
+            ->first();
+
+        session(['prompt' => $nextQuestion->question]);
+        session(['question' => $nextQuestion]);
+        session(['question_id' => $nextQuestion->question_id]);
+        
+        
+        // Redirect back to the game view with the next question
+        return redirect()->route('playgame')->with([
+            'question' => $nextQuestion,
+        ]);
+    }
+
 
     // Get all rounds for a specific game
     public function getRoundsByGame($gameId)

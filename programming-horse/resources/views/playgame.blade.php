@@ -16,15 +16,19 @@
     <!-- Hidden fields for game data -->
     <input type="hidden" name="game_id" id="game_id" value="{{ session('game_id') }}">
     <input type="hidden" name="round_num" id="round_num" value="{{ session('round_num', 1) }}">
-    <input type="hidden" name="question_id" value="{{ $question->question_id ?? '' }}">
+    <input type="hidden" name="question_id" value="{{ session('question_id') ?? '' }}">
 
     <!-- Display topic and question data -->
-    <p id="topic">Topic ID: {{ $question->topic_id ?? 'Topic Loading...' }}</p>
-    <p id="question">Question: {{ $question->question ?? 'Question Loading...' }}</p>
+    <p id="topic">Topic ID: {{ session('topic_id') ?? 'Topic Loading...' }}</p>
+    <p id="question">Question: {{ session('prompt') ?? 'Question Loading...' }}</p>
 
-    <!-- Display answer options, with error handling -->
-    @if(isset($question))
-        @foreach([$question->correct_answer, $question->incorrect_1, $question->incorrect_2, $question->incorrect_3] as $index => $answer)
+    @if (session('question'))
+        @foreach([
+            session('question')->correct_answer,
+            session('question')->incorrect_1,
+            session('question')->incorrect_2,
+            session('question')->incorrect_3
+        ] as $index => $answer)
             <input type="radio" id="answer_{{ $index }}" name="selection" value="{{ $answer }}" required>
             <label for="answer_{{ $index }}">{{ $answer }}</label><br>
         @endforeach
@@ -32,17 +36,34 @@
         <p>Answers Loading...</p>
     @endif
 
-    <input type="submit" value="Submit">
-</form>
 
-       <!-- Display user and COM selection only after submission -->
-      <!-- Display User and COM selection after submission -->
-      <p id="user_selection" style="display: none;">USER selected: <span id="user_answer_text"></span></p>
-        <p id="com_selection" style="display: none;">COM selected: <span id="com_answer_text"></span></p>
+    <button type="submit">Submit</button>
+    </form>
 
-        <p id="COM">COM points: {{ session('com_points', 0) }}</p>
-        <p id="USER">USER points: {{ session('user_points', 0) }}</p>
+        @if (session('user_selection'))
+            <p id="user_selection">USER selected: {{ session('user_selection') }}</p>
+            <p id="com_selection">COM selected: {{ session('com_selection') }}</p>
+            <p id="round_winner">Round Winner: {{ session('round_winner') }}</p>
+        @endif
 
-        <p id="winner">{{ session('winner', '[no winner yet]') }}</p>
+        <!-- Display scores -->
+        <p>COM points: {{ session('com_points', 0) }}</p>
+        <p>USER points: {{ session('user_points', 0) }}</p>
+
+        <!-- Button for next question, only visible after form submission -->
+        @if (session('round_winner') !== null)
+    @if (session('user_points', 0) >= 5)
+        <p>[Winner: USER]</p>
+    @elseif (session('com_points', 0) >= 5)
+        <p>[Winner: COM]</p>
+    @else
+        <form action="{{ route('rounds.next') }}" method="POST">
+            @csrf
+            <button type="submit">Move on to Next Question</button>
+        </form>
+    @endif
+@else
+    <p>[no winner yet]</p>
+@endif
     </div>
 </x-app-layout>

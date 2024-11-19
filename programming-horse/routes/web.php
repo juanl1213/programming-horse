@@ -45,6 +45,8 @@ Route::get('/playgame', function () {
     return view('playgame');
 })->name('playgame');
 
+Route::post('/rounds/next', [RoundController::class, 'nextRound'])->name('rounds.next');
+
 Route::post('/rounds/store', [RoundController::class, 'store'])->name('rounds.store');
 Route::post('/rounds/update', [GameController::class, 'submitAnswer'])->name('rounds.update'); // Submit answer
 Route::get('/playgame/load-new-question/{gameId}/{topicId}/{language}', [GameController::class, 'loadNewQuestion'])->name('load-question'); // Load next question

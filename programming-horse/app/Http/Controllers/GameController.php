@@ -51,6 +51,8 @@ class GameController extends Controller
         ]);
 
         session([
+            'user_points' => 0,
+            'com_points' => 0,
             'game_id' => $game->game_id,
             'programming_language' => $validated['programming_language'],
             'topic_id' => $validated['topic_id'],
@@ -70,6 +72,9 @@ class GameController extends Controller
             session(['question_id' => $question->question_id]);
         }
 
+        session(['question' => $question]);
+        session(['prompt' => $question->question]);
+
      /*    session(['question' => $question]);
   
         session(['question_id' => $question->question_id]); */
@@ -82,7 +87,27 @@ class GameController extends Controller
 
     }
 
+    public function nextRound(Request $request)
+    {
+    // Increment the round number in session
+    session(['round_num' => session('round_num', 1) + 1]);
 
+    // Load the next question based on session data
+    $nextQuestion = Question::where('topic_id', session('topic_id'))
+        ->where('language', session('programming_language'))
+        ->whereNotIn('question_id', function ($query) {
+            $query->select('question_id')
+                ->from('rounds')
+                ->where('game_id', session('game_id'));
+        })
+        ->inRandomOrder()
+        ->first();
+
+    // Redirect back to the game view with the next question
+    return redirect()->route('playgame')->with([
+            'question' => $nextQuestion,
+        ]);
+    }
 
     public function submitAnswer(Request $request)
     {
