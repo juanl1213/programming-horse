@@ -7,7 +7,7 @@
             </h2>
         </div>
     </header>
-    <form action="{{ route('playgame') }}" method="POST" class="space-y-8">
+    <form action="{{ route('games.start') }}" method="POST" class="space-y-8">
             @csrf
             
             <!-- Programming Language Selection -->

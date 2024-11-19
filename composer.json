@@ -1,0 +1,5 @@
+{
+    "require": {
+        "thiagoprz/eloquent-composite-key": "^1.0"
+    }
+}

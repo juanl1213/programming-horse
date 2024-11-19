@@ -12,17 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rounds', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("round_num");
-            $table->unsignedBigInteger("game_id")->unqiue();
+
+            $table->unsignedBigInteger('round_id');
+            $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger("question_id");
+            //$table->primary(['game_id', 'question_id']);
             $table->string("answer_selected");
             $table->string("round_winner");
             $table->string("is_correct");
 
             $table->foreign("game_id")->references("game_id")->on("games");
             $table->foreign("question_id")->references("question_id")->on("questions");
+
+            $table->primary(['round_id', 'game_id']);
     });
     }
 
