@@ -40,8 +40,6 @@ class RoundController extends Controller
     $comAnswer = $answers[array_rand($answers)];
     $isCorrect = $validatedData['selection'] === $question->correct_answer;
 
-
-
     if($isCorrect) {
         session(['correct_answers' => session('correct_answers', 0) + 1]);
     }
@@ -87,14 +85,13 @@ class RoundController extends Controller
     $userScorePercentage = 0;
    if (session('user_points') >= 5) {
         $winner = 'USER';
-        $totalRounds = Round::where('game_id', $gameId)->count();
-      
-        $userScorePercentage = session('correct_answers') / $totalRounds * 100;
+        
     } elseif (session('com_points') >= 5) {
         $winner = 'COM';
-        $totalRounds = Round::where('game_id', $gameId)->count();
-        $userScorePercentage = session('correct_answers')  / $totalRounds * 100;
     } 
+
+    $totalRounds = Round::where('game_id', $gameId)->count();
+    $userScorePercentage = round((session('correct_answers') / $totalRounds * 100), 2);
 
     // Update session with the new question data
     session(['question_id' => $question->question_id]);
