@@ -34,13 +34,13 @@ class QuestionsController extends Controller
 
         $request->validate([
              'language' => 'required|string|max:255',
-        'topic_id' => 'required|integer',
-        'question' => 'required|string',
-        'correct_answer' => 'required|string',
-        'incorrect_1' => 'required|string',
-        'incorrect_2' => 'required|string',
-        'incorrect_3' => 'required|string',
-        'validated' => 'required|boolean',
+            'topic_id' => 'required|integer',
+            'question' => 'required|string',
+            'correct_answer' => 'required|string',
+            'incorrect_1' => 'required|string',
+            'incorrect_2' => 'required|string',
+            'incorrect_3' => 'required|string',
+            'validated' => 'required|boolean',
         ]);
 
         Question::create([
@@ -100,26 +100,6 @@ class QuestionsController extends Controller
         $updated_question = Question::where('question_id', $request->question_id)
                              ->get();
 
-     /*    dd($updated_question); */
-
-
-
-
-  /*       // Find and update the question
-    $question = Question::where('question_id', $question_id)->firstOrFail();
-
-
-
-    $question->update([
-        'question_id' => $request->question_id,
-        'question' => $request->question,
-        'correct_answer' => $request->correct_answer,
-         'incorrect_1' => $request->incorrect_1,
-        'incorrect_2' => $request->incorrect_2,
-        'incorrect_3' => $request->incorrect_3, 
-    'validated' => $request->validated
-    ]); */
-
         // Redirect to the filter route with POST method
         return redirect()->route('questions.filter', [
             'topic_id' => $request->input('topic_id'),
@@ -135,10 +115,10 @@ class QuestionsController extends Controller
         }
 
         // Find the question by ID and delete it
-    $question = Question::where('question_id', $request->question_id)->firstOrFail();
-    $question->delete();
+        $question = Question::where('question_id', $request->question_id)->firstOrFail();
+        $question->delete();
 
-    return redirect()->route('question')->with('success', 'Question deleted successfully.');
+        return redirect()->route('question')->with('success', 'Question deleted successfully.');
     }
     
     
@@ -180,8 +160,6 @@ class QuestionsController extends Controller
         // Pass the question to the edit view
         return view('admin.edit-question', compact('editQuestion'));
     }
-
-
 
     // Get questions by topic and language
     public function getQuestionsByTopicAndLanguage(Request $request)
