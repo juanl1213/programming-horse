@@ -18,8 +18,8 @@ class OpenAIController extends Controller
     protected string $apiKey;
     protected OpenAI\Client $openaiclient;
 
-    public function __construct(
-    ){
+    public function __construct()
+    {
         $this->apiKey = env('API_KEY');
         $this->openaiclient = OpenAI::client($this->apiKey);
     }
