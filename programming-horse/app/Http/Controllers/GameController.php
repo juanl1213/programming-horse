@@ -51,6 +51,8 @@ class GameController extends Controller
         ]);
 
         session([
+            'lang' => $validated['programming_language'],
+            'topic_id' => $validated['topic_id'],
             'correct_answers' => 0,
             'user_points' => 0,
             'com_points' => 0,

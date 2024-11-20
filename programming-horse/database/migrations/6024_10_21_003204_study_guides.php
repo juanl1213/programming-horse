@@ -14,24 +14,24 @@ return new class extends Migration
         Schema::create('study_guides', function (Blueprint $table) {
             $table->id(); 
             $table->timestamps(); 
-            $table->foreignId("game_id")->unique();
-            $table->string("user_name");
+            $table->unsignedBigInteger('game_id');
+            $table->foreignId("user_id")->constrained('users');
             $table->string("language"); 
+            $table->integer("score"); 
             $table->unsignedBigInteger("topic_id")->onDelete('cascade'); // Foreign key referencing topics table
-            $table->string("recommendations_written_1");
-            $table->string("recommendations_written_2");
-            $table->string("recommendations_written_3");
-            $table->string("recommendations_video_1");
-            $table->string("recommendations_video_2");
-            $table->string("recommendations_video_3");
+            $table->string("recommendations_written_1")->default('system');
+            $table->string("recommendations_written_2")->default('system');
+            $table->string("recommendations_written_3")->default('system');
+            $table->string("recommendations_video_1")->default('system');
+            $table->string("recommendations_video_2")->default('system');
+            $table->string("recommendations_video_3")->default('system');
             $table->string("created_by")->default('system'); // created the study guide by system
 
-            $table->foreign("user_name")->references("user_name")->on("users");
-            $table->foreign("game_id")->references("game_id")->on("games");
-            $table->foreign("topic_id")->references("topic_id")->on("topics");
+            /* $table->foreign("game_id")->references("game_id")->on("games");
+            $table->foreign("topic_id")->references("topic_id")->on("topics"); */
 
             // Optional: Index for better performance
-            $table->index('user_name');
+
         });
     }
 

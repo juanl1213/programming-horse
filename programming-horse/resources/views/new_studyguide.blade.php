@@ -12,55 +12,44 @@
                 <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Your Performance</h2>
 
                 
-            @php
-                $data = [
-                    'Python' => [
-                        'Data Types' => 75,
-                        'OOP' => 50,
-                        'Data Structures' => 90,
-                        'Variable Types & Declarations' => 40,
-                    ],
-                    'Java' => [
-                        'Data Types' => 65,
-                        'OOP' => 80,
-                        'Data Structures' => 55,
-                        'Variable Types & Declarations' => 30,
-                    ],
-                    'C++' => [
-                        'Data Types' => 45,
-                        'OOP' => 70,
-                        'Data Structures' => 85,
-                        'Variable Types & Declarations' => 60,
-                    ],
-                ];
-            @endphp
+                @php
+                    // Retrieve session variables for the language, topic, and percentage
+                    $language = session('programming_language', 'Unknown');
+                    $topicId = session('topic_id', 0);
+                    $scorePercentage = session('user_score_percentage', 0);
+
+                    // Map topic ID to topic names
+                    $topics = [
+                        1 => 'Data Types',
+                        2 => 'Object Oriented Programming',
+                        3 => 'Data Structures',
+                        4 => 'Variable Types & Declarations',
+                    ];
+                    $topicName = $topics[$topicId] ?? 'Unknown Topic';
+                @endphp
 
             <!-- Loop through each language -->
-            @foreach ($data as $language => $topics)
-                <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-                    <h3 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">{{ $language }} Performance</h3>
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+                    <h3 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">
+                        Performance for {{ $language }} - {{ $topicName }}
+                    </h3>
 
-                    <!-- Topics Table -->
-                    <div class="space-y-4">
-                        @foreach ($topics as $topic => $percentage)
-                            <div class="flex items-center">
-                                <!-- Topic Name -->
-                                <p class="text-[#4e6797] font-semibold w-48">{{ $topic }}</p>
-                                
-                                <!-- Progress Bar -->
-                                <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
-                                    <div class="green absolute left-0 top-0 h-full rounded-full bg-green-500 shadow-md" 
-                                         style="width: {{ $percentage }}%; box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.4);">
-                                        <span class="text-white text-sm font-semibold flex justify-center items-center h-full">
-                                            {{ $percentage }}%
-                                        </span>
-                                    </div>
-                                </div>
+                    <!-- Topic Progress -->
+                    <div class="flex items-center">
+                        <p class="text-[#4e6797] font-semibold w-48">{{ $topicName }}</p>
+
+                        <!-- Progress Bar -->
+                        <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
+                            <div class="green absolute left-0 top-0 h-full rounded-full bg-green-500 shadow-md"
+                                 style="width: {{ $scorePercentage }}%; box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.4);">
+                                <span class="text-white text-sm font-semibold flex justify-center items-center h-full">
+                                    {{ $scorePercentage }}%
+                                </span>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
             </div>
 
             <!-- Review Recommendations Section -->
@@ -89,6 +78,8 @@
             </div>
 
             <!-- Action Buttons -->
+            
+
             <div class="flex flex-col items-center mt-8 space-y-3">
                 <a href="#" class="flex items-center justify-center w-full max-w-md bg-blue-600 text-white font-bold py-3 rounded-lg shadow hover:bg-blue-700">
                     Download as Text File

@@ -15,11 +15,12 @@ class StudyGuide extends Model
     // Specify the fillable fields for mass assignment
     protected $fillable = [
         'game_id',
-        'user_name',
+        'user_id',
         'language',
         'topic_id',
         'incorrect_answers',
         'recommendations',
+        'score',
         'created_by',
     ];
 

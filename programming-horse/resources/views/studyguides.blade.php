@@ -11,56 +11,38 @@
             <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
                 <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Your Performance</h2>
 
-                
-            @php
-                $data = [
-                    'Python' => [
-                        'Data Types' => 75,
-                        'OOP' => 50,
-                        'Data Structures' => 90,
-                        'Variable Types & Declarations' => 40,
-                    ],
-                    'Java' => [
-                        'Data Types' => 65,
-                        'OOP' => 80,
-                        'Data Structures' => 55,
-                        'Variable Types & Declarations' => 30,
-                    ],
-                    'C++' => [
-                        'Data Types' => 45,
-                        'OOP' => 70,
-                        'Data Structures' => 85,
-                        'Variable Types & Declarations' => 60,
-                    ],
-                ];
-            @endphp
+                <!-- Loop through each language -->
+                @foreach ($performanceData as $language => $topics)
+                    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+                        <h3 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">
+                            {{ $language }} Performance
+                        </h3>
 
-            <!-- Loop through each language -->
-            @foreach ($data as $language => $topics)
-                <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-                    <h3 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">{{ $language }} Performance</h3>
-
-                    <!-- Topics Table -->
-                    <div class="space-y-4">
-                        @foreach ($topics as $topic => $percentage)
-                            <div class="flex items-center">
-                                <!-- Topic Name -->
-                                <p class="text-[#4e6797] font-semibold w-48">{{ $topic }}</p>
-                                
-                                <!-- Progress Bar -->
-                                <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
-                                    <div class="green absolute left-0 top-0 h-full rounded-full bg-green-500 shadow-md" 
-                                         style="width: {{ $percentage }}%; box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.4);">
-                                        <span class="text-white text-sm font-semibold flex justify-center items-center h-full">
-                                            {{ $percentage }}%
-                                        </span>
-                                    </div>
+                        <!-- Topics Table -->
+                        <div class="space-y-4">
+                            @foreach ($topics as $topic => $percentage)
+                                <div class="flex items-center">
+                                    <!-- Topic Name -->
+                                    <p class="text-[#4e6797] font-semibold w-48">{{ $topic }}</p>
+                                    
+                                    <!-- Progress Bar or No Data Message -->
+                                    @if (!is_null($percentage))
+                                        <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
+                                            <div class="green absolute left-0 top-0 h-full rounded-full bg-green-500 shadow-md" 
+                                                 style="width: {{ $percentage }}%; box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.4);">
+                                                <span class="text-white text-sm font-semibold flex justify-center items-center h-full">
+                                                    {{ $percentage }}%
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <p class="text-gray-800 italic">No Data Available</p>
+                                    @endif
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
             </div>
 
             <!-- Review Recommendations Section -->
@@ -100,7 +82,7 @@
         </div>
     </div>
     <style>
-        .green{
+        .green {
             background-color: green;
         }
     </style>

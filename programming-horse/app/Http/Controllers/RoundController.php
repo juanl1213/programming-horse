@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Round;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Game;
+use App\Models\StudyGuide;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 
 class RoundController extends Controller
 { 
@@ -89,12 +93,39 @@ class RoundController extends Controller
         $winner = 'USER';
         $totalRounds = Round::where('game_id', $gameId)->count();
       
-        $userScorePercentage = session('correct_answers') / $totalRounds * 100;
+        $userScorePercentage = (int) (session('correct_answers') / $totalRounds * 100);
     } elseif (session('com_points') >= 5) {
         $winner = 'COM';
         $totalRounds = Round::where('game_id', $gameId)->count();
-        $userScorePercentage = session('correct_answers')  / $totalRounds * 100;
+        $userScorePercentage = (int) (session('correct_answers')  / $totalRounds * 100);
     } 
+
+    if($winner) {
+        $game = Game::where('game_id', $gameId)->firstOrFail();
+        $game->update([
+            'game_winner' => $winner,
+        ]);
+
+        StudyGuide::create([
+            'user_id' => Auth::id(),
+            'game_id' => $gameId,
+            'language' => session('lang'),
+            'topic_id' => session('topic_id'),
+/*             'incorrect_answers' => $totalRounds - session('correct_answers', 0), // Total incorrect answers
+ */     // Replace with logic for recommendations
+            'score' => $userScorePercentage, // User's score percentage
+            'recommendations_written_1' => "a",
+            "recommendations_written_2" => "a",
+            "recommendations_written_3" => "a",
+            "recommendations_video_1" => "a",
+            "recommendations_video_2" => "a",
+            "recommendations_video_3" => "a",
+        ]);
+
+        $studyGuide = StudyGuide::where('game_id', $gameId)
+        ->firstOrFail();
+
+    }
 
     // Update session with the new question data
     session(['question_id' => $question->question_id]);

@@ -8,6 +8,7 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\StudyGuideController;
 
 Route::get('/study-guide',[OpenAIController::class, 'createStudyGuide']);
 
@@ -45,6 +46,9 @@ Route::get('/playgame', function () {
     return view('playgame');
 })->name('playgame');
 
+Route::match(['get', 'post'], '/studyguides', [StudyGuideController::class, 'showStudyGuides'])->name('studyguidesshow');
+
+
 Route::post('/rounds/next', [RoundController::class, 'nextRound'])->name('rounds.next');
 
 Route::post('/rounds/store', [RoundController::class, 'store'])->name('rounds.store');
@@ -64,7 +68,7 @@ Route::post('/questions', [QuestionsController::class, 'store'])->name('question
 Route::put('/questions/update', [QuestionsController::class, 'update'])->name('questions.update');
 Route::get('/topicstable', [TopicController::class, 'index'])->name('topicstable');
 
-Route::get('/studyguides', function () {
+Route::get('/studyguidesss', function () {
     return view('studyguides');
 })->name('studyguides');
 
