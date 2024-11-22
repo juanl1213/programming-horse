@@ -54,28 +54,12 @@
 
             <!-- Review Recommendations Section -->
             <div class="mt-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-                <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em]">Review Recommendations</h2>
+    <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Review Recommendations</h2>
 
-                @php
-                    $recommendations = [
-                        'Data Types' => 'Read more about data types in the official JavaScript documentation.',
-                        'Operators' => 'Learn how to use operators in JavaScript from this YouTube video.',
-                    ];
-                @endphp
-                @foreach ($recommendations as $topic => $description)
-                    <div class="flex items-center justify-between gap-4 bg-[#f8f9fc] rounded-lg p-4 my-3 shadow">
-                        <div>
-                            <p class="text-[#0e121b] text-base font-medium">{{ $topic }}</p>
-                            <p class="text-[#4e6797] text-sm">{{ $description }}</p>
-                        </div>
-                        <a href="#" class="text-blue-600 hover:underline flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-                                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
-                            </svg>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+    <div id="recommendations" class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 shadow-inner">
+        <p class="text-gray-800 italic">Fetching recommendations for {{ $topicName }} in {{ $language }}...</p>
+    </div>
+</div>
 
             <!-- Action Buttons -->
             
@@ -94,5 +78,36 @@
         .green{
             background-color: green;
         }
+        .width {
+            width: 50%;
+        }
     </style>
+
+
+<script>
+    // Fetch recommendations dynamically
+    const topicId = {{ $topicId }};
+    const language = "{{ $language }}";
+
+    fetch(`{{ route('recommendations.for_game') }}?topic_id=${topicId}&language=${encodeURIComponent(language)}`)
+        .then(response => response.json())
+        .then(data => {
+            const recommendationsDiv = document.getElementById('recommendations');
+            if (data.recommendations) {
+                const lines = data.recommendations.split('\n').filter(line => line.trim() !== '');
+                    const formattedRecommendations = lines.map(line => `<li>${line.trim()}</li>`).join('');
+
+                    recommendationsDiv.innerHTML = `
+                    <ul class="list-decimal list-inside dark:text-white text-gray-800 leading-relaxed">
+                        ${formattedRecommendations}
+                    </ul>`;
+            } else {
+                recommendationsDiv.innerHTML = `<p class="text-gray-800 italic">No recommendations available.</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recommendations:', error);
+            document.getElementById('recommendations').innerHTML = `<p class="text-gray-800 italic">Failed to fetch recommendations.</p>`;
+        });
+</script>
 </x-app-layout>

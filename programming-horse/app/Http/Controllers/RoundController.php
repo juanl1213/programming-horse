@@ -46,6 +46,10 @@ class RoundController extends Controller
 
         if($isCorrect) {
             session(['correct_answers' => session('correct_answers', 0) + 1]);
+        } else {
+            $incorrect_questions = session('incorrect_questions', []); // Default to an empty array
+            $incorrect_questions[] = $question->question; // Append the current question's prompt
+            session(['incorrect_questions' => $incorrect_questions]); // Update the session
         }
 
         if ($validatedData['selection'] === $comAnswer) {
@@ -118,9 +122,6 @@ class RoundController extends Controller
             "recommendations_video_2" => "a",
             "recommendations_video_3" => "a",
         ]);
-
-        $studyGuide = StudyGuide::where('game_id', $gameId)
-        ->firstOrFail();
 
     }
 

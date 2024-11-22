@@ -54,6 +54,7 @@ class GameController extends Controller
             'lang' => $validated['programming_language'],
             'topic_id' => $validated['topic_id'],
             'correct_answers' => 0,
+            'incorrect_questions' => [],
             'user_points' => 0,
             'com_points' => 0,
             'game_id' => $game->game_id,

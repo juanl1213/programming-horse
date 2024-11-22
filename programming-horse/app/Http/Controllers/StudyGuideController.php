@@ -63,14 +63,25 @@ class StudyGuideController extends Controller
         $language = $average->language;
  
 
-        $performanceData[$language][$topicName] = round($average->average_score, 2);
-        
+        $performanceData[$language][$topicName] = round($average->average_score, 2);   
     }
+
+    $lowestScore = StudyGuide::select('topic_id', 'language', DB::raw('AVG(score) as average_score'))
+        ->groupBy('topic_id', 'language')
+        ->orderBy('average_score', 'asc')
+        ->first();
+
+    $lowestTopic = $lowestScore ? $topics[$lowestScore->topic_id] : null;
+    $lowestLanguage = $lowestScore->language ?? null;
 
     Log::info('Performance Data:', $performanceData);
 
 
-    return view('studyguides', compact('performanceData'));
+    return view('studyguides', [
+        'performanceData' => $performanceData,
+        'lowestTopic' => $lowestTopic,
+        'lowestLanguage' => $lowestLanguage,
+    ]);
 }
 
     // Get questions by topic and language

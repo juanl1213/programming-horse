@@ -34,9 +34,14 @@ Route::get('/rules', function () {
     return view('rules');
 })->name('rules');
 
+Route::get('/game-recommendations', [OpenAIController::class, 'getRecommendationsForGame'])->name('recommendations.for_game');
+
+
 Route::get('/admin', function () {
     return view('admin.admindatabase');
 })->name('admin');
+
+Route::get('/recommedations', [OpenAIController::class, 'getLowestScoreRecommendation'])->name('openai.lowest_score_recommendation');
 
 // web.php
 
