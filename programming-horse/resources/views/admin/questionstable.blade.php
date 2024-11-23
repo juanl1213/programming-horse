@@ -5,12 +5,16 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('admin') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="table mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
-                    <!-- Filtering Form -->
+                <!-- Filtering Form -->
                 <div class="mb-6">
                     <form method="POST" action="{{ route('questions.filter') }}">
                         @csrf

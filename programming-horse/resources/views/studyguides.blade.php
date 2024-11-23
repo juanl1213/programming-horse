@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-left: 25px;">
+        <!--Main Menu Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Performance Section -->
@@ -69,6 +74,9 @@
                 @endif
             </div>
         </div>
+
+        <br>
+
     </div>
     <style>
         .green {

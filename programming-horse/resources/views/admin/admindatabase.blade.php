@@ -4,6 +4,11 @@
             {{ __('Database Management') }}
         </h2>
     </x-slot>
+    
+    <div style="padding-top: 25px; padding-left: 25px;">
+        <!--Main Menu Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
+    </div>
 
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -11,7 +16,6 @@
 
                 <x-primary-button style="width: 270px; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('userstable') }}'">Users Table</x-primary-button>
                 <x-primary-button style="width: 270px; text-align: center;" onclick="window.location.href='{{ route('question') }}'">Questions Table</x-primary-button>
-
             </div>
         </div>
     </div>

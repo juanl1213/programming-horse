@@ -5,11 +5,15 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('admin') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
                     <!-- Edit User Form -->
                     @if (isset($editUser))
                         <div class="mb-6">
@@ -62,9 +66,9 @@
                                 <th class="px-4 py-2">User Name</th>
                                 <th class="px-4 py-2">Email</th>
                                 <th class="px-4 py-2">User Role</th>
-                                <th class="px-4 py-2">Style Sheet</th>
-                                <th class="px-4 py-2">Avatar URL</th>
-                                <th class="px-4 py-2">Email Verified At</th>
+                                <!--<th class="px-4 py-2">Style Sheet</th>-->
+                                <!--<th class="px-4 py-2">Avatar URL</th>-->
+                                <!--<th class="px-4 py-2">Email Verified At</th>-->
                                 <th class="px-4 py-2">Created At</th>
                                 <th class="px-4 py-2">Updated At</th>
                             </tr>
@@ -76,9 +80,9 @@
                                     <td class="px-4 py-2">{{ $user->user_name }}</td>
                                     <td class="px-4 py-2">{{ $user->email }}</td>
                                     <td class="px-4 py-2">{{ $user->user_role }}</td>
-                                    <td class="px-4 py-2">{{ $user->style_sheet }}</td>
-                                    <td class="px-4 py-2">{{ $user->avatar_url }}</td>
-                                    <td class="px-4 py-2">{{ $user->email_verified_at }}</td>
+                                    <!--<td class="px-4 py-2">{{ $user->style_sheet }}</td>-->
+                                    <!--<td class="px-4 py-2">{{ $user->avatar_url }}</td>-->
+                                    <!--<td class="px-4 py-2">{{ $user->email_verified_at }}</td>-->
                                     <td class="px-4 py-2">{{ $user->created_at }}</td>
                                     <td class="px-4 py-2">{{ $user->updated_at }}</td>
                                     <td class="px-2 py-2">
