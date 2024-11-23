@@ -21,7 +21,7 @@ class OpenAIController extends Controller
 
     public function __construct()
     {
-        $this->apiKey = env('API_KEY');
+        $this->apiKey = 'sk-xS7cZd_L9m0Z1hV1gatpXZ74waA9IBOS2xb0b6y57fT3BlbkFJBGRNrc1uRzTH2dcc3wkr_R06GjzLBZqagmarxqPdsA';
         $this->openaiclient = OpenAI::client($this->apiKey);
     }
 
