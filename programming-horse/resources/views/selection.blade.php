@@ -75,23 +75,124 @@
         </form>
     </div>
     <style>
-    .grid {
-            display: grid; grid-template-columns: repeat(3, 0.4fr); gap: 5px; padding-bottom: 25px; width: 600px; margin: 0 auto; margin-top: 16px; border-radius: 25px;
-        }
+       /* Grid Layouts */
+       .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 600px;
+        margin: 20px auto;
+        padding-bottom: 25px;
+    }
+
     .grid2 {
-        display: grid; grid-template-columns: repeat(2, 0.6fr); gap: 5px; padding-bottom: 25px; width: 600px; margin: 0 auto; margin-top: 16px; border-radius: 25px;
-        justify-content:space-evenly;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 600px;
+        margin: 20px auto;
+        padding-bottom: 25px;
     }
+
+    /* Button Styling */
     .start-button {
-       margin-left: 900px;
+        display: block;
+        margin: 30px auto 0;
+        background-color: #3b82f6;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
     }
+
+    .start-button:hover {
+        background-color: #2563eb; /* Darker blue */
+    }
+
+    /* Selection Cards */
+    .selection-card {
+        background-color: white;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .selection-card:hover {
+        border-color: #3b82f6; /* Blue-500 */
+        transform: scale(1.05); /* Slight zoom effect */
+    }
+
     .selection-card.selected {
-            border-color: #3b82f6; /* Blue-500 */
-        }
-        
+        border-color: #3b82f6;
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); /* Blue glow */
+    }
+
     @media (prefers-color-scheme: dark) {
+        .selection-card {
+            background-color: #1f2937; /* Gray-800 */
+            color: #d1d5db; /* Gray-300 */
+        }
+
         .selection-card.selected {
-            border-color: #60a5fa; /* Blue-400 */
+            border-color: #60a5fa; /* Light blue */
+            box-shadow: 0 0 10px rgba(96, 165, 250, 0.5); /* Light blue glow */
+        }
+    }
+
+    /* Error Messages */
+    .bg-red-100 {
+        background-color: #fee2e2; /* Light red */
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .text-red-700 {
+        color: #b91c1c; /* Dark red */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .grid, .grid2 {
+            grid-template-columns: repeat(2, 1fr);
+            width: 90%; /* Adjust width for smaller screens */
+        }
+
+        .start-button {
+            width: 80%; /* Adjust button size for tablets */
+        }
+
+        h2 {
+            font-size: 20px; /* Adjust heading size */
+        }
+
+        .selection-card {
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .grid, .grid2 {
+            grid-template-columns: 1fr; /* Single-column layout for mobile */
+            width: 100%; /* Full width for mobile */
+        }
+
+        .start-button {
+            width: 90%; /* Full-width button with margins */
+        }
+
+        h2 {
+            font-size: 18px; /* Smaller heading size for mobile */
+        }
+
+        .selection-card {
+            padding: 8px;
         }
     }
     </style>

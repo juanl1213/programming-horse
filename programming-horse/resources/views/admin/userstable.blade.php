@@ -55,45 +55,63 @@
                     @endif
 
                     <!-- Display Users Data in a Table -->
-                    <table class="min-w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-100 dark:bg-gray-700">
-                                <th class="px-4 py-2">ID</th>
-                                <th class="px-4 py-2">User Name</th>
-                                <th class="px-4 py-2">Email</th>
-                                <th class="px-4 py-2">User Role</th>
-                                <th class="px-4 py-2">Style Sheet</th>
-                                <th class="px-4 py-2">Avatar URL</th>
-                                <th class="px-4 py-2">Email Verified At</th>
-                                <th class="px-4 py-2">Created At</th>
-                                <th class="px-4 py-2">Updated At</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-4 py-2">{{ $user->id }}</td>
-                                    <td class="px-4 py-2">{{ $user->user_name }}</td>
-                                    <td class="px-4 py-2">{{ $user->email }}</td>
-                                    <td class="px-4 py-2">{{ $user->user_role }}</td>
-                                    <td class="px-4 py-2">{{ $user->style_sheet }}</td>
-                                    <td class="px-4 py-2">{{ $user->avatar_url }}</td>
-                                    <td class="px-4 py-2">{{ $user->email_verified_at }}</td>
-                                    <td class="px-4 py-2">{{ $user->created_at }}</td>
-                                    <td class="px-4 py-2">{{ $user->updated_at }}</td>
-                                    <td class="px-2 py-2">
-                                        <!-- Edit Link -->
-                                        <a href="{{ route('userstable', ['editUserId' => $user->id]) }}"
-                                        class="text-blue-500 hover:underline">Edit</a>
-                                    </td>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-auto border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">ID</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">User Name</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Email</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">User Role</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Style Sheet</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Avatar URL</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Email Verified At</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Created At</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Updated At</th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                                    <tr class="border-b dark:border-gray-700">
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->id }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->user_name }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->user_role }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->style_sheet }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->avatar_url }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email_verified_at }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->created_at }}</td>
+                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->updated_at }}</td>
+                                        <td class="px-4 py-2 text-sm">
+                                            <!-- Edit Link -->
+                                            <a href="{{ route('userstable', ['editUserId' => $user->id]) }}" class="text-blue-500 hover:underline">
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+            .overflow-x-auto {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
 </x-app-layout>
 

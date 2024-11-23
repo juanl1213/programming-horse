@@ -46,6 +46,9 @@
                                         </div>
                                     @endif
                                 </div>
+                                @if (!$loop->last)
+                                    <hr class="my-4 border-gray-300 dark:border-gray-700">
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -74,6 +77,47 @@
         .green {
             background-color: green;
         }
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb; /* Light gray for light mode */
+            margin: 1rem 0;
+        }
+        @media (prefers-color-scheme: dark) {
+            hr {
+                border-top: 1px solid #374151; /* Dark gray for dark mode */
+            }
+        }
+
+
+        /* Recommendations Container */
+        .recommendations-container {
+            background-color: #f8f9fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendations-container ul {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+
+        .recommendations-container li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .recommendations-container li a {
+            color: #2563eb; /* Blue */
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .recommendations-container li a:hover {
+            color: #1e40af; /* Darker blue */
+        }
     </style>
     <script>
         // Use AJAX to fetch recommendations from OpenAIController
@@ -82,17 +126,24 @@
             .then(data => {
                 const recommendationsDiv = document.getElementById('recommendations');
                 if (data.recommendations) {
+                const lines = data.recommendations.split('\n').filter(line => line.trim() !== '');
+                const formattedRecommendations = lines.map(line => {
+                    // Regex to find URLs
+                    const urlRegex = /(https?:\/\/[^\s]+)/g;
+                    // Replace URLs with clickable links
+                    const formattedLine = line.replace(urlRegex, url => {
+                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">${url}</a>`;
+                    });
+                    return `<li>${formattedLine}</li>`;
+                }).join('');
 
-                    const lines = data.recommendations.split('\n').filter(line => line.trim() !== '');
-                    const formattedRecommendations = lines.map(line => `<li>${line.trim()}</li>`).join('');
-
-                    recommendationsDiv.innerHTML = `
+                recommendationsDiv.innerHTML = `
                     <ul class="list-decimal list-inside dark:text-white text-gray-800 leading-relaxed">
                         ${formattedRecommendations}
                     </ul>`;
-                } else {
-                    recommendationsDiv.innerHTML = `<p>No recommendations available.</p>`;
-                }
+            } else {
+                recommendationsDiv.innerHTML = `<p class="text-gray-800 italic">No recommendations available.</p>`;
+            }
             })
             .catch(error => {
                 console.error('Error fetching recommendations:', error);

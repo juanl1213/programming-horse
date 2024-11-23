@@ -7,7 +7,7 @@
         </div>
     </header>
 
-    <div class="dark:bg-gray-800 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white" style="margin-top: 50px; font-family:'Urbanist';padding-bottom: 20px; border-radius: 25px; padding-top: 10px;">
+    <div class="box dark:bg-gray-800 bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white" style="margin-top: 50px; font-family:'Urbanist';padding-bottom: 20px; border-radius: 25px; padding-top: 10px;">
         <h1 id="round" style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">ROUND {{ session('round_num', 1) }}</h1>
 
         <form id="gameForm" action="{{ route('rounds.store') }}" method="POST">
@@ -40,7 +40,10 @@
     @endif
 
 
-    <button type="submit">Submit</button>
+    <button type="submit" 
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold start-button">
+                Submit
+            </button>
     </form>
 
         @if (session('user_selection'))
@@ -74,4 +77,65 @@
     <p>[no winner yet]</p>
 @endif
     </div>
+
+    <style>
+         @media screen and (max-width: 768px) {
+        #round {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        form p, #question, #topic, #correct_answer, #com_selection, #user_selection, #round_winner {
+            font-size: 18px;
+        }
+
+        form label {
+          
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            margin-bottom: 10px;
+        }
+
+        button, .x-primary-button {
+      
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+        .box {
+            width: 500px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        #round {
+            font-size: 20px;
+        }
+
+        h2 {
+            font-size: 18px;
+        }
+
+        .box {
+            width: 300px;
+        }
+
+        form p, #question, #topic, #correct_answer, #com_selection, #user_selection, #round_winner {
+            font-size: 18px;
+        }
+
+        button, .x-primary-button {
+            width: 100%; /* Full width for smaller screens */
+            padding: 10px;
+            font-size: 18px;
+        }
+    }
+    </style>
 </x-app-layout>

@@ -53,18 +53,18 @@
             </div>
 
             <!-- Review Recommendations Section -->
-            <div class="mt-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-    <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Review Recommendations</h2>
+            <div class="mt-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 box">
+                <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Review Recommendations</h2>
 
-    <div id="recommendations" class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 shadow-inner">
-        <p class="text-gray-800 italic">Fetching recommendations for {{ $topicName }} in {{ $language }}...</p>
-    </div>
-</div>
+                <div id="recommendations" class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 shadow-inner">
+                    <p class="text-gray-800 italic">Fetching recommendations for {{ $topicName }} in {{ $language }}...</p>
+                </div>
+            </div>
 
             <!-- Action Buttons -->
             
 
-            <div class="flex flex-col items-center mt-8 space-y-3">
+            <div class=" box flex flex-col items-center mt-8 space-y-3">
                 <a href="#" class="flex items-center justify-center w-full max-w-md bg-blue-600 text-white font-bold py-3 rounded-lg shadow hover:bg-blue-700">
                     Download as Text File
                 </a>
@@ -81,6 +81,51 @@
         .width {
             width: 50%;
         }
+        #recommendations {
+            font-size: 12px;
+        }
+        .box {
+            width: 50%;
+            margin-left: 25%;
+        }
+        @media (max-width: 480px) {
+        .box {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+
+    }
+        
+        /* Recommendations Container */
+        .recommendations-container {
+            background-color: #f8f9fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendations-container ul {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+
+        .recommendations-container li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .recommendations-container li a {
+            color: #2563eb; /* Blue */
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .recommendations-container li a:hover {
+            color: #1e40af; /* Darker blue */
+        }
     </style>
 
 
@@ -95,9 +140,17 @@
             const recommendationsDiv = document.getElementById('recommendations');
             if (data.recommendations) {
                 const lines = data.recommendations.split('\n').filter(line => line.trim() !== '');
-                    const formattedRecommendations = lines.map(line => `<li>${line.trim()}</li>`).join('');
+                const formattedRecommendations = lines.map(line => {
+                    // Regex to find URLs
+                    const urlRegex = /(https?:\/\/[^\s]+)/g;
+                    // Replace URLs with clickable links
+                    const formattedLine = line.replace(urlRegex, url => {
+                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">${url}</a>`;
+                    });
+                    return `<li>${formattedLine}</li>`;
+                }).join('');
 
-                    recommendationsDiv.innerHTML = `
+                recommendationsDiv.innerHTML = `
                     <ul class="list-decimal list-inside dark:text-white text-gray-800 leading-relaxed">
                         ${formattedRecommendations}
                     </ul>`;
