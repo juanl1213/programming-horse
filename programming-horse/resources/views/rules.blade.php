@@ -7,16 +7,25 @@
             </h2>
         </div>
     </header>
+
+    <div style="padding-top: 25px; padding-left: 25px;">
+        <!--Main Menu Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
+    </div>
+
     <div class="bg-white dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-section text-gray-800 dark:text-white rules-box">
         <h1 class="section-title" style="padding-top: 25px;">Overview</h1>
         <p class="section-text" style="padding-bottom: 25px;">Welcome to Programming HORSE! This game teaches early coding concepts. To start a game of Programming HORSE, just click the "Play a Game" button in the main menu. Then select one (1) programming language and one (1) topic and begin!</p> 
         <p class="section-text" style="padding-bottom: 25px;">Each round, you will take turns with the computer answering questions based on your chosen programming language and topic. Click and confirm your answer selection.
             If both players answer correctly, the round results in a tie and no letters are rewarded. Otherwise, the sole player who answers correctly will earn a letter towards spelling H-O-R-S-E. The first player to spell "HORSE" wins the game!
         </p>
+        <p class="section-text" style="padding-bottom: 25px;">
+            <b>NOTE:</b> Exiting mid-game will not save your progress. Be careful. 
+        </p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white rules-box" >
-        <h1 style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">Programming Languages</h1>
+    <div class="bg-white dark:bg-gray-800 dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white rules-box" style="padding-bottom: 25px;">
+        <h1 style="font-size: 30px; margin-bottom: 10px; font-weight: 900; padding-top: 25px;">Programming Languages</h1>
         <p class="section-text">
             Review the current list of available programming languages:
         </p>
@@ -27,8 +36,8 @@
         </div>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white rules-box" >
-        <h1 style="font-size: 30px; margin-bottom: 10px; font-weight: 900;">Topics</h1>
+    <div class="bg-white dark:bg-gray-800 dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white rules-box" style="padding-bottom: 25px;">
+        <h1 style="font-size: 30px; margin-bottom: 10px; font-weight: 900; padding-top: 25px;">Topics</h1>
         <p class="section-text">
             Review the current list of topics available:
         </p>
@@ -47,14 +56,16 @@
     <div class="bg-white dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-section text-gray-800 dark:text-white rules-box">
         <h1 class="section-title" style="padding-top: 25px;">Saving your Study Guide</h1>
         <p class="section-text" style="padding-bottom: 25px;">
-        At the end of a game of Programming HORSE, the program will create a custom study guide based on your in-game performance. The study guide will highlight your strongest and weakest topics, and recommend topics to study before the next game.
-        <br>
-        <br>
-        <b>NOTE:</b> Players will not receive a study guide for an unfinished game. 
-        <br>
-        <b>NOTE:</b> Discarding a study guide means it will no longer be available to download.
+            At the end of a game of Programming HORSE, the program will create a custom study guide based on your in-game performance. 
+            The study guide will highlight your strongest and weakest topics, and recommend topics to study before the next game.
+        </p>
+        <p class="section-text" style="padding-bottom: 25px;">
+            <b>NOTE:</b> Players will not receive a study guide for an unfinished game. 
         </p>
     </div>
+
+    <br>
+
     <style>
         .rules-box{
             margin-top: 5%; border-radius: 25px; width: 1000px;

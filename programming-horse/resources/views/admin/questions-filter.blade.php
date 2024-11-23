@@ -20,7 +20,6 @@
                             <select id="topic_id" name="topic_id"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     required>
-                                <option value="">Select a Topic</option>
                                 <option value="1">1 - Data Types</option>
                                 <option value="2">2 - Object Oriented Programming</option>
                                 <option value="3">3 - Data Structures</option>
@@ -37,7 +36,6 @@
                             <select id="language" name="language"
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     required>
-                                <option value="">Select a Language</option>
                                 <option value="Python">Python</option>
                                 <option value="Java">Java</option>
                                 <option value="C++">C++</option>

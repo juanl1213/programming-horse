@@ -5,11 +5,15 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('admin') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
                     <!-- Edit User Form -->
                     @if (isset($editUser))
                         <div class="mb-6">
@@ -55,45 +59,41 @@
                     @endif
 
                     <!-- Display Users Data in a Table -->
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full table-auto border-collapse">
-                            <thead>
-                                <tr class="bg-gray-100 dark:bg-gray-700">
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">ID</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">User Name</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Email</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">User Role</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Style Sheet</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Avatar URL</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Email Verified At</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Created At</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Updated At</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Actions</th>
+                    <table class="min-w-full table-auto">
+                        <thead>
+                            <tr class="bg-gray-100 dark:bg-gray-700">
+                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">User Name</th>
+                                <th class="px-4 py-2">Email</th>
+                                <th class="px-4 py-2">User Role</th>
+                                <!--<th class="px-4 py-2">Style Sheet</th>-->
+                                <!--<th class="px-4 py-2">Avatar URL</th>-->
+                                <!--<th class="px-4 py-2">Email Verified At</th>-->
+                                <th class="px-4 py-2">Created At</th>
+                                <th class="px-4 py-2">Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr class="border-b dark:border-gray-700">
+                                    <td class="px-4 py-2">{{ $user->id }}</td>
+                                    <td class="px-4 py-2">{{ $user->user_name }}</td>
+                                    <td class="px-4 py-2">{{ $user->email }}</td>
+                                    <td class="px-4 py-2">{{ $user->user_role }}</td>
+                                    <!--<td class="px-4 py-2">{{ $user->style_sheet }}</td>-->
+                                    <!--<td class="px-4 py-2">{{ $user->avatar_url }}</td>-->
+                                    <!--<td class="px-4 py-2">{{ $user->email_verified_at }}</td>-->
+                                    <td class="px-4 py-2">{{ $user->created_at }}</td>
+                                    <td class="px-4 py-2">{{ $user->updated_at }}</td>
+                                    <td class="px-2 py-2">
+                                        <!-- Edit Link -->
+                                        <a href="{{ route('userstable', ['editUserId' => $user->id]) }}"
+                                        class="text-blue-500 hover:underline">Edit</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                    <tr class="border-b dark:border-gray-700">
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->id }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->user_name }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->user_role }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->style_sheet }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->avatar_url }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->email_verified_at }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->created_at }}</td>
-                                        <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ $user->updated_at }}</td>
-                                        <td class="px-4 py-2 text-sm">
-                                            <!-- Edit Link -->
-                                            <a href="{{ route('userstable', ['editUserId' => $user->id]) }}" class="text-blue-500 hover:underline">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                 </div>
             </div>

@@ -7,6 +7,12 @@
             </h2>
         </div>
     </header>
+
+    <div style="padding-top: 25px; padding-left: 25px;">
+        <!--Main Menu Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
+    </div>
+
     <form action="{{ route('games.start') }}" method="POST" class="space-y-8">
             @csrf
             
@@ -73,6 +79,7 @@
                 Start Game
             </button>
         </form>
+        <br>
     </div>
     <style>
        /* Grid Layouts */

@@ -7,9 +7,14 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('question') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg" style="padding-bottom:25px; padding-left:25px; padding-right:25px">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-semibold mb-2">Edit Question: {{ $editQuestion->question }}</h3>
                     

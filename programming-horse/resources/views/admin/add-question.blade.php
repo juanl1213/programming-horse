@@ -7,6 +7,11 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('question') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -86,7 +91,7 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="flex items-center justify-end">
+                        <div class="flex items-split justify-end">
                             <button type="submit"
                                     class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 Add Question

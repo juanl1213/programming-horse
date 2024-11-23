@@ -5,29 +5,33 @@
         </h2>
     </x-slot>
 
+    <div style="padding-top: 25px; padding-bottom: 25px; padding-left: 25px;">
+        <!--Back Button-->
+        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('admin') }}'">Back</x-primary-button>
+    </div>
+
     <div class="py-12">
         <div class="table-container mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
-                    <!-- Filtering Form -->
-                    <div class="mb-6">
-                        <form method="POST" action="{{ route('questions.filter') }}">
-                            @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                
-                                <!-- Topic ID Filter -->
-                                <div>
-                                    <label for="topic_id" class="block text-sm font-medium dark:text-white text-gray-700">Topic ID</label>
-                                    <select id="topic_id" name="topic_id" 
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            required>
-                                        <option value="1">Data Types</option>
-                                        <option value="2">Object Oriented Programming</option>
-                                        <option value="3">Data Structures</option>
-                                        <option value="4">Variable Types & Declarations</option>
-                                    </select>
-                                </div>
+                <!-- Filtering Form -->
+                <div class="mb-6">
+                    <form method="POST" action="{{ route('questions.filter') }}">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            
+                            <!-- Topic ID Filter -->
+                            <div>
+                                <label for="topic_id" class="block text-sm font-medium dark:text-white text-gray-700">Topic ID</label>
+                                <select id="topic_id" name="topic_id" 
+                                        class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        required>
+                                    <option class="dark:text-gray-800" value="1">Data Types</option>
+                                    <option value="2">Object Oriented Programming</option>
+                                    <option value="3">Data Structures</option>
+                                    <option value="4">Variable Types & Declarations</option>
+                                </select>
+                            </div>
 
                                 <!-- Language Filter -->
                                 <div>

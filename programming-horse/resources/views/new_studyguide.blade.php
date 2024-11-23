@@ -61,16 +61,9 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            
-
-            <div class=" box flex flex-col items-center mt-8 space-y-3">
-                <a href="#" class="flex items-center justify-center w-full max-w-md bg-blue-600 text-white font-bold py-3 rounded-lg shadow hover:bg-blue-700">
-                    Download as Text File
-                </a>
-                <a href="#" class="flex items-center justify-center w-full max-w-md bg-gray-200 text-gray-800 font-bold py-3 rounded-lg shadow hover:bg-gray-300">
-                    Save for Later
-                </a>
+            <!-- Main Menu Button -->
+            <div class="flex flex-col items-center mt-8 space-y-3">
+            <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
             </div>
         </div>
     </div>
