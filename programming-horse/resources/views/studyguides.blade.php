@@ -5,11 +5,6 @@
         </h2>
     </x-slot>
 
-    <div style="padding-top: 25px; padding-left: 25px;">
-        <!--Main Menu Button-->
-        <x-primary-button style="width: fit; text-align: center; margin-right: 0;" onclick="window.location.href='{{ route('dashboard') }}'">Return to Main Menu</x-primary-button>
-    </div>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Performance Section -->
@@ -18,7 +13,7 @@
 
                 <!-- Loop through each language -->
                 @foreach ($performanceData as $language => $topics)
-                    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+                    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 spacing">
                         <h3 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">
                             {{ $language }} Performance
                         </h3>
@@ -44,7 +39,7 @@
                                     <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
                                             
                                                 
-                                                <span class="text-sm font-semibold flex justify-center items-center h-full">
+                                                <span class="size text-sm font-semibold flex justify-center items-center h-full">
                                                     No data available
                                                 </span>
                                             
@@ -77,11 +72,12 @@
                 @endif
             </div>
         </div>
-
-        <br>
-
     </div>
     <style>
+        .spacing {
+            margin-top: 10px;
+        }
+
         .green {
             background-color: green;
         }
@@ -93,6 +89,12 @@
         @media (prefers-color-scheme: dark) {
             hr {
                 border-top: 1px solid #374151; /* Dark gray for dark mode */
+            }
+        }
+
+        @media(max-width: 400px) {
+            .size {
+                font-size: 11px;
             }
         }
 
