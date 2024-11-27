@@ -39,9 +39,9 @@
                                     <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
                                             
                                                 
-                                                <span class="size text-sm font-semibold flex justify-center items-center h-full">
+                                                <p class="dark:text-gray-800 size text-sm font-semibold flex justify-center items-center h-full">
                                                     No data available
-                                                </span>
+                                                </p>
                                             
                                         </div>
                                     @endif
@@ -139,10 +139,10 @@
                 const lines = data.recommendations.split('\n').filter(line => line.trim() !== '');
                 const formattedRecommendations = lines.map(line => {
                     // Regex to find URLs
-                    const urlRegex = /(https?:\/\/[^\s]+)/g;
-                    // Replace URLs with clickable links
+                    const urlRegex = /\(?https?:\/\/[^\s]+\)?/g;                    // Replace URLs with clickable links
                     const formattedLine = line.replace(urlRegex, url => {
-                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">${url}</a>`;
+                        const cleanUrl = url.replace(/^\(|\)$/g, ''); // Remove parentheses from start and end
+                        return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">${cleanUrl}</a>`;
                     });
                     return `<li>${formattedLine}</li>`;
                 }).join('');
