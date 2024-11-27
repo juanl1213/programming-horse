@@ -13,18 +13,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900">
                     <!-- Edit User Form -->
                     @if (isset($editUser))
                         <div class="mb-6">
-                            <h3 class="text-lg font-semibold mb-2">Edit User: {{ $editUser->user_name }}</h3>
+                            <h3 class="text-lg font-semibold mb-2 dark:text-gray-100">Edit User: {{ $editUser->user_name }}</h3>
                             <form method="POST" action="{{ route('users.update', $editUser->id) }}">
                                 @csrf
                                 @method('PUT')
 
                                 <!-- User Name -->
                                 <div class="mb-4">
-                                    <label for="user_name" class="block text-sm font-medium text-gray-700">User Name</label>
+                                    <label for="user_name" class="block text-sm font-medium text-gray-700 dark:text-gray-100">User Name</label>
                                     <input type="text" id="user_name" name="user_name" value="{{ $editUser->user_name }}"
                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                            required>
@@ -35,7 +35,7 @@
 
                                 <!-- User Role -->
                                 <div class="mb-4">
-                                    <label for="user_role" class="block text-sm font-medium text-gray-700">User Role</label>
+                                    <label for="user_role" class="block text-sm font-medium text-gray-700 dark:text-gray-100">User Role</label>
                                     <select id="user_role" name="user_role"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                             required>
@@ -59,7 +59,7 @@
                     @endif
 
                     <!-- Display Users Data in a Table -->
-                    <table class="min-w-full table-auto">
+                    <table class="min-w-full table-auto dark:text-gray-100">
                         <thead>
                             <tr class="bg-gray-100 dark:bg-gray-700">
                                 <th class="px-4 py-2">ID</th>

@@ -13,7 +13,7 @@
     <div class="py-12">
         <div class="table-container mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900">
                 <!-- Filtering Form -->
                 <div class="mb-6">
                     <form method="POST" action="{{ route('questions.filter') }}">
@@ -57,14 +57,14 @@
 
                     <div class="mb-4">
                         <a href="{{ route('questions.create') }}" 
-                        class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        class="dark:text-gray-100 inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                             Add Question
                         </a>
                     </div>  
 
                     @if(isset($questions) && $questions->isNotEmpty())
                     <!-- Responsive Table -->
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto dark:text-gray-100">
                         <table class="min-w-full table-auto text-sm border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 dark:bg-gray-700">
@@ -109,7 +109,7 @@
                         </table>
                     </div>
                     @else
-                    <p>No questions found. Please use the filter above to search for questions.</p>
+                    <p class="dark:text-gray-100">No questions found. Please use the filter above to search for questions.</p>
                     @endif
 
                 </div>
