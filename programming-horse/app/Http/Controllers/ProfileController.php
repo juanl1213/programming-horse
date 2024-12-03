@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class ProfileController extends Controller
 {
@@ -67,19 +68,23 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+           // Validate the request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+    ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    // Find and update the user
+    $user = User::where('user_name', Auth::user()->user_name)->firstOrFail();
 
-        $request->user()->dark_mode = $request->boolean('dark_mode');
+    $user->update([
+        'user_name' => $request->name,
+        'email' => $request->email,
+    ]);
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

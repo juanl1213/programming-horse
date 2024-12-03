@@ -63,6 +63,7 @@ Route::get('/playgame/load-new-question/{gameId}/{topicId}/{language}', [GameCon
 //admin routes
 Route::get('/userstable', [ProfileController::class, 'index'])->name('userstable');
 Route::put('/users/{id}', [ProfileController::class, 'adminupdate'])->name('users.update');
+Route::put('/users/{id}/update', [ProfileController::class, 'update'])->name('user-users.update');
 Route::get('/question', [QuestionsController::class, 'index'])->name('question'); // Show the filtering form
 Route::match(['get', 'post'], '/question/filter', [QuestionsController::class, 'filter'])->name('questions.filter');// Route to display the edit form for a specific question
 Route::get('/questions/{question_id}/edit', [QuestionsController::class, 'edit'])->name('questions.edit');
@@ -95,7 +96,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
