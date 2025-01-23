@@ -39,17 +39,13 @@
     <div class="bg-white dark:bg-gray-800 dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-white rules-box" style="padding-bottom: 25px;">
         <h1 style="font-size: 30px; margin-bottom: 10px; font-weight: 900; padding-top: 25px;">Topics</h1>
         <p class="section-text">
-            Review the current list of topics available:
+            Review the current list of available topics:
         </p>
-        <div class="bg-gray-200 dark:bg-gray-600 grid">    
+        <div class="bg-gray-200 dark:bg-gray-600 grid2">    
             <x-topic-box>Data Types</x-topic-box>
-            <x-topic-box>Arrays</x-topic-box>
-            <x-topic-box>Functions</x-topic-box>
-            <x-topic-box>Objects</x-topic-box>
-            <x-topic-box>Strings</x-topic-box>
-            <x-topic-box>Syntax</x-topic-box>
-            <x-topic-box>Loops</x-topic-box>
-            <x-topic-box>Operators</x-topic-box>
+            <x-topic-box>Object Oriented Programming</x-topic-box>
+            <x-topic-box>Data Strutures</x-topic-box>
+            <x-topic-box>Variable Types & Declarations</x-topic-box>
         </div>
     </div>
 
@@ -71,7 +67,11 @@
             margin-top: 5%; border-radius: 25px; width: 1000px;
         }
         .grid {
-            display: grid; grid-template-columns: repeat(3, 0.4fr); gap: 5px; padding-bottom: 25px; width: 600px; margin: 0 auto; margin-top: 16px; border-radius: 25px;
+            display: grid; grid-template-columns: repeat(3, 0.4fr); gap: 5px; padding-bottom: 25px; width: 600px; margin: 0 auto; margin-top: 16px; border-radius: 25px; 
+        }
+
+        .grid2 {
+            display: grid; grid-template-columns: repeat(4, 0.4fr); gap: 5px; padding-bottom: 25px; width: 800px; margin: 0 auto; margin-top: 16px; border-radius: 25px; font-size: 10px;
         }
         @media (max-width: 600px) {
             .section-text{
@@ -82,10 +82,13 @@
                 font-size: 10px;
                 padding-bottom: 25px;
             }
-            .grid{
+            .grid, .grid2{
                 width: 300px;
                 gap: 2px;
-   
+            }
+            .grid2 {
+                width: 300px;
+                grid-template-columns: repeat(2, 0.6fr);
             }
         }
 

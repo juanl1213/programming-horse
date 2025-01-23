@@ -39,7 +39,7 @@
                                     <div class="relative flex-1 h-6 bg-gray-200 rounded-full shadow-inner">
                                             
                                                 
-                                                <p class="dark:text-gray-800 size text-sm font-semibold flex justify-center items-center h-full">
+                                                <p class="text-gray-800 size text-sm font-semibold flex justify-center items-center h-full">
                                                     No data available
                                                 </p>
                                             
@@ -63,12 +63,12 @@
                     <p class="mb-4 text-[#0e121b] text-lg font-medium">
                         Recommendations for <strong>{{ $lowestTopic }}</strong> in <strong>{{ $lowestLanguage }}</strong>:
                     </p>
-                    <div id="recommendations">
+                    <div id="recommendations" class="mb-4 text-[#0e121b] text-lg font-medium">
                         <!-- Add JavaScript or dynamic fetching for OpenAI recommendations -->
                         <p>Fetching recommendations...</p>
                     </div>
                 @else
-                    <p class="text-gray-800 italic">No recommendations available.</p>
+                    <p class="mb-4 text-[#0e121b] text-lg font-medium">No recommendations available.</p>
                 @endif
             </div>
         </div>
@@ -152,7 +152,7 @@
                         ${formattedRecommendations}
                     </ul>`;
             } else {
-                recommendationsDiv.innerHTML = `<p class="text-gray-800 italic">No recommendations available.</p>`;
+                recommendationsDiv.innerHTML = `<p class="mb-4 text-[#0e121b] text-lg font-medium">No recommendations available.</p>`;
             }
             })
             .catch(error => {

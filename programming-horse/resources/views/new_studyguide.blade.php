@@ -57,7 +57,7 @@
                 <h2 class="text-[#0e121b] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Review Recommendations</h2>
 
                 <div id="recommendations" class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 shadow-inner">
-                    <p class="text-gray-800 italic">Fetching recommendations for {{ $topicName }} in {{ $language }}...</p>
+                    <p class="mb-4 text-[#0e121b] text-lg font-medium">Fetching recommendations for {{ $topicName }} in {{ $language }}...</p>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@
                         ${formattedRecommendations}
                     </ul>`;
             } else {
-                recommendationsDiv.innerHTML = `<p class="text-gray-800 italic">No recommendations available.</p>`;
+                recommendationsDiv.innerHTML = `<p class="mb-4 text-[#0e121b] text-lg font-medium">No recommendations available.</p>`;
             }
         })
         .catch(error => {

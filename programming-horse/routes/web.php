@@ -41,7 +41,7 @@ Route::get('/admin', function () {
     return view('admin.admindatabase');
 })->name('admin');
 
-Route::get('/recommedations', [OpenAIController::class, 'getLowestScoreRecommendation'])->name('openai.lowest_score_recommendation');
+Route::get('/recommendations', [OpenAIController::class, 'getLowestScoreRecommendation'])->name('openai.lowest_score_recommendation');
 
 // web.php
 

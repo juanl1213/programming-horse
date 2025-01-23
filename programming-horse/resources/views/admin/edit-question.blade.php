@@ -41,9 +41,9 @@
 
                         <!-- Question Text Field -->
                         <div class="mb-4">
-                            <label for="question" class="block text-sm font-medium text-gray-700">Question</label>
+                            <label for="question" class="block text-sm font-medium text-gray-700 dark:text-white">Question</label>
                             <textarea id="question" name="question"
-                                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                      class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                       >{{ old('question', $editQuestion->question) }}</textarea>
                             @error('question')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -52,10 +52,10 @@
 
                         <!-- Correct Answer Field -->
                         <div class="mb-4">
-                            <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
+                            <label for="correct_answer" class="block text-sm font-medium text-gray-700 dark:text-white">Correct Answer</label>
                             <input type="text" id="correct_answer" name="correct_answer" 
                                    value="{{ old('correct_answer', $editQuestion->correct_answer) }}" 
-                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                    >
                             @error('correct_answer')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -64,10 +64,10 @@
 
                         <!-- Incorrect Answer 1 Field -->
                         <div class="mb-4">
-                            <label for="incorrect_1" class="block text-sm font-medium text-gray-700">Incorrect Answer 1</label>
+                            <label for="incorrect_1" class="block text-sm font-medium text-gray-700 dark:text-white">Incorrect Answer 1</label>
                             <input type="text" id="incorrect_1" name="incorrect_1" 
                                    value="{{ old('incorrect_1', $editQuestion->incorrect_1) }}" 
-                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                    >
                            <!--  @error('incorrect_1')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -76,10 +76,10 @@
 
                         <!-- Incorrect Answer 2 Field -->
                         <div class="mb-4">
-                            <label for="incorrect_2" class="block text-sm font-medium text-gray-700">Incorrect Answer 2</label>
+                            <label for="incorrect_2" class="block text-sm font-medium text-gray-700 dark:text-white">Incorrect Answer 2</label>
                             <input type="text" id="incorrect_2" name="incorrect_2" 
                                    value="{{ old('incorrect_2', $editQuestion->incorrect_2) }}" 
-                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                    >
                             @error('incorrect_2')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -88,10 +88,10 @@
 
                         <!-- Incorrect Answer 3 Field -->
                         <div class="mb-4">
-                            <label for="incorrect_3" class="block text-sm font-medium text-gray-700">Incorrect Answer 3</label>
+                            <label for="incorrect_3" class="block text-sm font-medium text-gray-700 dark:text-white">Incorrect Answer 3</label>
                             <input type="text" id="incorrect_3" name="incorrect_3" 
                                    value="{{ old('incorrect_3', $editQuestion->incorrect_3) }}" 
-                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                   class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                    >
                             @error('incorrect_3')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -100,9 +100,9 @@
 
                         <!-- Validated Field -->
                         <div class="mb-4">
-                            <label for="validated" class="block text-sm font-medium text-gray-700">Validated</label>
+                            <label for="validated" class="block text-sm font-medium text-gray-700 dark:text-white">Validated</label>
                             <select id="validated" name="validated"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    class="text-gray-900 dark:text-white dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     required>
                                 <option value="1" {{ old('validated', $editQuestion->validated) ? 'selected' : '' }}>Yes</option>
                                 <option value="0" {{ old('validated', $editQuestion->validated) ? '' : 'selected' }}>No</option>
