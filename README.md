@@ -1,5 +1,5 @@
 # Programming HORSE 🏀💻
-An interactive, web-based adaptation of the classic basketball game "Horse," designed to make learning programming concepts fun and engaging for beginners.
+An interactive, web-based adaptation of the classic basketball game "Horse," designed to make learning programming concepts fun and engaging.
 
 ## Table of Contents
 - [About the Project](#about-the-project)
