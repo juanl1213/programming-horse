@@ -12,6 +12,7 @@ use App\Models\Round;
 use OpenAI\Contracts\TransporterContract;
 use Illuminate\Support\Facades\DB;
 use App\Models\Game;
+use Illuminate\Support\Facades\Log;
 
 class OpenAIController extends Controller
 {
@@ -21,12 +22,12 @@ class OpenAIController extends Controller
 
     public function __construct()
     {
-        $this->apiKey = 'sk-xS7cZd_L9m0Z1hV1gatpXZ74waA9IBOS2xb0b6y57fT3BlbkFJBGRNrc1uRzTH2dcc3wkr_R06GjzLBZqagmarxqPdsA';
+        $this->apiKey = 'api-key goes here';
         $this->openaiclient = OpenAI::client($this->apiKey);
     }
 
     public function getRecommendationsForGame(Request $request)
-{
+    {
     $topicId = $request->input('topic_id');
     $language = $request->input('language');
 
@@ -54,12 +55,12 @@ class OpenAIController extends Controller
     }
 
     // Prompt for OpenAI
-    $prompt = <<<PROMPT
-Generate three text-based recommendations and three video-based recommendations for improving performance in the topic '$topicName' for the language '$language'.
-Examples of text-based recommendations include website links, articles, blog posts, etc. Examples of video recommendations include YouTube video links.
-PLEASE refine your recommendations based on the incorrectly answered questions:
-$incorrectQuestionsFormatted
-PROMPT;
+    $prompt = "Generate three text-based recommendations and three video-based recommendations for improving performance in the topic '$topicName' for the language '$language'.
+Examples of text-based recommendations include website links, articles, blog posts, etc. For text-based recommendations, please only include links to free reputable
+(e.g. GeeksForGeeks, W3School, FreeCodeCamp, official documentation, etc). Ensure the links are pubicly accessible. Examples of video recommendations include YouTube video links.
+PLEASE refine your recommendations based on the incorrectly answered questions: '$incorrectQuestionsFormatted'";
+
+
     
     try {
         $completion = $this->openaiclient->chat()->create([
@@ -71,6 +72,8 @@ PROMPT;
 
         // Extract the recommendations
         $recommendations = $completion['choices'][0]['message']['content'];
+        
+
 
         return response()->json([
             'topic' => $topicName,
@@ -78,60 +81,76 @@ PROMPT;
             'recommendations' => $recommendations,
         ]);
     } catch (\Exception $e) {
+        Log::error('Hit catch statement. Failed to generate recommendations.', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ]);
+        
         return response()->json(['error' => 'Failed to generate recommendations.'], 500);
     }
 }
 
 
     public function getLowestScoreRecommendation(Request $request)
-{
-    // Predefined topics (or fetch them from the database if dynamic)
-    $topics = [
-        1 => 'Data Types',
-        2 => 'Object Oriented Programming',
-        3 => 'Data Structures',
-        4 => 'Variable Types & Declarations',
-    ];
+    {
+        // Predefined topics (or fetch them from the database if dynamic)
+        $topics = [
+            1 => 'Data Types',
+            2 => 'Object Oriented Programming',
+            3 => 'Data Structures',
+            4 => 'Variable Types & Declarations',
+        ];
 
-    // Step 1: Fetch scores grouped by topic and language
-    $lowestScore = StudyGuide::select('topic_id', 'language', DB::raw('AVG(score) as average_score'))
-        ->groupBy('topic_id', 'language')
-        ->orderBy('average_score', 'asc') // Get the lowest score first
-        ->first();
+        // Step 1: Fetch scores grouped by topic and language
+        $lowestScore = StudyGuide::select('topic_id', 'language', DB::raw('AVG(score) as average_score'))
+            ->groupBy('topic_id', 'language')
+            ->orderBy('average_score', 'asc') // Get the lowest score first
+            ->first();
 
-    if (!$lowestScore) {
-        return response()->json(['message' => 'No data available to generate recommendations.']);
+        if (!$lowestScore) {
+            return response()->json(['message' => 'No data available to generate recommendations.']);
+        }
+
+
+        // Step 2: Resolve topic name and language
+        $topicName = $topics[$lowestScore->topic_id] ?? 'Unknown Topic';
+        $language = $lowestScore->language;
+
+        // Step 3: Generate recommendations for the topic and language with the lowest score
+        $prompt = "Generate three text-based recommendations and three video-based recommendations for improving performance in the topic '$topicName' for the language '$language'.
+        Examples of text-based recommendations include website links, articles, blog posts, etc. For text-based recommendations, please only include links to free reputable
+        (e.g. GeeksForGeeks, W3School, FreeCodeCamp, official documentation, etc). Examples of video recommendations include YouTube video links. Please ensure that the resources cotained
+        in the links provided actually exist and have been revised or created within no more than 4 years.";
+
+        try {
+            $completion = $this->openaiclient->chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => $prompt],
+                ],
+            ]);
+
+            // Extract recommendations
+            $recommendations = $completion['choices'][0]['message']['content'];
+
+            
+
+            return response()->json([
+                'topic' => $topicName,
+                'language' => $language,
+                'recommendations' => $recommendations,
+            ]);
+        } catch (\Exception $e) {
+
+            Log::error('Hit catch statement. Failed to generate recommendations.', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+    
+
+            return response()->json(['error' => 'Failed to generate recommendations.'], 500);
+        }
     }
-
-
-    // Step 2: Resolve topic name and language
-    $topicName = $topics[$lowestScore->topic_id] ?? 'Unknown Topic';
-    $language = $lowestScore->language;
-
-    // Step 3: Generate recommendations for the topic and language with the lowest score
-    $prompt = "Generate three text-based recommendations and three video-based recommendations for improving performance in the topic '$topicName' for the language '$language'.
-    Examples of text-based recommendations include website links, articles, blog posts, etc. Examples of video recommendations include YouTube video links";
-
-    try {
-        $completion = $this->openaiclient->chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => $prompt],
-            ],
-        ]);
-
-        // Extract recommendations
-        $recommendations = $completion['choices'][0]['message']['content'];
-
-        return response()->json([
-            'topic' => $topicName,
-            'language' => $language,
-            'recommendations' => $recommendations,
-        ]);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Failed to generate recommendations.'], 500);
-    }
-}
 
 
     public function generateChatCompletion(Request $request)

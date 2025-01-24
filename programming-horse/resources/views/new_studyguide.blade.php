@@ -128,7 +128,13 @@
     const language = "{{ $language }}";
 
     fetch(`{{ route('recommendations.for_game') }}?topic_id=${topicId}&language=${encodeURIComponent(language)}`)
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             const recommendationsDiv = document.getElementById('recommendations');
             if (data.recommendations) {
