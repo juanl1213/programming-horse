@@ -10,21 +10,20 @@ An interactive, web-based adaptation of the classic basketball game "Horse," des
 ---
 
 ## About the Project
-**Programming HORSE** combines the excitement of a game with the benefits of a personalized learning experience. Players compete against a computer-controlled opponent by answering introductory programming questions. The game aims to enhance learning through repetition, provide actionable insights for improvement, and make coding accessible to everyone.
+**Programming HORSE** combines the excitement of a game with the benefits of a personalized learning experience. Players compete against a computer-controlled opponent by answering introductory-to-intermediate programming questions. The game aims to enhance learning through repetition, provide actionable insights for improvement, and make coding accessible to everyone.
 
 ### Purpose
-- To help beginners grasp fundamental programming concepts.
-- To provide customized learning resources based on user performance.
+- To help beginners grasp fundamental programming concepts and reinforce them through repetition.
+- To provide customized learning resources based on weak knowledge areas.
 - To create an intuitive and engaging platform for learning.
 
 ---
 
 ## Features
-- **Gamified Learning**: Answer programming questions to score and spell "HORSE."
-- **Randomized Question Bank**: Questions are filtered by topic to meet user needs.
+- **Gamified Learning**: Answer multiple-choice programming questions to score and spell "HORSE."
+- **Randomized Question Bank**: Questions are filtered by topic (Data Types, Object Oriented Programming, Data Structures, and Variable Types and Declarations) and programming language (Python, Java, and C++) to meet user needs.
 - **Performance Reports**: Get personalized study guides with accuracy percentages, recommended topics, and resources.
 - **Beginner-Friendly**: Intuitive design ensures ease of use for those new to coding.
-- **Session Management**: Save progress and revisit your study guide at any time.
 
 ---
 
@@ -37,3 +36,4 @@ An interactive, web-based adaptation of the classic basketball game "Horse," des
 
 ### Design Principles
 - **Object-Oriented Programming (OOP)**: Modular design for scalability and maintainability.
+- **Model-View-Controller (MVC)**: Default Laravel design pattern and easily adabtable to OOP concepts. 
